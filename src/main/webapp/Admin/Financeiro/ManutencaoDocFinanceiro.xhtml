@@ -1,0 +1,48 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:b="http://bootsfaces.net/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:o="http://omnifaces.org/ui">
+
+
+    <f:metadata>
+        <o:viewParam name="id" value="#{lancamentosFinanceirosBean.financeiro}" />
+
+        <f:viewAction action="#{lancamentosFinanceirosBean.prepararCadastro()}" />
+    </f:metadata>
+
+
+
+
+    <ui:define name="content">
+        <h:form id="frmManuntecaoDocucmento">
+            <div class="ui-lesscurve">
+
+                <div class="Container100">
+
+                    <div class="ContainerIndent">
+                        <div class="ShadowBox whiteback OrangeBorderedBox">
+                            <h1 class="BigTopic">Manutenção de Documentos Financeiro</h1>
+                            <p:messages showSummary="false"  showDetail="true" autoUpdate="true" closable="true" />
+                            <p:toolbar>
+                            </p:toolbar>
+                            <p:panelGrid columns="1" layout="grid" style="border:0px !important; background:none;" styleClass="ui-panelgrid-blank">
+                                <p:outputLabel value="Nº do Documento" />
+                                <p:outputLabel value="#{lancamentosFinanceirosBean.financeiro.id}"/>
+                                <p:outputLabel value="Data do Lançamento" />
+                                <p:outputLabel value="#{lancamentosFinanceirosBean.financeiro.dataLancamento}"/>
+                                <p:outputLabel value="Valor a Receber" for="valorLancamento" />
+                                <p:inputText id="valorLancamento" value="#{lancamentosFinanceirosBean.financeiro.valor}"/>
+                                <p:commandButton  value="Salvar"  update="frmManuntecaoDocucmento"  icon="fa fa-save" action="#{lancamentosFinanceirosBean.salvar}" styleClass="GreenButton" validateClient="true"/>
+                            </p:panelGrid>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+
+    </ui:define>
+</ui:composition>

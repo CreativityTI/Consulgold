@@ -1,0 +1,75 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:b="http://bootsfaces.net/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:o="http://omnifaces.org/ui">
+
+    <f:metadata>
+        <o:viewParam name="id" value="#{cadastroMensagemBean.mensagem}" />
+
+        <f:viewAction action="#{cadastroMensagemBean.prepararCadastro()}" />
+    </f:metadata>
+
+
+    <ui:define name="content">
+
+        <h:form id="frmCadMensagem">
+
+            <div class="ui-lesscurve">
+
+                <div class="Container100">
+                    <div class="ContainerIndent ">
+                        <div class="ShadowBox whiteback OrangeBorderedBox">
+                            <h1 class="BigTopic">Mensagens de Avisos</h1>
+
+                            <p:toolbar>
+
+
+                            </p:toolbar>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="ContainerIndent">
+                    <div class="ShadowBox whiteback RedBorderedBox ui-fluid">
+                        <p:messages id="messagesFicha" showSummary="false"  showDetail="true" autoUpdate="true" closable="true" />
+                        <div class="Container100 Responsive100">
+                            <p:panelGrid columns="1" layout="grid" style="border:0px !important; background:none;" styleClass="ui-panelgrid-blank">
+                                <p:outputLabel value="Titulo da Mensagem" for="tituloMensagem"/>
+                                <p:inputText id="tituloMensagem" value="#{cadastroMensagemBean.mensagem.tituloMensagem}" maxlength="20"/>
+
+                                <p:outputLabel value="Texto Mensagem" for="textoMensagem"/>
+                                <p:inputTextarea id="textoMensagem" value="#{cadastroMensagemBean.mensagem.textoMensagem}" maxlength="3000"/>
+
+                                <p:outputLabel value="Gestor" for="gestor"/>
+                                <p:selectOneMenu  id="gestor"  value="#{cadastroMensagemBean.mensagem.consultor}"   > 
+                                    <f:selectItem itemLabel="Selecione o Gestor" itemValue=""  />
+                                    <f:selectItems value="#{cadastroMensagemBean.todosUsuarios}" var="gestor" itemLabel="#{gestor.nome} " 
+                                                   itemValue="#{gestor}"  />
+
+                                </p:selectOneMenu>
+
+                                <h:outputText value="Desativar Mensagem: " title="Desativar mensagem" />
+                                <p:selectBooleanCheckbox value="#{cadastroMensagemBean.mensagem.status}"/>
+
+                            </p:panelGrid>
+
+                            <p:commandButton  value="Salvar"  update="frmCadMensagem"  icon="fa fa-save" action="#{cadastroMensagemBean.salvar()}" styleClass="GreenButton" validateClient="true"/>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </h:form>
+
+
+
+    </ui:define>
+</ui:composition>

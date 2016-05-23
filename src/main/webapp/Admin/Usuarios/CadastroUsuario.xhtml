@@ -1,0 +1,210 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:b="http://bootsfaces.net/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:o="http://omnifaces.org/ui">
+
+
+    <f:metadata>
+        <o:viewParam name="id" value="#{cadastroUsuarioBean.usuario}" />
+
+        <f:viewAction action="#{cadastroUsuarioBean.prepararCadastro}" />
+    </f:metadata>
+
+
+
+    <ui:define name="content">
+
+        <h:form id="frmCadUsuario">
+
+            <div class="ui-lesscurve">
+
+                <div class="Container100">
+                    <div class="ContainerIndent">
+                        <div class="ShadowBox whiteback OrangeBorderedBox">
+                            <h1 class="BigTopic">#{cadastroUsuarioBean.editando ? "Edição de Usuário":" Novo Usuário"}</h1>
+
+                            <p:toolbar>
+                                <f:facet name="left">
+                                    <p:commandButton  value="Salvar"  update="frmCadUsuario"  icon="fa fa-save" action="#{cadastroUsuarioBean.salvar}" styleClass="GreenButton"/>
+                                </f:facet>
+
+                                <f:facet name="right">
+                                    <p:button  value="Novo" icon="fa fa-user-plus" outcome="/Admin/Usuarios/CadastroUsuario" />
+                                    <span class="ui-separator">
+                                        <span class="fa fa-ellipsis-v leaden" />
+                                    </span>
+                                    <p:button value="Pesauisar" icon="fa  fa-search" styleClass="OrangeButton" outcome="/Admin/Usuarios/PesquisaUsuario" />
+                                </f:facet>
+
+                            </p:toolbar>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="ContainerIndent">
+                    <div class="ShadowBox whiteback RedBorderedBox ui-fluid">
+                        <b:messages showSummary="false"/>
+                        <div class="Container50 Responsive50">
+                            <div class="ContainerIndent">
+                                <h1 class="BigTopic">Dados Gerais</h1>
+                                <p:panelGrid columns="1" layout="grid" style="border:0px !important; background:none;" styleClass="ui-panelgrid-blank">
+
+                                    <p:graphicImage id="pic" height="100" style="margin-top: 10px"
+                                                    width="100"
+                                                    url="#{cadastroUsuarioBean.retornaFoto()}" onclick="PF('enviaFotoDialog').show()"/>
+
+
+
+                                    <p:outputLabel value="Nome:" for="nome" />
+                                    <p:inputText id="nome"  value="#{cadastroUsuarioBean.usuario.nome}" />
+
+                                    <p:outputLabel value="CPF:" for="cpf" />
+                                    <p:inputMask id="cpf"   value="#{cadastroUsuarioBean.usuario.documento}" mask="999.999.999-99" />
+
+
+
+
+                                    <p:outputLabel value="Telefone:" for="telefone" />
+                                    <p:inputMask id="telefone" value="#{cadastroUsuarioBean.usuario.telefone}" mask="99-9999-9999"/>
+
+                                    <p:outputLabel value="Celular:" for="celular" />
+                                    <p:inputMask id="celular" value="#{cadastroUsuarioBean.usuario.celular}" mask="99-9999-9999"/>
+
+
+                                </p:panelGrid>
+
+
+                                <h:form id="frmBusca">
+                                    <p:panelGrid columns="1" layout="grid" style="border:0px !important; background:none;" styleClass="ui-panelgrid-blank">
+                                        <p:outputLabel value="CEP: " for="cep"  id="frmCep"/>
+                                        <p:inputMask mask="99999-999" value="#{cadastroUsuarioBean.usuario.cep}" rendered="#{cadastroUsuarioBean.editando}"/>
+
+                                        <p:inputMask id="cep" mask="99999-999" value="#{cadastroUsuarioBean.cep}" rendered="#{cadastroUsuarioBean.editandoCep}" >
+                                            <p:ajax listener="#{cadastroUsuarioBean.encontraCEPS}" update="frmCadUsuario:frmResultado" />
+                                        </p:inputMask>
+
+
+                                    </p:panelGrid>
+                                </h:form>
+
+                                <h:form id="frmResultado">
+                                    <p:panelGrid id="frmResultado" columns="1" layout="grid" style="border:0px !important; background:none;" styleClass="ui-panelgrid-blank">
+                                        <h:outputLabel value="UF: " for="uf"/>
+                                        <p:inputText id="uf"  value="#{cadastroUsuarioBean.usuario.estado}" />
+
+                                        <h:outputLabel value="Tipo: " for="tipoLogradouro"/>
+                                        <p:inputText id="tipologradouro" value="#{cadastroUsuarioBean.usuario.tipoLogradouro}" />
+
+                                        <h:outputLabel value="Logradouro: " for="logradouro"/>
+                                        <p:inputText id="logradouro" value="#{cadastroUsuarioBean.usuario.logradouro}" />
+
+                                        <p:outputLabel value="Número: " for="numero" />
+                                        <p:inputText id="numero" size="10" value="#{cadastroUsuarioBean.usuario.numero}" />
+
+
+                                        <h:outputLabel value="Cidade: " for="cidade"/>
+                                        <p:inputText id="cidade" size="50" value="#{cadastroUsuarioBean.usuario.cidade}" />
+
+                                        <h:outputLabel value="Bairro: " for="bairro"/>
+                                        <p:inputText id="bairro" size="25" value="#{cadastroUsuarioBean.usuario.bairro}" />
+
+
+                                    </p:panelGrid>
+                                </h:form>
+
+
+
+
+                            </div>
+                        </div>
+                        <div class="Container50 Responsive50">
+                            <div class="ContainerIndent">
+                                <h1 class="BigTopic">Dados do Usuário</h1>
+                                <p:panelGrid columns="1" layout="grid" style="border:0px !important; background:none;" styleClass="ui-panelgrid-blank">
+
+
+
+                                    <p:outputLabel value="E-mail:" for="email" />
+                                    <p:inputText id="email"  value="#{cadastroUsuarioBean.usuario.email}" />
+
+                                    <p:outputLabel value="Senha:" for="senha" />
+                                    <p:password id="senha" value="#{cadastroUsuarioBean.usuario.senha}" style="width: 50%"  />
+
+
+                                    <p:outputLabel value="Perfil de Usuário:" for="gruposUsuarios"  />
+                                    <p:selectOneMenu  id="gruposUsuarios"  value="#{cadastroUsuarioBean.usuario.grupoUsuario}"   > 
+                                        <f:selectItem itemLabel="Seleione o Perfil" itemValue=""  />
+                                        <f:selectItems value="#{cadastroUsuarioBean.gruposUsuarios}" var="grupo" itemLabel="#{grupo.descricao} " 
+                                                       itemValue="#{grupo}"  />
+
+
+                                    </p:selectOneMenu > 
+
+                                    <p:outputLabel value="Gestor:" for="gestores"  />
+                                    <p:selectOneMenu  id="gestores"  value="#{cadastroUsuarioBean.usuario.gestor}"   > 
+                                        <f:selectItem itemLabel="Seleione o gestor" itemValue=""  />
+                                        <f:selectItems value="#{cadastroUsuarioBean.gestores}" var="gestor" itemLabel="#{gestor.nome} " 
+                                                       itemValue="#{gestor}"  />
+
+                                    </p:selectOneMenu > 
+
+
+                                    <h:outputLabel value="Observação: " for="observacao"/>
+                                    <p:inputTextarea id="observacao" value="#{cadastroUsuarioBean.usuario.observacao}" />
+
+                                    <h:outputText value="Bloquear Usuário: " title="Marque opção para bloquear usuário" />
+                                    <p:selectBooleanCheckbox value="#{cadastroUsuarioBean.usuario.status}"/>
+
+
+                                </p:panelGrid>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </h:form>
+
+
+
+
+
+        <p:dialog widgetVar="enviaFotoDialog" id="enviatFotoDialog" 
+                  header="Enviar Foto" resizable="false" responsive="true" closeOnEscape="true" 
+                  >
+
+
+            <p:messages showSummary="false"/>
+            <h:form id="foto" enctype="multipart/form-data">
+
+                <p:fileUpload  
+                    fileUploadListener="#{cadastroUsuarioBean.processarFoto}" 
+                    cancelLabel="Cancelar"
+                    requiredMessage="Selecione  uma foto!"
+                    uploadLabel="Processar foto"
+                    fileLimit="1"
+                    fileLimitMessage="Apenas uma foto por vez"
+                    mode="advanced" 
+                    dragDropSupport="false"
+                    sizeLimit="100000" 
+                    label="Selecionar foto..."
+                    update="frmCadUsuario:pic"
+                    oncomplete="PF('enviatFotoDialog').hide()"
+
+                    allowTypes="/(\.|\/)(gif|jpe?g|png)$/" 
+                    />
+
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:define>
+</ui:composition>

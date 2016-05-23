@@ -1,0 +1,108 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:b="http://bootsfaces.net/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:o="http://omnifaces.org/ui">
+
+
+    <ui:define name="content">
+
+        <h:form id="frmCadMensagem">
+
+            <div class="ui-lesscurve">
+
+                <div class="Container100">
+
+                    <div class="ContainerIndent">
+                        <div class="ShadowBox whiteback OrangeBorderedBox">
+
+
+
+                            <h1 class="BigTopic">Pesquisa de Mensagens</h1>
+
+                            <p:messages autoUpdate="true" closable="true" />
+
+                            <p:toolbar style="margin-top: 20px">
+                                <p:toolbarGroup>
+                                    <p:commandButton value="Pesquisar" action="#{pesquisaMensagemBean.pesquisar()}" 
+                                                     update="@form" styleClass="OrangeButton"/>
+                                </p:toolbarGroup>
+                                <p:toolbarGroup align="right">
+                                    <p:button value="Nova Mensagem" outcome="/Admin/Mensagens/CadastroMensagem"  />
+                                </p:toolbarGroup>
+                            </p:toolbar>
+
+                            <p:panelGrid columns="1" layout="grid" style="border:0px !important; background:none;" styleClass="ui-panelgrid-blank">
+
+
+                                <p:outputLabel value="Nome" for="nome"/>
+                                <p:inputText id="nome" size="60" value="#{pesquisaMensagemBean.filtro.tituloMensagem}" />
+                            </p:panelGrid>
+
+                            <p:dataTable id="mensagensTable" value="#{pesquisaMensagemBean.mensagensFiltradas}" var="mens" 
+                                         emptyMessage="Nenhuma mensagem encontrada." rows="10" reflow="true"  
+                                         paginator="true"
+                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                         rowsPerPageTemplate="5,10,15,30,100">
+                                <f:facet name="header">
+                                    Lista de Mensagens
+                                </f:facet>
+                                <p:column headerText=" Data" width="10%" >
+                                    <h:outputText value="#{mens.dataCriacao}" />
+                                </p:column>
+
+                                <p:column headerText="Titulo da Mensagem" width="20%" >
+                                    <h:outputText value="#{mens.tituloMensagem}" />
+                                </p:column>
+
+                                <p:column headerText="Texto da Mensagem" width="50%" >
+                                    <h:outputText value="#{mens.textoMensagem}" />
+                                </p:column>
+
+                                <p:column headerText="Gestor" width="30%" >
+                                    <h:outputText value="#{mens.consultor.nome}"  />
+                                </p:column>
+                                <p:column headerText="Ação" width="10%"  style="text-align: center" >
+
+
+                                    <p:button class="Wid40" outcome="/Admin/Mensagens/CadastroMensagem" icon="fa  fa-edit" title="Editar" styleClass="OrangeButton" >  
+                                        <f:param name="id" value="#{mens.id}"/>
+                                    </p:button>  
+
+
+
+
+                                    <p:commandButton icon="fa  fa-trash-o" title="Excluir" styleClass="OrangeButton" oncomplete="PF('confirmacaoExclusao').show()"
+                                                     process="@this" update="frmCadMensagem:confirmacaoExclusaoDialog" >
+                                        <f:setPropertyActionListener target="#{pesquisaMensagemBean.mensagemSelecionada}" 
+                                                                     value="#{mens}" />
+                                    </p:commandButton>
+
+
+                                </p:column>
+                            </p:dataTable>
+
+                            <p:confirmDialog header="Exclusão de usuário" 
+                                             message="Tem certeza que deseja excluir a mensagem #{pesquisaMensagemBean.mensagemSelecionada.tituloMensagem}?"
+                                             widgetVar="confirmacaoExclusao"	id="confirmacaoExclusaoDialog">
+                                <p:button value="Não" onclick="PF('confirmacaoExclusao').hide(); return false;" />
+                                <p:commandButton value="Sim" oncomplete="PF('confirmacaoExclusao').hide();" update="mensagensTable"
+                                                 action="#{pesquisaMensagemBean.excluir()}" process="@this"
+                                                 />
+                            </p:confirmDialog>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </h:form>
+
+
+
+    </ui:define>
+</ui:composition>

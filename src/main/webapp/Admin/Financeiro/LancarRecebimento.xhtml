@@ -1,0 +1,158 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:b="http://bootsfaces.net/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:o="http://omnifaces.org/ui">
+
+
+    <f:metadata>
+        <o:viewParam name="id" value="#{baixaFinanceiroBean.financeiro}" />
+
+        <f:viewAction action="#{baixaFinanceiroBean.prepararCadastro()}" />
+    </f:metadata>
+
+
+
+
+    <ui:define name="content">
+
+        <h:form id="frmRecebimentoFinanceiro">
+
+            <div class="ui-lesscurve">
+
+                <div class="Container100">
+                    <div class="ContainerIndent ">
+                        <div class="ShadowBox whiteback OrangeBorderedBox">
+                            <h1 class="BigTopic">Recebimento Financeiro</h1>
+
+                            <p:toolbar>
+                                <f:facet name="left">
+
+                                    <p:commandButton  value="Lançar Baixa Doc"  update="frmRecebimentoFinanceiro" disabled="#{baixaFinanceiroBean.isStatusPago()}"  icon="fa fa-save" styleClass="GreenButton"
+                                                      oncomplete="PF('diaFinAdm').show()" process="@this" />
+
+                                </f:facet>
+
+                            </p:toolbar>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="ContainerIndent">
+                    <div class="ShadowBox whiteback RedBorderedBox ui-fluid">
+                        <p:messages id="messagesFicha" showSummary="false"  showDetail="true" autoUpdate="true" closable="true" />
+                        <div class="Container100 Responsive100 DispBlock red Fs26">
+
+                            <p:panelGrid columns="4" layout="grid" style="border:0px !important; background:none;" styleClass="ui-panelgrid-blank">
+                                <p:outputLabel value="Nº do Documento" />
+                                <p:outputLabel value="#{baixaFinanceiroBean.financeiro.id}"/>
+                                <p:outputLabel value="Gestor" />
+                                <p:outputLabel value="#{baixaFinanceiroBean.financeiro.ficha.gestor.nome}"/>
+                                <p:outputLabel value="Cliente" />
+                                <p:outputLabel value="#{baixaFinanceiroBean.financeiro.ficha.nomeRazao}"/>
+                                <p:outputLabel value="Data do Lançamento" />
+                                <p:outputLabel value="#{baixaFinanceiroBean.financeiro.dataLancamento}"/>
+                                <p:outputLabel value="Valor a Receber" for="valorLancamento" />
+                                <p:outputLabel id="valorLancamento" value="#{baixaFinanceiroBean.financeiro.valor}">
+                                    <f:convertNumber currencySymbol="R$" type="currency"/>
+                                </p:outputLabel>
+                                <p:outputLabel value="Valor Recebido" for="valorTotalRecebido" />
+                                <p:outputLabel id="valorTotalRecebido" value="#{baixaFinanceiroBean.financeiro.valorTotalRecebido}">
+                                    <f:convertNumber currencySymbol="R$" type="currency"/>
+                                </p:outputLabel>
+                            </p:panelGrid>
+
+
+
+
+                            <p:dataTable id="financeiroTable" value="#{baixaFinanceiroBean.financeiro.baixasFinanceiro}" var="baixa" 
+                                         style="margin-top: 5px; border:0px !important; background:none;" emptyMessage="Nenhum lançamento encontrado." reflow="true"
+                                         paginatorPosition="bottom">
+                                <p:column headerText="Doc Financeiro" width="15%" style="text-align: center;">
+                                    <h:outputText value="#{baixa.financeiro}" />
+                                </p:column>
+                                <p:column headerText="Descrição Pagamento" width="15%" style="text-align: center;"  >
+                                    <h:outputText value="#{baixa.descricaoPagamento}" />
+                                </p:column>     
+                                <p:column headerText="Histórcio Pagamento" width="30%" style="text-align: center;"  >
+                                    <h:outputText value="#{baixa.historicoPagamento}" />
+                                </p:column>   
+                                <p:column headerText="Valor Pago" width="30%" style="text-align: center;" >
+                                    <h:outputText value="#{baixa.valorPagamento}" >
+                                        <f:convertNumber currencySymbol="R$" type="currency"/>
+                                    </h:outputText>
+                                </p:column>
+                                <p:column style="width: 100px; text-align: center">
+                                    <p:commandButton icon="ui-icon-trash" title="Excluir"
+                                                     oncomplete="PF('exclusaoEnderecoDialog').show(); return false;">
+                                        <f:setPropertyActionListener value="#{baixa}"
+                                                                     target="#{baixaFinanceiroBean.baixaFinanceiroSelecionada}" />
+                                    </p:commandButton>
+                                </p:column>
+
+                            </p:dataTable>
+
+                            <p:confirmDialog header="Estorno de Baixa"
+                                             message="Tem certeza que deseja excluir essa baixa?"
+                                             widgetVar="exclusaoEnderecoDialog">
+                                <p:button value="Não"
+                                          onclick="PF('exclusaoEnderecoDialog').hide(); return false;" >
+                                </p:button>
+                                <p:commandButton value="Sim"
+                                                 oncomplete="PF('exclusaoEnderecoDialog').hide();"
+                                                 action="#{baixaFinanceiroBean.excluirPagamento()}"
+                                                 update="financeiroTable valorTotalRecebido messagesFicha" />
+                            </p:confirmDialog>
+
+
+                            <p:dialog  closable="true" draggable="false" id="finDialAdm" widgetVar="diaFinAdm" 
+                                       header="Lançamento de Baixa" maximizable="true" minimizable="true" responsive="true"
+                                       position="center" resizable="false" showEffect="modal" height="500" width="500" >
+                                <b:messages id="mesDialFinAdm" />
+
+                                <p:panelGrid id="gridFinAdm" columns="1" layout="grid" style="margin-top: 5px; border:0px !important; background:none;" styleClass="ui-panelgrid-blank">
+
+                                    <p:outputLabel value="Data Pagamento" for="dataPagamento"/>
+                                    <p:calendar id="dataPagamento" locale="pt" showOn="button" maxlength="10" pattern="dd/MM/yyyy" mask="99/99/9999"
+                                                value="#{baixaFinanceiroBean.baixaFinanceiro.dataPagamento}"
+                                                >
+                                    </p:calendar>
+                                    <p:outputLabel value="Descrição Pagamento" for="descricaoPagamento" />
+                                    <p:inputText id="descricaoPagamento"  value="#{baixaFinanceiroBean.baixaFinanceiro.descricaoPagamento}"
+                                                 />    
+
+                                    <p:outputLabel value="Histórico Pagamento" for="historicoPagamento" />
+                                    <p:inputTextarea id="historicoPagamento" value="#{baixaFinanceiroBean.baixaFinanceiro.historicoPagamento}"
+                                                     cols="50" rows="10" maxlength="200"  />  
+
+
+                                    <p:outputLabel value="Valor do Pagamento" for="valorPgto" />
+                                    <p:inputText id="valorPgto"  value="#{baixaFinanceiroBean.baixaFinanceiro.valorPagamento}"
+                                                 />
+
+
+                                </p:panelGrid>
+
+                                <p:commandButton value="Lançar" oncomplete="if (!args.validationFailed){ PF('diaFinAdm').hide() }"
+                                                 style="margin-top: 10px" action="#{baixaFinanceiroBean.adicionarPagamento()}" styleClass="GreenButton"
+                                                 update="messagesFicha frmRecebimentoFinanceiro mesDialFinAdm gridFinAdm" process="@this finDialAdm" >
+
+                                </p:commandButton>
+
+                            </p:dialog>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+
+
+
+    </ui:define>
+</ui:composition>

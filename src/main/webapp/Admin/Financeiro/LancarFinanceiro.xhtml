@@ -1,0 +1,160 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:b="http://bootsfaces.net/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:o="http://omnifaces.org/ui">
+
+
+    <f:metadata>
+        <o:viewParam name="id" value="#{cadastroFichaBean.ficha}" />
+
+        <f:viewAction action="#{cadastroFichaBean.prepararCadastro()}" />
+    </f:metadata>
+
+
+
+    <ui:define name="content">
+
+        <h:form id="frmCadFicha">
+
+            <div class="ui-lesscurve">
+
+                <div class="Container100">
+                    <div class="ContainerIndent ">
+                        <div class="ShadowBox whiteback OrangeBorderedBox">
+                            <h1 class="BigTopic">Lançar Doc.Financeiro</h1>
+
+                            <p:toolbar>
+                                <f:facet name="left">
+
+                                    <p:commandButton  value="Lançar Doc Financeiro"  update="frmCadFicha" disabled="#{not seguranca.aprovarFicha}"  icon="fa fa-save" styleClass="GreenButton"
+                                                      rendered="#{cadastroFichaBean.editando}" oncomplete="PF('diaFinAdm').show()" process="@this" />
+                                    <p:separator rendered="#{cadastroFichaBean.editando}" />
+                                    <p:button value="Adiconar  Lançamentos" icon="fa   fa-plus-circle" styleClass="OrangeButton" outcome="/Admin/Financeiro/FichasAguardandoFinanceiro" />
+                                </f:facet>
+
+                            </p:toolbar>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="ContainerIndent">
+                    <div class="ShadowBox whiteback RedBorderedBox ui-fluid">
+                        <p:messages id="messagesFicha" showSummary="false"  showDetail="true" autoUpdate="true" closable="true" />
+                        <div class="Container100 Responsive100">
+                            <div class="Container100 Responsive100 DispBlock red Fs26">
+
+
+                                <p:panelGrid columns="4" layout="grid" style="border:0px !important; background:none;" styleClass="ui-panelgrid-blank">
+                                    <p:outputLabel value="Nº da Ficha" />
+                                    <p:outputLabel value="#{cadastroFichaBean.ficha.id}"/>
+                                    <p:outputLabel value="Gestor" />
+                                    <p:outputLabel value="#{cadastroFichaBean.ficha.gestor.nome}"/>
+                                    <p:outputLabel value="Cliente" />
+                                    <p:outputLabel value="#{cadastroFichaBean.ficha.nomeRazao}"/>
+                                    <p:outputLabel value="Data do Lançamento" />
+                                    <p:outputLabel value="#{cadastroFichaBean.ficha.dataCriacao}"/>
+                                </p:panelGrid>
+
+
+
+
+                                <p:dataTable id="financeiroTable" value="#{cadastroFichaBean.ficha.lancamentoFinanceiros}" var="financeiro" 
+                                             style="margin-top: 5px; border:0px !important; background:none;" emptyMessage="Nenhum lançamento encontrado." reflow="true"
+                                             paginatorPosition="bottom">
+                                    <p:column headerText="Ficha" width="15%" style="text-align: center;">
+                                        <h:outputText value="#{financeiro.ficha}" />
+                                    </p:column>
+                                    <p:column headerText="Data" width="15%" style="text-align: center;"  >
+                                        <h:outputText value="#{financeiro.dataLancamento}" >
+                                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+                                        </h:outputText>
+                                    </p:column>
+
+                                    <p:column headerText="Valor de Venda" width="30%" style="text-align: center;">
+                                        <h:outputText value="#{financeiro.ficha.valorTotalFicha}" >
+                                            <f:convertNumber currencySymbol="R$" type="currency"/>
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:column headerText="Valor a Receber" width="30%" style="text-align: center;" >
+                                        <h:outputText value="#{financeiro.valor}" >
+                                            <f:convertNumber currencySymbol="R$" type="currency"/>
+                                        </h:outputText>
+                                    </p:column>
+
+                                    <p:column headerText="Status Financeiro" style="text-align: center;" width="15%">
+                                        <p:graphicImage name="creativity/images/#{financeiro.statusFinanceiro}.png" title="#{ficha.statusFinanceiro.descricao}"/>
+
+                                    </p:column>
+                                </p:dataTable>
+
+
+
+
+
+
+
+
+                                <p:dialog  closable="false" draggable="false" id="finDialAdm" widgetVar="diaFinAdm"
+                                           header="Lançar Doc Financeiro" maximizable="true" minimizable="true" responsive="true"
+                                           position="center" resizable="false" showEffect="modal" height="350" width="400" >
+                                    <b:messages id="mesDialFinAdm" />
+                                    <p:panelGrid id="gridFinAdm" columns="2" style="margin-top: 5px; border:0px !important; background:none;" styleClass="ui-panelgrid-blank">
+
+                                        <p:outputLabel value="Ficha" />
+                                        <p:outputLabel value="#{cadastroFichaBean.ficha.id}"/>
+
+                                        <p:outputLabel value="Gestor" />
+                                        <p:outputLabel value="#{cadastroFichaBean.ficha.gestor.nome}"/>      
+
+                                        <p:outputLabel value="Cliente" />
+                                        <p:outputLabel value="#{cadastroFichaBean.ficha.nomeRazao}"/>      
+
+                                        <p:outputLabel value="Quantidade Equipamento" />
+                                        <p:outputLabel value="#{cadastroFichaBean.ficha.quantidade}"/>
+
+                                        <p:outputLabel value="Valor Total" />
+                                        <p:outputLabel value="#{cadastroFichaBean.ficha.valorSubtotal}">
+                                            <f:convertNumber currencySymbol="R$" type="currency"/>
+                                        </p:outputLabel>
+
+                                        <p:outputLabel value="Desconto" />
+                                        <p:outputLabel value="#{cadastroFichaBean.ficha.valorDesconto}">
+                                            <f:convertNumber currencySymbol="R$" type="currency"/>
+                                        </p:outputLabel>
+
+                                        <p:outputLabel value="Valor Liquido da Venda" />
+                                        <p:outputLabel value="#{cadastroFichaBean.ficha.valorTotal}">
+                                            <f:convertNumber currencySymbol="R$" type="currency"/>
+                                        </p:outputLabel>
+
+                                        <p:outputLabel value="Valor a Receber" for="valorLancamento" />
+                                        <p:inputText id="valorLancamento" value="#{cadastroFichaBean.financeiro.valor}">
+
+                                        </p:inputText>
+                                    </p:panelGrid>
+
+                                    <p:commandButton value="Lançar" oncomplete="if (!args.validationFailed){ PF('diaFinAdm').hide() }"
+                                                     style="margin-top: 10px" action="#{cadastroFichaBean.adicionarFinanceiro()}" styleClass="GreenButton"
+                                                     update="messagesFicha frmCadFicha mesDialFinAdm gridFinAdm financeiroTable" process="@this finDialAdm" >
+
+                                    </p:commandButton>
+
+                                </p:dialog>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+
+
+
+    </ui:define>
+</ui:composition>

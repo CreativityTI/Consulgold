@@ -1,0 +1,65 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:pr="http://primefaces.org/ronin">
+
+    <div id="layout-menu-cover">
+        <ui:include src="topbar.xhtml" />
+        <h:form id="menuformAdmin" rendered="#{seguranca.permitirAdmin}">
+            <pr:menu>
+                <p:menuitem id="rm_dashboardAdmin" value="Menu Principal" icon="fa fa-joomla"  outcome="/DashboardAdmin" />
+
+                <p:submenu id="rm_layoutCadastros" label="Cadastros de Usuários" icon="fa  fa-user-plus">
+                    <p:menuitem id="rm_dark_layout1" value="Usuarios" icon=" fa fa-users" outcome="/Admin/Usuarios/CadastroUsuario"/>
+
+                </p:submenu>
+
+                <p:submenu id="rm_layoutMensagens" label="Mensagens" icon="fa fa-comment">
+                    <p:menuitem id="rm_dark_layoutMensagem" value="Cadastro Mensagem" icon="fa fa-comments-o" outcome="/Admin/Mensagens/CadastroMensagem"/>
+                    <p:menuitem id="rm_dark_layoutMensagemPesquisa" value="Pesquisa Mensagens" icon=" fa fa-search" outcome="/Admin/Mensagens/PesquisaMensagens"/>
+                </p:submenu>
+
+
+
+                <p:submenu id="rm_layoutFinanceiro" label="Financeiro" icon="fa fa-calculator">
+
+                    <p:menuitem id="rm_dark_layoutGerarFinanceiro" value="Fichas Aguardando Financeiro" icon=" fa fa-legal" outcome="/Admin/Financeiro/FichasAguardandoFinanceiro"/>
+                    <p:menuitem id="rm_dark_layoutAguardandoPagamentoFinanceiro" value="Contas a Receber" icon="fa  fa-money" outcome="/Admin/Financeiro/ContasReceber"/>
+
+
+                </p:submenu>
+
+                <p:submenu id="rm_layoutFichas" label="Fichas" icon="fa  fa-folder-open">
+                    <p:menuitem id="rm_dark_layout2" value="Lançar Ficha" icon="fa fa-paste" outcome="/Admin/Fichas/CadastroFicha"/>
+                    <p:menuitem id="rm_dark_layout3" value="Pesquisa de Fichas" icon=" fa fa-search" outcome="/Admin/Fichas/PesquisaFicha"/>
+
+                </p:submenu>
+                <p:menuitem value="Sair" url="/j_spring_security_logout" />
+            </pr:menu>
+        </h:form>
+
+        <h:form id="menuformGestor" rendered="#{seguranca.permitirGestor}">
+            <pr:menu>
+
+                <p:menuitem id="rm_dashboardGestor" value="Menu Principal" icon="fa fa-joomla"  outcome="/DashboardGestor" />
+
+                <p:submenu id="rm_layoutFinanceiroGestor" label="Financeiro" icon="fa fa-calculator">
+
+                    <p:menuitem id="rm_dark_layoutAguardandoPagamentoFinanceiro" value="Contas a Pagar" icon="fa  fa-money" outcome="/Fichas/ContasPagar"/>
+
+
+                </p:submenu>
+                <p:submenu id="rm_layout2" label="Fichas" icon="fa  fa-folder-open">
+                    <p:menuitem id="rm_dark_layout2" value="Lançar Fichas" icon="fa fa-paste" outcome="/Fichas/CadastroFicha"/>
+                    <p:menuitem id="rm_dark_layout3" value="Pesquisa de Fichas" icon=" fa fa-search" outcome="/Fichas/PesquisaFicha"/>
+
+                </p:submenu>
+                <p:menuitem value="Sair" url="/j_spring_security_logout" />
+            </pr:menu>
+        </h:form>
+    </div>
+
+</ui:composition>

@@ -1,0 +1,64 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:b="http://bootsfaces.net/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:o="http://omnifaces.org/ui">
+
+
+    <f:metadata>
+      
+        <f:viewAction action="#{pesquisaLancamentosFinanceiroBean.prepararCadastro()}" />
+    </f:metadata>
+
+
+
+    <ui:define name="content">
+        <h:form id="frmPesquisa">
+            <div class="ui-lesscurve">
+
+                <div class="Container100">
+
+                    <div class="ContainerIndent">
+                        <div class="ShadowBox whiteback OrangeBorderedBox">
+
+
+                            <h1 class="BigTopic">Pesquisa Lançamentos Financeiro</h1>
+
+
+
+                            <p:dataTable id="lancamentosTable" value="#{pesquisaLancamentosFinanceiroBean.lancamentos}" var="lancamento" 
+                                         emptyMessage="Nenhuma ficha encontrada." rows="10" reflow="true"  
+                                         paginator="true"
+                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                         rowsPerPageTemplate="5,10,15,30,100">
+
+                                <f:facet name="header">
+                                    Lista de Fichas
+                                </f:facet>
+                                <p:column headerText="Fichaº" width="5%" >
+                                    <h:outputText value="#{lancamento.ficha}" />
+                                </p:column>
+
+
+                                <p:column headerText="Valor" >
+                                    <h:outputText value="#{lancamento.valor}" >
+                                        <f:convertNumber type="currency"/>
+                                    </h:outputText>
+                                </p:column>                                 
+
+                            </p:dataTable>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </h:form>
+
+    </ui:define>
+</ui:composition>

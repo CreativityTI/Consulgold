@@ -1,0 +1,134 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:b="http://bootsfaces.net/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:o="http://omnifaces.org/ui">
+
+
+
+
+    <ui:define name="content">
+        <h:form id="frmPesquisa">
+            <div class="ui-lesscurve">
+
+                <div class="Container100">
+
+                    <div class="ContainerIndent">
+                        <div class="ShadowBox whiteback OrangeBorderedBox">
+
+
+                            <h1 class="BigTopic">Pesquisa de Fichas</h1>
+
+                            <p:messages showSummary="false"  showDetail="true" autoUpdate="true" closable="true" />
+
+                            <p:toolbar style="margin-top: 20px">
+                                <p:toolbarGroup>
+                                    <p:commandButton value="Pesquisar" action="#{pesquisaFichasBean.pesquisar()}" 
+                                                     update="@form" styleClass="OrangeButton"/>
+                                </p:toolbarGroup>
+                                <p:toolbarGroup align="right">
+                                    <p:button value="Nova Ficha" outcome="/Fichas/CadastroFicha"  />
+                                </p:toolbarGroup>
+                            </p:toolbar>
+
+                            <p:panelGrid columns="1" layout="grid" style="border:0px !important; background:none;" styleClass="ui-panelgrid-blank">
+
+
+                                <p:outputLabel value="Número" />
+                                <h:panelGroup>
+                                    <p:inputText size="10" value="#{pesquisaFichasBean.filtro.numeroDe}" />
+                                    a
+                                    <p:inputText size="10" value="#{pesquisaFichasBean.filtro.numeroAte}" />
+                                </h:panelGroup>
+
+                                <p:outputLabel value="Data de criação" />
+                                <h:panelGroup>
+                                    <p:calendar size="10" pattern="dd/MM/yyyy" locale="pt" 
+                                                value="#{pesquisaFichasBean.filtro.dataCriacaoDe}" />
+                                    a
+                                    <p:calendar size="10" pattern="dd/MM/yyyy" locale="pt"
+                                                value="#{pesquisaFichasBean.filtro.dataCriacaoAte}" />
+                                </h:panelGroup>
+
+                                <p:outputLabel value="Cliente" />
+                                <p:inputText size="40" value="#{pesquisaFichasBean.filtro.nomeCliente}" />
+
+                                <p:outputLabel value="Status" />
+                                <p:selectManyCheckbox value="#{pesquisaFichasBean.filtro.statuses}" layout="responsive" columns="4" style="margin:30px 0px;">
+                                    <f:selectItems value="#{pesquisaFichasBean.statuses}" var="status"
+                                                   itemValue="#{status}" itemLabel="#{status.descricao}" />
+                                </p:selectManyCheckbox>
+
+
+                            </p:panelGrid>
+
+                            <p:dataTable id="fichasTable" value="#{pesquisaFichasBean.fichasFiltrados}" var="ficha" 
+                                         emptyMessage="Nenhuma ficha encontrada." rows="10" reflow="true"  
+                                         paginator="true"
+                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                         rowsPerPageTemplate="5,10,15,30,100">
+                                <f:facet name="header">
+                                    Lista de Fichas
+                                </f:facet>
+                                <p:column headerText="Nº" width="5%" >
+                                    <h:outputText value="#{ficha.id}" />
+                                </p:column>
+                                <p:column headerText="Gestor" >
+                                    <h:outputText value="#{ficha.gestor.nome}" />
+                                </p:column>
+
+                                <p:column headerText="Cliente" >
+                                    <h:outputText value="#{ficha.nomeRazao}" />
+                                </p:column>   
+
+                                <p:column headerText="Quantidade" style="text-align: center">
+                                    <h:outputText value="#{ficha.quantidade}" />
+                                </p:column>     
+
+                                <p:column headerText="Valor Desconto" >
+                                    <h:outputText value="#{ficha.valorDesconto}" >
+                                        <f:convertNumber currencySymbol="R$" type="currency"/>
+                                    </h:outputText>
+                                </p:column>  
+
+                                <p:column headerText="Valor Total" >
+                                    <h:outputText value="#{ficha.valorTotal}" >
+                                        <f:convertNumber currencySymbol="R$" type="currency"/>
+                                    </h:outputText>
+                                </p:column>  
+
+                                <p:column headerText="MCC" style="text-align: center" >
+                                    <h:outputText value="#{ficha.categoria.MCC}" >
+
+                                    </h:outputText>
+                                </p:column> 
+
+                                <p:column headerText="Status" style="text-align: center;" width="8%">
+                                    <p:graphicImage name="creativity/images/#{ficha.statusFicha}.png" title="#{ficha.statusFicha.descricao}"/>
+
+                                </p:column>
+
+
+
+
+                                <p:column headerText="Ação" width="12%"  style="text-align: center" >
+
+                                    <p:button class="Wid40" outcome="/Fichas/CadastroFicha" icon="fa  fa-edit" title="Editar" styleClass="OrangeButton"  >  
+                                        <f:param name="id" value="#{ficha.id}" />
+                                    </p:button>  
+
+                                </p:column>
+                            </p:dataTable>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </h:form>
+
+    </ui:define>
+</ui:composition>

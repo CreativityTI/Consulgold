@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+        </f:facet>
+
+
+        <title>Consulgold</title>
+        <ui:insert name="head" />
+    </h:head>
+
+    <h:body styleClass="loginbody">
+
+        <f:metadata>
+            <f:viewParam name="dummy" />
+            <f:event listener="#{loginBean.preRender}" type="preRenderView" />
+        </f:metadata>
+        <h:form id="frm" prependId="false">
+            <b:messages showSummary="false"/>
+            <div class="Wid25 MarAuto DispBlock OvHidden Responsive100">
+                <div class="ContainerIndent">
+                    <div class="Wid90 MarAuto">
+                        <div class="Wid100 TexAlCenter">
+                            <h:graphicImage name="creativity/images/LogoLogin.png"  style="width:100px; margin-top:50px;"/>
+                            <div class="EmptyBox30"></div>
+                        </div>
+                        <div class="ShadowBox whiteback TexAlCenter RedBorderedBox BordRad15">
+                            <div class="EmptyBox20"></div>
+                            <div class="Wid100 OvHidden BigTopic FontDosisSemiBold Fs30"><i class="fa fa-key"></i> Acesso ao Sistema</div>
+                            <div class="EmptyBox20"></div>
+                            <div class="Wid100"><p:inputText id="j_username" value="#{loginBean.email}" placeholder="Email" styleClass="Wid80 TexAlCenter Fs18"/></div>
+                            <div class="EmptyBox10"></div>
+                            <div class="Wid100"><p:password id="j_password" placeholder="Password" styleClass="Wid80 TexAlCenter Fs18"/></div>
+                            <div class="EmptyBox30"></div>
+
+                            <div class="EmptyBox30"></div>
+                            <div class="Wid100"><p:commandButton value="Login" action="#{loginBean.login}" ajax="false" icon="fa fa-sign-in Fs18 white" styleClass="Wid60"/></div>
+                            <div class="EmptyBox5"></div>
+
+                        </div>
+                        <div class="Wid100 TexAlCenter MarTop20 softgray Fs14 FontDosisRegular">
+                            <i class="fa fa-copyright"></i>  Sistema Gerencial Consulgold <br/> .
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h:outputStylesheet name="css/core-layout.css" library="ronin-layout" />
+            <h:outputStylesheet name="css/font-awesome.css" library="ronin-layout" />
+            <h:outputStylesheet name="css/animate.css" library="ronin-layout" />
+            <h:outputStylesheet name="css/ronin-layout.css" library="ronin-layout" />
+        </h:form>
+    </h:body>
+
+</html>

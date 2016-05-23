@@ -1,0 +1,40 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+    <boddy>
+        <h:form id="frmBusca">
+            <p:panelGrid id="pnCEP" columns="3">
+                <h:outputText value="CEP: " />
+                <p:inputMask mask="99999-999" value="#{mbService.cep}" />
+
+                <p:commandButton value="Pesquisar" icon="ui-icon-search"
+                                 action="#{mbService.encontraCEPS}" update="frmResultado" />
+            </p:panelGrid>
+        </h:form>
+
+        <h:form id="frmResultado">
+            <p:panelGrid id="pnResultado" columns="2">
+                <h:outputLabel value="UF: "
+                               style="font-weight:bold; padding-right: 5px; float: right;" />
+                <p:inputText size="5" value="#{mbService.usuario.estado}" />
+
+                <h:outputLabel value="Logradouro: "
+                               style="font-weight:bold; padding-right: 5px; float: right;" />
+                <p:inputText size="50"
+                             value="#{mbService.usuario.tipoLogradouro} #{mbService.usuario.logradouro}" />
+
+                <h:outputLabel value="Cidade: "
+                               style="font-weight:bold; padding-right: 5px; float: right;" />
+                <p:inputText size="50" value="#{mbService.usuario.cidade}" />
+
+                <h:outputLabel value="Bairro: "
+                               style="font-weight:bold; padding-right: 5px; float: right;" />
+                <p:inputText size="25" value="#{mbService.usuario.bairro}" />
+            </p:panelGrid>
+        </h:form>
+    </boddy>
+
+</ui:composition>

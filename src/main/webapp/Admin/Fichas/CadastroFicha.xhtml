@@ -1,0 +1,499 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:b="http://bootsfaces.net/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:o="http://omnifaces.org/ui">
+
+
+    <f:metadata>
+        <o:viewParam name="id" value="#{cadastroFichaBean.ficha}" />
+
+        <f:viewAction action="#{cadastroFichaBean.prepararCadastro()}" />
+    </f:metadata>
+
+
+
+    <ui:define name="content">
+        <p:focus/>
+
+        <h:form id="frmCadFicha">
+            <p:focus context="frmCadFicha" for="tabViewFicha:nome"/>
+
+            <div class="ui-lesscurve">
+
+                <div class="Container100">
+                    <div class="ContainerIndent ">
+                        <div class="ShadowBox whiteback OrangeBorderedBox">
+                            <h1 class="BigTopic">#{cadastroFichaBean.editando ? "Edição de Ficha":" Nova Ficha"}</h1>
+
+                            <p:toolbar>
+                                <f:facet name="left">
+                                    <p:commandButton  value="Salvar"  update="frmCadFicha"  icon="fa fa-save" action="#{cadastroFichaBean.salvar}" styleClass="GreenButton" validateClient="true"/>
+                                </f:facet>
+
+
+                                <f:facet name="right">
+                               
+
+                                    <p:commandButton  value="Pendente"  disabled="#{not seguranca.pedenteFicha}"  icon="fa fa-save"  styleClass="OrangeButton"
+                                                      rendered="#{cadastroFichaBean.editando}"  oncomplete="PF('diaEndAdm').show()" process="@this"   />
+                                    <p:separator rendered="#{cadastroFichaBean.editando}" />
+                                    <p:commandButton  value="Aprovar"  update="frmCadFicha" disabled="#{not seguranca.aprovarFicha}"  icon="fa fa-save" action="#{cadastroFichaBean.fichaAprovar}" styleClass="GreenButton"
+                                                      rendered="#{cadastroFichaBean.editando}" />
+                                    <p:separator rendered="#{cadastroFichaBean.editando}" />
+                                    <p:button  value="Nova Ficha" icon="fa fa-user-plus" outcome="/Admin/Fichas/CadastroFicha" />
+                                    <p:separator rendered="#{cadastroFichaBean.editando}" />
+                                    <p:button value="Pesquisar" icon="fa  fa-search" styleClass="OrangeButton" outcome="/Admin/Fichas/PesquisaFicha" />
+                                </f:facet>
+
+                            </p:toolbar>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="ContainerIndent">
+                    <div class="ShadowBox whiteback RedBorderedBox ui-fluid">
+                        <p:messages id="messagesFicha" showSummary="false"  showDetail="true" autoUpdate="true" closable="true" />
+                        <div class="Container100 Responsive100">
+
+
+                            <p:tabView id="tabViewFicha" orientation="left">
+
+                                <p:tab id="dadosPessoaisTab" title="Dados Pessoais"  >
+                                    <p:panelGrid columns="1" layout="grid" style="border:0px !important; background:none;" styleClass="ui-panelgrid-blank">
+
+
+                                        <p:outputLabel value="Data de criação" rendered="#{cadastroFichaBean.ficha.existente}" />
+                                        <h:outputText value="#{cadastroFichaBean.ficha.dataCriacao}" rendered="#{cadastroFichaBean.ficha.existente}"  />
+
+
+
+                                        <p:outputLabel value="Tipo" for="tipo" />
+                                        <p:selectOneRadio id="tipo" value="#{cadastroFichaBean.ficha.tipoPessoa}"
+                                                          styleClass="sem-borda">
+                                            <f:selectItems value="#{cadastroFichaBean.tiposPessoas}" var="tipo" itemValue="#{tipo}"
+                                                           itemLabel="#{tipo.descricao}"/>
+                                            <p:ajax event="change" update="grupoFisica proprietarioEmpresa"
+                                                    process="@this" partialSubmit="true"/>
+                                        </p:selectOneRadio>
+
+                                        <p:outputLabel value="Nome Razão Social:" for="nome" />
+                                        <p:inputText id="nome"  value="#{cadastroFichaBean.ficha.nomeRazao}"/>
+
+                                        <h:panelGroup id="grupoFisica">
+                                            <p:outputLabel value="Nome Fantasia:" for="nomeFantasia"  rendered="#{cadastroFichaBean.ficha.tipoPessoa  eq 'JURIDICA'}"/>
+                                            <p:inputText id="nomeFantasia"  value="#{cadastroFichaBean.ficha.nomeFantasia}"  rendered="#{cadastroFichaBean.ficha.tipoPessoa  eq 'JURIDICA'}"/>
+
+                                            <p:outputLabel value="CPF" for="cpf"
+                                                           rendered="#{cadastroFichaBean.ficha.tipoPessoa eq 'FISICA'}" />
+                                            <p:outputLabel value="CNPJ" for="cnpj"
+                                                           rendered="#{cadastroFichaBean.ficha.tipoPessoa  eq 'JURIDICA'}" />
+
+
+                                            <p:inputMask mask="999.999.999-99" value="#{cadastroFichaBean.ficha.cpf}" id="cpf"
+                                                         rendered="#{cadastroFichaBean.ficha.tipoPessoa eq 'FISICA'}" />
+                                            <p:inputMask mask="99.999.999/9999-99" value="#{cadastroFichaBean.ficha.cnpj}" id="cnpj"
+                                                         rendered="#{cadastroFichaBean.ficha.tipoPessoa eq 'JURIDICA'}" />
+
+
+                                            <p:outputLabel value="RG" for="rg"
+                                                           rendered="#{cadastroFichaBean.ficha.tipoPessoa eq 'FISICA'}" />
+
+                                            <p:inputText value="#{cadastroFichaBean.ficha.rg}" id="rg" maxlength="15"
+                                                         rendered="#{cadastroFichaBean.ficha.tipoPessoa eq 'FISICA'}" />
+
+                                            <p:outputLabel value="Data Nascimento" for="dataNascimento" rendered="#{cadastroFichaBean.ficha.tipoPessoa eq 'FISICA'}" />
+                                            <p:calendar id="dataNascimento" locale="pt" showOn="button" maxlength="10" pattern="dd/MM/yyyy" mask="99/99/9999"
+                                                        value="#{cadastroFichaBean.ficha.dataNascimento}" rendered="#{cadastroFichaBean.ficha.tipoPessoa eq 'FISICA'}">
+
+                                            </p:calendar>
+
+
+                                        </h:panelGroup>
+
+                                        <h:panelGroup id="proprietarioEmpresa">
+                                            <p:panel header="Dados do Titular"  rendered="#{cadastroFichaBean.ficha.tipoPessoa eq 'JURIDICA'}">
+
+                                                <p:outputLabel value="CPF" for="cpfTitular"
+                                                               rendered="#{cadastroFichaBean.ficha.tipoPessoa eq 'JURIDICA'}" />
+                                                <p:inputMask mask="999.999.999-99" value="#{cadastroFichaBean.ficha.cpfTtitular}" id="cpfTitular"
+                                                             rendered="#{cadastroFichaBean.ficha.tipoPessoa eq 'JURIDICA'}" required="true" requiredMessage="Informar CPF do titular" />
+
+                                                <p:outputLabel value="RG" for="rgTitular"
+                                                               rendered="#{cadastroFichaBean.ficha.tipoPessoa eq 'JURIDICA'}" />
+                                                <p:inputText id="rgTitular" value="#{cadastroFichaBean.ficha.rgTtiluar}" rendered="#{cadastroFichaBean.ficha.tipoPessoa eq 'JURIDICA'}"  required="true"
+                                                             requiredMessage=" Informar RG do Titular"/>
+
+                                                <p:outputLabel value="Data Nasc Titular" for="nascimentoTitular"
+                                                               rendered="#{cadastroFichaBean.ficha.tipoPessoa eq 'JURIDICA'}" />
+                                                <p:calendar id="nascimentoTitular" value="#{cadastroFichaBean.ficha.dataNascTitular}"  locale="pt" showOn="button" pattern="dd/MM/yyyy" mask="99/99/9999"
+                                                            rendered="#{cadastroFichaBean.ficha.tipoPessoa eq 'JURIDICA'}" required="true" requiredMessage=" Informar Data Nascimento do titular">
+                                                </p:calendar>
+
+                                            </p:panel>
+                                        </h:panelGroup>
+
+                                    </p:panelGrid>
+                                </p:tab>
+
+                                <p:tab id="dadosComerciaisTab" title="Dados Comerciais">
+
+                                    <p:outputLabel value="Gestor" for="gestor"/>
+                                    <p:selectOneMenu  id="gestor"  value="#{cadastroFichaBean.ficha.gestor}"   > 
+                                        <f:selectItem itemLabel="Selecione o Gestor" itemValue=""  />
+                                        <f:selectItems value="#{cadastroFichaBean.usuariosGestor}" var="gestor" itemLabel="#{gestor.nome} " 
+                                                       itemValue="#{gestor}"  />
+
+                                    </p:selectOneMenu>
+
+                                    <p:outputLabel value="Consultor" for="consultor"/>
+                                    <p:selectOneMenu  id="consultor"  value="#{cadastroFichaBean.ficha.consultor}"   > 
+                                        <f:selectItem itemLabel="Selecione o Consultor" itemValue=""  />
+                                        <f:selectItems value="#{cadastroFichaBean.usuariosConsultor}" var="consultor" itemLabel="#{consultor.nome} " 
+                                                       itemValue="#{consultor}"  />
+
+                                    </p:selectOneMenu>
+
+
+
+                                    <p:outputLabel value="Categoria" for="categoria"/>
+                                    <p:selectOneMenu id="categoria" value="#{cadastroFichaBean.categoriaPai}" >
+                                        <f:selectItem itemLabel="Selecione a categoria"/>
+                                        <f:selectItems value="#{cadastroFichaBean.categoriasRaizes}" var="categoria"
+                                                       itemValue="#{categoria}" itemLabel="#{categoria.descricao}" />
+                                        <p:ajax listener="#{cadastroFichaBean.carregarSubcategorias}" update="subcategoria" />
+                                    </p:selectOneMenu>
+
+                                    <p:outputLabel value="Subcategoria" for="subcategoria"/>
+                                    <p:selectOneMenu id="subcategoria" value="#{cadastroFichaBean.ficha.categoria}" >
+                                        <f:selectItem itemLabel="Selecione a subcategoria"/>
+                                        <f:selectItems value="#{cadastroFichaBean.subcategorias}" var="subcategoria" 
+                                                       itemValue="#{subcategoria}" itemLabel="#{subcategoria.descricao} "  />
+
+                                    </p:selectOneMenu>
+
+
+
+                                    <p:outputLabel value="Retorno da Oferta" for="retornoOferta" />
+                                    <p:selectOneMenu id="retornoOferta"  value="#{cadastroFichaBean.ficha.oferta}"   > 
+                                        <f:selectItem itemLabel="Selecione" itemValue=""  />
+                                        <f:selectItem itemLabel="Faturamento R$ 500,00 ao mês" itemValue="Faturamento R$ 500,00 ao mês"  />
+                                        <f:selectItem itemLabel="Faturamento com antecipação" itemValue="Faturamento com antecipação"  />
+
+                                    </p:selectOneMenu > 
+
+
+                                </p:tab>
+
+                                <p:tab id="enderecoTab" title="Endereço">
+
+
+                                    <p:panelGrid columns="1" layout="grid" style="border:0px !important; background:none;" styleClass="ui-panelgrid-blank">
+                                        <p:outputLabel value="CEP:" for="cep"/>
+                                        <p:inputMask id="cep" mask="99999-999" value="#{cadastroFichaBean.ficha.cep}" rendered="#{cadastroFichaBean.editando}"/>
+
+                                        <p:inputMask  mask="99999-999" value="#{cadastroFichaBean.cep}" rendered="#{cadastroFichaBean.editandoCep}" >
+                                            <p:ajax listener="#{cadastroFichaBean.encontraCEPS}" update="frmResultado"/>
+                                        </p:inputMask>
+
+
+                                    </p:panelGrid>
+
+
+                                    <p:panelGrid id="frmResultado" columns="1" layout="grid" style="border:0px !important; background:none;" styleClass="ui-panelgrid-blank">
+                                        <p:outputLabel value="UF: " for="uf"/>
+                                        <p:inputText id="uf"  value="#{cadastroFichaBean.ficha.estado}" />
+
+                                        <p:outputLabel value="Tipo: " for="tipologradouro"/>
+                                        <p:inputText id="tipologradouro" value="#{cadastroFichaBean.ficha.tipoLogradouro}" />
+
+                                        <p:outputLabel value="Logradouro: " for="logradouro"/>
+                                        <p:inputText id="logradouro" value="#{cadastroFichaBean.ficha.logradouro}" />
+
+                                        <p:outputLabel value="Número: " for="numero"/>
+                                        <p:inputText id="numero" size="10" value="#{cadastroFichaBean.ficha.numero}" />
+
+
+                                        <p:outputLabel value="Cidade: " for="cidade"/>
+                                        <p:inputText id="cidade" size="50" value="#{cadastroFichaBean.ficha.cidade}" />
+
+                                        <p:outputLabel value="Bairro: " for="bairro"/>
+                                        <p:inputText id="bairro" size="25" value="#{cadastroFichaBean.ficha.bairro}" />
+
+                                        <p:outputLabel value="Complemento: " for="complemento"/>
+                                        <p:inputText id="complemento" size="25" value="#{cadastroFichaBean.ficha.complemento}" maxlength="40" />
+
+                                    </p:panelGrid>
+
+                                </p:tab>
+                                <p:tab id="dadosContatoTab" title="Dados de contato" >
+                                    <p:panelGrid  columns="1" layout="grid" style="border:0px !important; background:none;" styleClass="ui-panelgrid-blank">
+
+                                        <p:outputLabel value="E-mail:" for="email" />
+                                        <p:inputText id="email"  value="#{cadastroFichaBean.ficha.email}" />
+                                        <p:outputLabel value="Telefone fixo: " for="telefonefixo"/>
+                                        <p:inputMask id="telefonefixo"  value="#{cadastroFichaBean.ficha.telefone}" mask="(99)9999-9999"/>
+
+                                        <p:outputLabel value="Telefone Celular: " for="telCelular"/>
+
+                                        <p:inputMask id="telCelular"  value="#{cadastroFichaBean.ficha.celular}" mask="(99)#9999-9999"/>
+
+                                        <p:outputLabel value="Telefone Preferêncial:" for="telPreferencial" />
+                                        <p:selectOneMenu id="telPreferencial"  value="#{cadastroFichaBean.ficha.telPreferencial}"   > 
+                                            <f:selectItem itemLabel="Selecione" itemValue=""  />
+                                            <f:selectItem itemLabel="Telefone Fixo" itemValue="Telefone Fixo"  />
+                                            <f:selectItem itemLabel="Telefone Celular" itemValue="Telefone Celular"  />
+
+                                        </p:selectOneMenu > 
+
+
+
+                                    </p:panelGrid>
+
+                                </p:tab>
+
+                                <p:tab id="dadosBancariosTab" title="Dados bancários">
+                                    <p:panelGrid  columns="1" layout="grid" style="border:0px !important; background:none;" styleClass="ui-panelgrid-blank">
+
+                                        <p:outputLabel value="Banco:" for="banco" />
+                                        <p:selectOneMenu  id="banco"  value="#{cadastroFichaBean.ficha.banco}" filter="true" filterMatchMode="startsWith" var="b" > 
+                                            <f:selectItem itemLabel="Selecione o Banco" itemValue=""  />
+                                            <f:selectItems value="#{cadastroFichaBean.todosBancos}" var="banco" itemLabel="#{banco.nome} " 
+                                                           itemValue="#{banco}"  />
+
+                                            <p:column>
+                                                #{b.nome} -  #{b.codigoBanco}
+                                            </p:column>
+
+                                        </p:selectOneMenu>
+
+                                        <p:outputLabel value="Agência: " for="agencia"/>
+                                        <p:inputText id="agencia"  value="#{cadastroFichaBean.ficha.agencia}"  maxlength="10"/>
+
+                                        <p:outputLabel value="Conta Corrente: " for="conta"/>
+                                        <p:inputText id="conta"  value="#{cadastroFichaBean.ficha.conta}" maxlength="10" />
+
+                                        <p:outputLabel value="Digito: " for="digito"/>
+                                        <p:inputText id="digito"  value="#{cadastroFichaBean.ficha.digitoConta}" maxlength="10" />
+
+
+                                    </p:panelGrid>
+                                </p:tab>
+
+                                <p:tab id="equipamentosTab" title="Equipamentos">
+                                    <p:panelGrid  columns="1" layout="grid" style="border:0px !important; background:none;" styleClass="ui-panelgrid-blank">
+
+                                        <p:outputLabel value="Solução de Captura:" for="captura" />
+                                        <p:selectOneMenu id="captura"  value="#{cadastroFichaBean.ficha.solucaoCaptura}"   > 
+                                            <f:selectItem itemLabel="Selecione" itemValue=""  />
+                                            <f:selectItem itemLabel="Pós GPRS Móvel - R$ 144,80" itemValue="Pós GPRS Móvel - R$ 144,80"  />
+                                            <f:selectItem itemLabel="Pós Fixo - R$ 100,80" itemValue="Pós Fixo - R$ 100,80"  />
+
+                                        </p:selectOneMenu > 
+
+
+                                        <p:outputLabel value="Quantidade:" for="quantidade" />
+                                        <p:spinner id="quantidade" size="10" maxlength="10" 
+                                                   value="#{cadastroFichaBean.ficha.quantidade}" >
+                                            <f:convertNumber type="number" />
+
+                                            <p:ajax event="change" process="@this" update="totalFicha, subtotal"
+                                                    listener="#{cadastroFichaBean.recalcularFicha()}" />
+                                        </p:spinner>
+
+                                        <p:outputLabel value="Operadora:" for="operadora" />
+                                        <p:selectOneMenu id="operadora"  value="#{cadastroFichaBean.ficha.operadora}"   > 
+                                            <f:selectItem itemLabel="Selecione" itemValue=""  />
+                                            <f:selectItem itemLabel="Oi" itemValue="Oi"  />
+                                            <f:selectItem itemLabel="Tim" itemValue="Tim"  />
+                                            <f:selectItem itemLabel="Vivo" itemValue="Vivo"  />
+                                            <f:selectItem itemLabel="Claro" itemValue="Claro"  />
+                                        </p:selectOneMenu > 
+
+
+                                        <p:outputLabel value="Melhor dia para instalação:" for="instalacao" />
+                                        <p:selectOneMenu id="instalacao"  value="#{cadastroFichaBean.ficha.diaInstalacao}"   > 
+                                            <f:selectItem itemLabel="Selecione" itemValue=""  />
+                                            <f:selectItem itemLabel="Qualquer dia" itemValue="Qualquer dia"  />
+                                            <f:selectItem itemLabel="Segunda - Sexta" itemValue="Segunda - Sexta"  />
+                                            <f:selectItem itemLabel="Segunda - Sabado" itemValue="Segunda - Sabado"  />
+                                        </p:selectOneMenu > 
+
+                                    </p:panelGrid>
+                                </p:tab>
+
+
+                                <p:tab id="formaPagamentoTab" title="Forma de Pagamento">
+                                    <p:panelGrid  columns="1" layout="grid" style="border:0px !important; background:none;" styleClass="ui-panelgrid-blank">
+                                        <p:outputLabel value="Forma de Pagamento: " for="formaPagamento"/>
+                                        <p:inputText id="formaPagamento"  value="#{cadastroFichaBean.ficha.formaPagemento}" />
+
+
+                                        <p:outputLabel value="Subtotal" style="font-weight: bold"/>
+                                        <h:outputText value="#{cadastroFichaBean.ficha.valorSubtotal}" 
+                                                      style="font-weight: bold" id="subtotal">
+                                            <f:convertNumber currencySymbol="R$" type="currency" />
+                                        </h:outputText>
+
+                                        <p:outputLabel value="Valor de desconto" for="valorDesconto"/>
+                                        <p:inputText id="valorDesconto" size="10" maxlength="10" styleClass="moeda" 
+                                                     value="#{cadastroFichaBean.ficha.valorDesconto}">
+
+
+                                            <p:ajax event="change" process="@this" update="totalFicha,subtotal"
+                                                    listener="#{cadastroFichaBean.recalcularFicha()}" />
+                                        </p:inputText>
+
+                                        <p:outputLabel value="Total" style="font-weight: bold; font-size: 1.1em"/>
+                                        <h:outputText value="#{cadastroFichaBean.ficha.valorTotal}" 
+                                                      style="font-weight: bold; font-size: 1.1em" id="totalFicha">
+                                            <f:convertNumber currencySymbol="R$" type="currency" />
+                                        </h:outputText>
+
+                                    </p:panelGrid>
+                                </p:tab>
+
+
+
+                                <p:tab id="anotacoesTab"  title="Anotações" rendered="#{cadastroFichaBean.editando}">
+
+                                    <p:commandButton value="Adicionar Anotação" style="margin-top: 20px" action="#{cadastroFichaBean.novaAnotacao()}"
+                                                     oncomplete="PF('diaEnd').show()" process="@this" update="endDial" styleClass="OrangeButton">
+
+                                    </p:commandButton>
+
+                                    <p:dataTable id="anotacaoTable" value="#{cadastroFichaBean.ficha.atonacoes}" var="anotacao" 
+                                                 sortBy="#{anotacao.dataAnotacao}" sortOrder="DESCENDING"
+                                                 style="margin-top: 5px; border:0px !important; background:none;" emptyMessage="Nenhuma anotacao encontrada." reflow="true"
+
+                                                 paginatorPosition="bottom">
+
+
+                                        <p:column headerText="Ficha" width="5%">
+                                            <h:outputText value="#{anotacao.ficha}" />
+                                        </p:column>
+                                        <p:column headerText="Data" width="15%" >
+                                            <h:outputText value="#{anotacao.dataAnotacao}"  >
+                                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+                                            </h:outputText>
+                                        </p:column>
+
+                                        <p:column headerText="Usuário" width="10%" >
+                                            <h:outputText value="#{anotacao.usuario.nome}" />
+                                        </p:column>
+                                        <p:column headerText="Nota" >
+                                            <h:outputText value="#{anotacao.nota}" />
+                                        </p:column>
+                                    </p:dataTable>
+
+                                    <p:dialog  closable="true" draggable="false" id="endDial" widgetVar="diaEnd"
+                                               header="Anotação" maximizable="true" minimizable="true"
+                                               position="center" resizable="false" showEffect="slide" >
+                                        <p:messages id="mesDial" />
+                                        <p:panelGrid id="gridEnd" columns="2">
+                                            <p:outputLabel value="Usuário" for="usuarioAnotacao"/>
+                                            <p:selectOneMenu  id="usuarioAnotacao"  value="#{cadastroFichaBean.anotacao.usuario}"   > 
+                                                <f:selectItem itemLabel="Selecione " itemValue=""  />
+                                                <f:selectItems value="#{cadastroFichaBean.usuarioLogado}" var="usuarioLogado" itemLabel="#{usuarioLogado.nome} " 
+                                                               itemValue="#{usuarioLogado}"  />
+                                            </p:selectOneMenu>
+                                            <p:outputLabel value="Nota" for="nota" />
+                                            <p:inputTextarea id="nota" value="#{cadastroFichaBean.anotacao.nota}" cols="100" rows="20" maxlength="200"/>
+                                        </p:panelGrid>
+                                        <p:commandButton value="Incluir" oncomplete="if (!args.validationFailed){ PF('diaEnd').hide() }"
+                                                         style="margin-top: 10px" action="#{cadastroFichaBean.adicionarAnotacao()}"
+                                                         update="anotacaoTable mesDial gridEnd frmCadFicha:messagesFicha" process="@this endDial" styleClass="GreenButton"/>
+                                    </p:dialog>
+                                </p:tab>
+
+
+                                <p:tab id="dadosCredenciamentoTab" title="Credenciamento" rendered="#{cadastroFichaBean.editando}">
+                                    <p:panelGrid  columns="1" layout="grid" style="border:0px !important; background:none;" styleClass="ui-panelgrid-blank">
+                                        <p:outputLabel value="EC:" for="ec" />
+                                        <p:inputText id="ec"  value="#{cadastroFichaBean.ficha.numeroCreadenciamento}" />
+
+                                        <p:outputLabel value="Observação:" for="obsCred" />
+                                        <p:inputTextarea id="obsCred" value="#{cadastroFichaBean.ficha.observacaoCredenciamento}" />
+                                    </p:panelGrid>
+                                </p:tab>
+
+
+                                <p:tab id="financeirosTab"  title="Financeiro" rendered="#{cadastroFichaBean.editando}">
+                                    <p:dataTable id="financeiroTable" value="#{cadastroFichaBean.ficha.lancamentoFinanceiros}" var="financeiro" 
+                                                 style="margin-top: 5px; border:0px !important; background:none;" emptyMessage="Nenhum lançamento encontrado." reflow="true"
+                                                 paginatorPosition="bottom">
+                                        <p:column headerText="Ficha" width="15%" style="text-align: center;">
+                                            <h:outputText value="#{financeiro.ficha}" />
+                                        </p:column>
+                                        <p:column headerText="Nº Doc Financeiro" width="10%" style="text-align: center;">
+                                            <h:outputText value="#{financeiro.id}" />
+                                        </p:column>
+                                        <p:column headerText="Data" width="15%" style="text-align: center;"  >
+                                            <h:outputText value="#{financeiro.dataLancamento}" >
+                                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+                                            </h:outputText>
+                                        </p:column>
+
+                                        <p:column headerText="Valor de Venda" width="30%" style="text-align: center;">
+                                            <h:outputText value="#{financeiro.ficha.valorTotalFicha}" >
+                                                <f:convertNumber currencySymbol="R$" type="currency" />
+                                            </h:outputText>
+                                        </p:column>
+                                        <p:column headerText="Valor a Receber" width="30%" style="text-align: center;" >
+                                            <h:outputText value="#{financeiro.valor}" >
+                                                <f:convertNumber currencySymbol="R$" type="currency" />
+                                            </h:outputText>
+                                        </p:column>
+
+                                        <p:column headerText="Status Financeiro" style="text-align: center;" width="15%">
+                                            <p:graphicImage name="creativity/images/#{financeiro.statusFinanceiro}.png" title="#{ficha.statusFinanceiro.descricao}"/>
+
+                                        </p:column>
+                                    </p:dataTable>
+                                </p:tab>
+                            </p:tabView>
+
+
+
+                            <p:dialog  closable="false" draggable="false" id="endDialAdm" widgetVar="diaEndAdm"
+                                       header="Anotação" maximizable="true" minimizable="true" 
+                                       position="center" resizable="false" showEffect="slide" >
+                                <b:messages id="mesDialAdm" />
+                                <p:panelGrid id="gridEndAdm" columns="2">
+
+                                    <p:outputLabel value="Usuário" for="usuarioAnotacaoPendente"/>
+                                    <p:selectOneMenu  id="usuarioAnotacaoPendente"  value="#{cadastroFichaBean.anotacao.usuario}"   > 
+                                        <f:selectItem itemLabel="Selecione " itemValue=""  />
+                                        <f:selectItems value="#{cadastroFichaBean.gestores}" var="usuarioLogado" itemLabel="#{usuarioLogado.nome} " 
+                                                       itemValue="#{usuarioLogado}"  />
+                                    </p:selectOneMenu>
+
+                                    <p:outputLabel value="Nota" for="anotacaoNota" />
+                                    <p:inputTextarea id="anotacaoNota" value="#{cadastroFichaBean.anotacao.nota}" cols="100" rows="20" maxlength="200"/>
+                                </p:panelGrid>
+
+                                <p:commandButton value="Incluir" oncomplete="if (!args.validationFailed){ PF('diaEndAdm').hide() }"
+                                                 style="margin-top: 10px" action="#{cadastroFichaBean.adicionarAnotacaoPendente()}" styleClass="GreenButton"
+                                                 update="messagesFicha frmCadFicha mesDialAdm gridEndAdm tabViewFicha:anotacaoTable" process="@this endDialAdm" >
+
+                                </p:commandButton>
+
+                            </p:dialog>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+
+
+
+    </ui:define>
+</ui:composition>

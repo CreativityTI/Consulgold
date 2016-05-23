@@ -1,0 +1,109 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:b="http://bootsfaces.net/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:o="http://omnifaces.org/ui">
+
+
+    <f:metadata>
+
+
+    </f:metadata>
+
+    <ui:define name="content">
+        <h:form id="frmPesquisa">
+            <div class="ui-lesscurve">
+
+                <div class="Container100">
+
+                    <div class="ContainerIndent">
+                        <div class="ShadowBox whiteback OrangeBorderedBox">
+
+
+
+                            <h1 class="BigTopic">Pesquisa de Usuário</h1>
+
+                            <p:messages autoUpdate="true" closable="true" />
+
+                            <p:toolbar style="margin-top: 20px">
+                                <p:toolbarGroup>
+                                    <p:commandButton value="Pesquisar" action="#{pesquisaUsuarioBean.pesquisar}" 
+                                                     update="@form" styleClass="RedButton"/>
+                                </p:toolbarGroup>
+                                <p:toolbarGroup align="right">
+                                    <p:button value="Novo" outcome="/Usuarios/CadastroUsuario"  />
+                                </p:toolbarGroup>
+                            </p:toolbar>
+
+                            <p:panelGrid columns="1" layout="grid" style="border:0px !important; background:none;" styleClass="ui-panelgrid-blank">
+
+
+                                <p:outputLabel value="Nome" for="nome"/>
+                                <p:inputText id="nome" size="60" value="#{pesquisaUsuarioBean.filtro.nome}" />
+                            </p:panelGrid>
+
+                            <p:dataTable id="usuariosTable" value="#{pesquisaUsuarioBean.usuariosFiltrados}" var="usuario" 
+                                         emptyMessage="Nenhum usuario encontrado." rows="20" reflow="true" 
+                                         paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom"
+                                        >
+                                <f:facet name="header">
+                                    Lista de Usuários
+                                </f:facet>
+                                <p:column headerText="Nome"  >
+                                    <h:outputText value="#{usuario.nome}" />
+                                </p:column>
+                                <p:column headerText="Email" >
+                                    <h:outputText value="#{usuario.email}" />
+                                </p:column>
+
+                                <p:column headerText="Perfil" >
+                                    <h:outputText value="#{usuario.grupoUsuario.descricao}" />
+                                </p:column>
+
+                                <p:column headerText="Status" width="9%" style="text-align: center" >
+                                    <p:graphicImage name="/creativity/images/#{usuario.status}.png"/>
+                                </p:column>
+
+
+                                <p:column headerText="Ação" width="10%"  style="text-align: center" >
+
+
+                                    <p:button class="Wid40" outcome="/Usuarios/CadastroUsuario" icon="fa  fa-edit" title="Editar" styleClass="OrangeButton" >  
+                                        <f:param name="id" value="#{usuario.id}"/>
+                                    </p:button>  
+
+
+
+
+                                    <p:commandButton icon="fa  fa-trash-o" title="Excluir" styleClass="RedButton" oncomplete="PF('confirmacaoExclusao').show()"
+                                                     process="@this" update="frmPesquisa:confirmacaoExclusaoDialog" >
+                                        <f:setPropertyActionListener target="#{pesquisaUsuarioBean.usuarioSelecionado}" 
+                                                                     value="#{usuario}" />
+                                    </p:commandButton>
+
+
+                                </p:column>
+                            </p:dataTable>
+
+                            <p:confirmDialog header="Exclusão de usuário" 
+                                             message="Tem certeza que deseja excluir o usuário #{pesquisaUsuarioBean.usuarioSelecionado.nome}?"
+                                             widgetVar="confirmacaoExclusao"	id="confirmacaoExclusaoDialog">
+                                <p:button value="Não" onclick="PF('confirmacaoExclusao').hide(); return false;" />
+                                <p:commandButton value="Sim" oncomplete="confirmacaoExclusao.hide();"
+                                                 action="#{pesquisaUsuarioBean.excluir()}" process="@this"
+                                                 />
+                            </p:confirmDialog>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </h:form>
+
+    </ui:define>
+</ui:composition>
