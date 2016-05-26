@@ -100,7 +100,7 @@
 
                                                 <p:outputLabel value="RG" for="rg"
                                                                rendered="#{cadastroFichaBean.ficha.tipoPessoa eq 'FISICA'}" />
-                                               
+
                                                 <p:inputText value="#{cadastroFichaBean.ficha.rg}" id="rg" maxlength="15"
                                                              rendered="#{cadastroFichaBean.ficha.tipoPessoa eq 'FISICA'}" />
 
@@ -341,7 +341,7 @@
                                             <p:outputLabel value="Valor de desconto" for="valorDesconto"/>
                                             <p:inputText id="valorDesconto" size="10" maxlength="10" styleClass="moeda" 
                                                          value="#{cadastroFichaBean.ficha.valorDesconto}">
-                                              
+
 
                                                 <p:ajax event="change" process="@this" update="totalFicha,subtotal"
                                                         listener="#{cadastroFichaBean.recalcularFicha()}" />
@@ -366,7 +366,7 @@
                                         </p:commandButton>
 
                                         <p:dataTable id="anotacaoTable" value="#{cadastroFichaBean.ficha.atonacoes}" var="anotacao" 
-                                                      sortBy="#{anotacao.dataAnotacao}" sortOrder="DESCENDING"
+                                                     sortBy="#{anotacao.dataAnotacao}" sortOrder="DESCENDING"
                                                      style="margin-top: 5px; border:0px !important; background:none;" emptyMessage="Nenhuma anotacao encontrada." reflow="true"
 
                                                      paginatorPosition="bottom">
@@ -397,16 +397,8 @@
                                                    header="Anotação" maximizable="true" minimizable="true"
                                                    position="center" resizable="false" showEffect="slide" >
                                             <p:messages id="mesDial" />
-                                            <p:panelGrid id="gridEnd" columns="2">
+                                            <p:panelGrid id="gridEnd" columns="1">
 
-                                                <p:outputLabel value="Usuário" for="usuarioAnotacao"/>
-                                                <p:selectOneMenu  id="usuarioAnotacao"  value="#{cadastroFichaBean.anotacao.usuario}"   > 
-                                                    <f:selectItem itemLabel="Selecione " itemValue=""  />
-                                                    <f:selectItems value="#{cadastroFichaBean.usuarioLogado}" var="usuarioLogado" itemLabel="#{usuarioLogado.nome} " 
-                                                                   itemValue="#{usuarioLogado}"  />
-
-
-                                                </p:selectOneMenu>
 
                                                 <p:outputLabel value="Nota" for="nota" />
                                                 <p:inputTextarea id="nota" value="#{cadastroFichaBean.anotacao.nota}" cols="100" rows="20" maxlength="200"/>
@@ -416,7 +408,7 @@
                                             </p:panelGrid>
 
                                             <p:commandButton value="Incluir" oncomplete="if (!args.validationFailed){ PF('diaEnd').hide() }"
-                                                             style="margin-top: 10px" action="#{cadastroFichaBean.adicionarAnotacao()}"
+                                                             style="margin-top: 10px" action="#{cadastroFichaBean.adicionarAnotacaoResAtendente()}"
                                                              update="anotacaoTable mesDial gridEnd frmCadFicha:messagesFicha" process="@this endDial" styleClass="GreenButton"/>
 
                                         </p:dialog>
@@ -445,7 +437,7 @@
                                            position="center" resizable="false" showEffect="slide" >
                                     <b:messages id="mesDialAdm" />
                                     <p:panelGrid id="gridEndAdm" columns="2">
-
+                                        <!--
                                         <p:outputLabel value="Usuário" for="usuarioAnotacaoPendente"/>
                                         <p:selectOneMenu  id="usuarioAnotacaoPendente"  value="#{cadastroFichaBean.anotacao.usuario}"   > 
                                             <f:selectItem itemLabel="Selecione " itemValue=""  />
@@ -453,7 +445,7 @@
                                                            itemValue="#{usuarioLogado}"  />
 
 
-                                        </p:selectOneMenu>
+                                        </p:selectOneMenu>-->
 
                                         <p:outputLabel value="Nota" for="anotacaoNota" />
                                         <p:inputTextarea id="anotacaoNota" value="#{cadastroFichaBean.anotacao.nota}" cols="100" rows="20" maxlength="200"/>

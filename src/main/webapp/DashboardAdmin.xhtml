@@ -277,7 +277,7 @@
             <h1 class="BigTopic" style="text-align: center">Fichas Pendentes</h1>
 
             <h:form>
-              
+
 
                 <p:dataTable id="fichasTable" value="#{reportFichasBean.fichasPendentesAdmMenu}" var="ficha" 
                              emptyMessage="Nenhuma ficha pendente encontrada." rows="20" reflow="true" 
@@ -319,6 +319,10 @@
 
                     <p:column headerText="Status" style="text-align: center;" width="8%">
                         <p:graphicImage name="creativity/images/#{ficha.statusFicha}.png" title="#{ficha.statusFicha.descricao}"/>
+
+                    </p:column>
+                    <p:column headerText="Anotação" style="text-align: center;" width="8%" >
+                        <p:graphicImage name="creativity/images/#{ficha.statusResposta}.png" title="#{ficha.statusResposta.descricao}"/>
 
                     </p:column>
 

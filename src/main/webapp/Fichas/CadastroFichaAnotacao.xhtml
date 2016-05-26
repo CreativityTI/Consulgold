@@ -98,7 +98,7 @@
 
                                                 <p:outputLabel value="RG" for="rg"
                                                                rendered="#{cadastroFichaBean.ficha.tipoPessoa eq 'FISICA'}" />
-                                             
+
                                                 <p:inputText value="#{cadastroFichaBean.ficha.rg}" id="rg" maxlength="15"
                                                              rendered="#{cadastroFichaBean.ficha.tipoPessoa eq 'FISICA'}" />
 
@@ -389,17 +389,7 @@
                                                    header="Anotação" maximizable="true" minimizable="true" 
                                                    position="center" resizable="false" showEffect="slide" >
                                             <p:messages id="mesDial" />
-                                            <p:panelGrid id="gridEnd" columns="2">
-
-                                                <p:outputLabel value="Usuário" for="usuarioAnotacao"/>
-                                                <p:selectOneMenu  id="usuarioAnotacao"  value="#{cadastroFichaBean.anotacao.usuario}"   > 
-                                                    <f:selectItem itemLabel="Selecione " itemValue=""  />
-                                                    <f:selectItems value="#{cadastroFichaBean.usuarioLogado}" var="usuarioLogado" itemLabel="#{usuarioLogado.nome} " 
-                                                                   itemValue="#{usuarioLogado}"  />
-
-
-                                                </p:selectOneMenu>
-
+                                            <p:panelGrid id="gridEnd" columns="1">
                                                 <p:outputLabel value="Nota" for="nota" />
                                                 <p:inputTextarea id="nota" value="#{cadastroFichaBean.anotacao.nota}" cols="100" rows="20" maxlength="200"/>
 
@@ -408,7 +398,7 @@
                                             </p:panelGrid>
 
                                             <p:commandButton value="Incluir" oncomplete="if (!args.validationFailed){ PF('diaEnd').hide() }"
-                                                             style="margin-top: 10px" action="#{cadastroFichaBean.adicionarAnotacao()}"
+                                                             style="margin-top: 10px" action="#{cadastroFichaBean.adicionarAnotacaoResConsultor()}"
                                                              update="anotacaoTable mesDial gridEnd frmCadFicha:messagesFicha" process="@this endDial" styleClass="GreenButton"/>
 
                                         </p:dialog>

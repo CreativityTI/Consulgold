@@ -139,7 +139,6 @@ public class Ficha implements Serializable {
 
     private BigDecimal valorUnitario = BigDecimal.valueOf(400);
 
-   
     private BigDecimal valorDesconto = BigDecimal.ZERO;
     private BigDecimal valorTotal = BigDecimal.ZERO;
     private BigDecimal quantidade = BigDecimal.ZERO;
@@ -162,6 +161,11 @@ public class Ficha implements Serializable {
     @Column(columnDefinition = "DATE")
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date dataCriacao;
+
+  
+    @Enumerated(EnumType.STRING)
+    @Column(length = 20)
+    private StatusResposta statusResposta;
 
     @NotNull
     @Enumerated(EnumType.STRING)
@@ -653,6 +657,16 @@ public class Ficha implements Serializable {
         this.setValorTotal(total);
 
     }
+
+    public StatusResposta getStatusResposta() {
+        return statusResposta;
+    }
+
+    public void setStatusResposta(StatusResposta statusResposta) {
+        this.statusResposta = statusResposta;
+    }
+    
+    
 
     public BigDecimal getValorTotalFinanceiro() {
         BigDecimal vlTotal = new BigDecimal(BigInteger.ZERO);

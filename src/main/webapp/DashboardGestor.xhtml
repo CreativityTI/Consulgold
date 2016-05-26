@@ -189,9 +189,9 @@
                 </p:dataTable>
 
             </p:dialog>
-            
-            
-            
+
+
+
             <p:dialog id="modalDialogTodos" header="Você tem uma mensagem!!!"  responsive="true"
                       visible="#{!empty reportFichasBean.mensagensTodos}"
                       widgetVar="dlg3" modal="true" height="300" width="600">
@@ -209,7 +209,7 @@
                 </p:dataTable>
 
             </p:dialog>
-            
+
 
             <p:dataTable id="fichasTable" value="#{reportFichasBean.financeiroAbertoPorGestor}" var="financeiro" 
                          emptyMessage="Nenhuma documento encontrado."  reflow="true"  sortBy="#{financeiro.ficha.gestor.nome}">
@@ -311,7 +311,10 @@
 
                     </p:column>
 
+                    <p:column headerText="Anotação" style="text-align: center;" width="8%">
+                        <p:graphicImage name="creativity/images/#{ficha.statusResposta}.png" title="#{ficha.statusResposta.descricao}"/>
 
+                    </p:column>
 
 
                     <p:column headerText="Ação" width="12%"  style="text-align: center" >

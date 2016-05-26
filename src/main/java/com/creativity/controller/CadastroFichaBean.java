@@ -12,6 +12,7 @@ import com.creativity.model.Ficha;
 import com.creativity.model.Financeiro;
 import com.creativity.model.StatusFicha;
 import com.creativity.model.StatusFinanceiro;
+import com.creativity.model.StatusResposta;
 import com.creativity.model.TipoPessoa;
 import com.creativity.model.Usuario;
 import com.creativity.repository.Bancos;
@@ -115,9 +116,11 @@ public class CadastroFichaBean implements Serializable {
         try {
             anotacao.setFicha(this.ficha);
             anotacao.setDataAnotacao(new Date());
+            anotacao.setUsuario(this.usuarioLogado.get(0));
             this.ficha.getAtonacoes().add(anotacao);
             FacesUtil.addInfoMessage("Anotação adicionanda com sucesso!");
             this.ficha.setStatusFicha(StatusFicha.PENDENTE);
+            this.ficha.setStatusResposta(StatusResposta.RESATENDENTE);
 
             this.cadastroFichaService.salvar(this.ficha);
             FacesUtil.addInfoMessage(" Ficha está com estatus PENDENTE!");
@@ -144,7 +147,51 @@ public class CadastroFichaBean implements Serializable {
 
             this.cadastroFichaService.salvar(this.ficha);
             FacesUtil.addInfoMessage(" Ficha está com estatus FINANCEIRO EM ABERTO!");
-           /* this.ficha = new Ficha();*/
+            /* this.ficha = new Ficha();*/
+
+        } catch (Exception e) {
+            FacesMessage mensagem = new FacesMessage(e.getMessage());
+            mensagem.setSeverity(FacesMessage.SEVERITY_ERROR);
+            context.addMessage(null, mensagem);
+        }
+
+    }
+
+    public void adicionarAnotacaoResAtendente() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        /*if (!ficha.getAtonacoes().contains(this.anotacao)) {*/
+
+        try {
+            anotacao.setFicha(ficha);
+            anotacao.setDataAnotacao(new Date());
+            anotacao.setUsuario(this.usuarioLogado.get(0));
+            ficha.getAtonacoes().add(anotacao);
+            FacesUtil.addInfoMessage("Anotação adicionanda com sucesso!");
+            this.ficha.setStatusResposta(StatusResposta.RESATENDENTE);
+            this.cadastroFichaService.salvar(this.ficha);
+            this.anotacao = new Anotacao();
+
+        } catch (Exception e) {
+            FacesMessage mensagem = new FacesMessage(e.getMessage());
+            mensagem.setSeverity(FacesMessage.SEVERITY_ERROR);
+            context.addMessage(null, mensagem);
+        }
+
+    }
+
+    public void adicionarAnotacaoResConsultor() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        /*if (!ficha.getAtonacoes().contains(this.anotacao)) {*/
+
+        try {
+            anotacao.setFicha(ficha);
+            anotacao.setDataAnotacao(new Date());
+            anotacao.setUsuario(this.usuarioLogado.get(0));
+            ficha.getAtonacoes().add(anotacao);
+            FacesUtil.addInfoMessage("Anotação adicionanda com sucesso!");
+            this.ficha.setStatusResposta(StatusResposta.RESCONSULTOR);
+            this.cadastroFichaService.salvar(this.ficha);
+            this.anotacao = new Anotacao();
 
         } catch (Exception e) {
             FacesMessage mensagem = new FacesMessage(e.getMessage());
@@ -165,7 +212,6 @@ public class CadastroFichaBean implements Serializable {
             FacesUtil.addInfoMessage("Anotação adicionanda com sucesso!");
             this.cadastroFichaService.salvar(this.ficha);
             this.anotacao = new Anotacao();
-           
 
         } catch (Exception e) {
             FacesMessage mensagem = new FacesMessage(e.getMessage());
@@ -267,8 +313,6 @@ public class CadastroFichaBean implements Serializable {
             ficha.setBairro(cepWebService.getBairro());
 
         }
-
-      
 
     }
 
@@ -415,6 +459,14 @@ public class CadastroFichaBean implements Serializable {
 
     public boolean isEditandoCep() {
         return this.ficha.getId() == null;
+    }
+
+    public boolean isRespostaAtendente() {
+        return this.ficha.getStatusResposta() == ficha.getStatusResposta().RESATENDENTE;
+    }
+
+    public boolean isRespostaConsultor() {
+        return this.ficha.getStatusResposta() == ficha.getStatusResposta().RESCONSULTOR;
     }
 
 }
