@@ -138,7 +138,7 @@
 
                             <div class="Container33 Responsive50">
                                 <div class="ContainerIndent">
-                                    <span class="DispBlock Fs18 FontDosisRegular leaden">Fichas pendentes para regularização </span>
+                                   
                                     <div class="EmptyBox10"></div>
                                     <span class="DispBlock Fs30 leaden" style="line-height:30px;"><p:outputLabel value="#{reportFichasBean.fichasPendentesGestorAno}"/></span>
 
@@ -160,7 +160,7 @@
 
                             <div class="Container33 Responsive50">
                                 <div class="ContainerIndent">
-                                    <span class="DispBlock Fs18 FontDosisRegular leaden">Novas Fichas serem cadastradas</span>
+                                   
                                     <div class="EmptyBox10"></div>
                                     <span class="DispBlock Fs30 leaden" style="line-height:30px;"><p:outputLabel value="#{reportFichasBean.fichasNovoCadastroGestorAno}"/></span>
 
@@ -217,13 +217,13 @@
                 <f:facet name="header">
                     Lista de Documentos a Pagar
                 </f:facet>
-                <p:column headerText="Ficha" width="15%" style="text-align: center;" sortBy="#{financeiro.ficha}" >
+                <p:column headerText="Ficha" width="15%" style="text-align: center;" >
                     <h:outputText value="#{financeiro.ficha}" />
                 </p:column>
-                <p:column headerText="Nº Doc Pagar" width="10%" style="text-align: center;" sortBy="#{financeiro.id}">
+                <p:column headerText="Nº Doc Pagar" width="10%" style="text-align: center;" >
                     <h:outputText value="#{financeiro.id}" />
                 </p:column>
-                <p:column headerText="Data" width="15%" style="text-align: center;" sortBy="#{financeiro.dataLancamento}" >
+                <p:column headerText="Data" width="15%" style="text-align: center;" >
                     <h:outputText value="#{financeiro.dataLancamento}" >
                         <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
                     </h:outputText>

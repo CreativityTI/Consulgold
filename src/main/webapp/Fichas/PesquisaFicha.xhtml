@@ -30,6 +30,12 @@
                                                      update="@form" styleClass="OrangeButton"/>
                                 </p:toolbarGroup>
                                 <p:toolbarGroup align="right">
+
+                                    <p:commandButton value="Exportar para XLS" disabled="#{empty pesquisaFichasBean.fichasFiltrados}"
+                                                     ajax="false"  class="GreenButton">
+                                        <p:dataExporter type="xls" target="fichasTable" fileName="fichas" postProcessor="#{pesquisaFichasBean.posProcessarXls}"/>
+                                    </p:commandButton>
+                                    <p:separator/>
                                     <p:button value="Nova Ficha" outcome="/Fichas/CadastroFicha"  />
                                 </p:toolbarGroup>
                             </p:toolbar>
@@ -41,8 +47,8 @@
                                 <h:panelGroup>
                                     <p:inputMask size="20" value="#{pesquisaFichasBean.filtro.cpf}" mask="999.999.999-99"/>
                                 </h:panelGroup>
-                                
-                                   <p:outputLabel value="CNPJ" />
+
+                                <p:outputLabel value="CNPJ" />
                                 <h:panelGroup>
                                     <p:inputMask size="20" value="#{pesquisaFichasBean.filtro.cnpj}" mask="999.999.999/9999-99"/>
                                 </h:panelGroup>
