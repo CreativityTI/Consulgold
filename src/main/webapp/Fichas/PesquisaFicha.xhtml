@@ -37,11 +37,14 @@
                             <p:panelGrid columns="1" layout="grid" style="border:0px !important; background:none;" styleClass="ui-panelgrid-blank">
 
 
-                                <p:outputLabel value="Número" />
+                                <p:outputLabel value="CPF" />
                                 <h:panelGroup>
-                                    <p:inputText size="10" value="#{pesquisaFichasBean.filtro.numeroDe}" />
-                                    a
-                                    <p:inputText size="10" value="#{pesquisaFichasBean.filtro.numeroAte}" />
+                                    <p:inputMask size="20" value="#{pesquisaFichasBean.filtro.cpf}" mask="999.999.999-99"/>
+                                </h:panelGroup>
+                                
+                                   <p:outputLabel value="CNPJ" />
+                                <h:panelGroup>
+                                    <p:inputMask size="20" value="#{pesquisaFichasBean.filtro.cnpj}" mask="999.999.999/9999-99"/>
                                 </h:panelGroup>
 
                                 <p:outputLabel value="Data de criação" />
@@ -65,51 +68,56 @@
 
                             </p:panelGrid>
 
+
                             <p:dataTable id="fichasTable" value="#{pesquisaFichasBean.fichasFiltrados}" var="ficha" 
                                          emptyMessage="Nenhuma ficha encontrada." rows="10" reflow="true"  
                                          paginator="true"
+                                         sortBy="#{ficha.dataCriacao}"
+                                         sortOrder="DESCENDING"
+                                         currentPageReportTemplate="Pag. {currentPage}/{totalPages} - Total de Fichas: {totalRecords} )"
                                          paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                         rowsPerPageTemplate="5,10,15,30,100">
+                                         rowsPerPageTemplate="5,10,15,30,100"
+                                         rowExpandMode="single">
+
                                 <f:facet name="header">
                                     Lista de Fichas
                                 </f:facet>
-                                <p:column headerText="Nº" width="5%" >
+                                <p:column headerText="Nº" width="5%" sortBy="#{ficha.id}" >
                                     <h:outputText value="#{ficha.id}" />
                                 </p:column>
-                                <p:column headerText="Gestor" >
-                                    <h:outputText value="#{ficha.gestor.nome}" />
-                                </p:column>
 
-                                <p:column headerText="Cliente" >
-                                    <h:outputText value="#{ficha.nomeRazao}" />
-                                </p:column>   
-
-                                <p:column headerText="Quantidade" style="text-align: center">
-                                    <h:outputText value="#{ficha.quantidade}" />
-                                </p:column>     
-
-                                <p:column headerText="Valor Desconto" >
-                                    <h:outputText value="#{ficha.valorDesconto}" >
-                                        <f:convertNumber currencySymbol="R$" type="currency"/>
-                                    </h:outputText>
-                                </p:column>  
-
-                                <p:column headerText="Valor Total" >
-                                    <h:outputText value="#{ficha.valorTotal}" >
-                                        <f:convertNumber currencySymbol="R$" type="currency"/>
-                                    </h:outputText>
-                                </p:column>  
-
-                                <p:column headerText="MCC" style="text-align: center" >
-                                    <h:outputText value="#{ficha.categoria.MCC}" >
+                                <p:column headerText="Data" style="text-align: center"  sortBy="#{ficha.dataCriacao}">
+                                    <h:outputText value="#{ficha.dataCriacao}" >
 
                                     </h:outputText>
                                 </p:column> 
-
-                                <p:column headerText="Status" style="text-align: center;" width="8%">
-                                    <p:graphicImage name="creativity/images/#{ficha.statusFicha}.png" title="#{ficha.statusFicha.descricao}"/>
-
+                                <p:column headerText="Gestor" sortBy="#{ficha.gestor.nome}" >
+                                    <h:outputText value="#{ficha.gestor.nome}" />
                                 </p:column>
+
+                                <p:column headerText="Cliente" sortBy="#{ficha.nomeRazao}" >
+                                    <h:outputText value="#{ficha.nomeRazao}" />
+                                </p:column>   
+
+                                <p:column headerText="Quantidade" style="text-align: center" sortBy="#{ficha.quantidade}">
+                                    <h:outputText value="#{ficha.quantidade}" />
+                                </p:column>     
+
+
+                                <p:column headerText="Valor Total" sortBy="#{ficha.valorTotal}" >
+                                    <h:outputText value="#{ficha.valorTotal}" >
+                                       	<f:convertNumber currencySymbol="R$" type="currency"/>
+                                    </h:outputText>
+                                </p:column>  
+
+
+
+
+                                <p:column headerText="Status" style="text-align: center;" width="8%" sortBy="#{ficha.statusFicha.descricao}">
+                                    <h:outputText value="#{ficha.statusFicha.descricao}"/>
+                                </p:column>
+
+
 
 
 

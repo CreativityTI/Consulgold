@@ -138,7 +138,7 @@
 
                             <div class="Container33 Responsive50">
                                 <div class="ContainerIndent">
-                                    <span class="DispBlock Fs18 FontDosisRegular leaden">Fichas pendentes para regularização</span>
+
                                     <div class="EmptyBox10"></div>
                                     <span class="DispBlock Fs30 leaden" style="line-height:30px;"><p:outputLabel value="#{reportFichasBean.fichasPendentesAno}"/></span>
 
@@ -160,7 +160,7 @@
 
                             <div class="Container33 Responsive50">
                                 <div class="ContainerIndent">
-                                    <span class="DispBlock Fs18 FontDosisRegular leaden">Novas Fichas serem cadastradas</span>
+
                                     <div class="EmptyBox10"></div>
                                     <span class="DispBlock Fs30 leaden" style="line-height:30px;"><p:outputLabel value="#{reportFichasBean.fichasNovasAno}"/></span>
 
@@ -282,45 +282,47 @@
                 <p:dataTable id="fichasTable" value="#{reportFichasBean.fichasPendentesAdmMenu}" var="ficha" 
                              emptyMessage="Nenhuma ficha pendente encontrada." rows="20" reflow="true" 
                              paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom"
-                             >
+                             sortBy="#{ficha.dataCriacao}"
+                             sortOrder="DESCENDING">
 
-                    <p:column headerText="Nº" width="5%" >
+                    <p:column headerText="Nº" width="5%" sortBy="#{ficha.id}" >
                         <h:outputText value="#{ficha.id}" />
                     </p:column>
-                    <p:column headerText="Gestor" >
+
+                    <p:column headerText="Data" style="text-align: center"  sortBy="#{ficha.dataCriacao}">
+                        <h:outputText value="#{ficha.dataCriacao}" >
+
+                        </h:outputText>
+                    </p:column> 
+                    <p:column headerText="Gestor" sortBy="#{ficha.gestor.nome}" >
                         <h:outputText value="#{ficha.gestor.nome}" />
                     </p:column>
 
-                    <p:column headerText="Cliente" >
+                    <p:column headerText="Cliente" sortBy="#{ficha.nomeRazao}" >
                         <h:outputText value="#{ficha.nomeRazao}" />
                     </p:column>   
 
-                    <p:column headerText="Quantidade" style="text-align: center">
+                    <p:column headerText="Quantidade" style="text-align: center" sortBy="#{ficha.quantidade}">
                         <h:outputText value="#{ficha.quantidade}" />
                     </p:column>     
 
-                    <p:column headerText="Valor Desconto" >
-                        <h:outputText value="#{ficha.valorDesconto}" >
-                            <f:convertNumber currencySymbol="R$" type="currency"/>
-                        </h:outputText>
-                    </p:column>  
 
-                    <p:column headerText="Valor Total" >
+                    <p:column headerText="Valor Total" sortBy="#{ficha.valorTotal}" >
                         <h:outputText value="#{ficha.valorTotal}" >
                             <f:convertNumber currencySymbol="R$" type="currency"/>
                         </h:outputText>
                     </p:column>  
 
-                    <p:column headerText="MCC" style="text-align: center" >
-                        <h:outputText value="#{ficha.categoria.MCC}" >
 
-                        </h:outputText>
-                    </p:column> 
 
-                    <p:column headerText="Status" style="text-align: center;" width="8%">
-                        <p:graphicImage name="creativity/images/#{ficha.statusFicha}.png" title="#{ficha.statusFicha.descricao}"/>
 
+                    <p:column headerText="Status" style="text-align: center;" width="8%" sortBy="#{ficha.statusFicha.descricao}">
+                        <h:outputText value="#{ficha.statusFicha.descricao}"/>
                     </p:column>
+
+
+
+
                     <p:column headerText="Anotação" style="text-align: center;" width="8%" >
                         <p:graphicImage name="creativity/images/#{ficha.statusResposta}.png" title="#{ficha.statusResposta.descricao}"/>
 

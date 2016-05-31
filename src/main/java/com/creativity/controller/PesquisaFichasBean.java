@@ -9,7 +9,9 @@ import com.creativity.Filter.FichaFilter;
 import com.creativity.model.Ficha;
 import com.creativity.model.StatusFicha;
 import com.creativity.model.StatusFinanceiro;
+import com.creativity.model.Usuario;
 import com.creativity.repository.Fichas;
+import com.creativity.repository.Usuarios;
 import com.creativity.util.FacesUtil;
 import java.awt.Font;
 import java.io.Serializable;
@@ -47,7 +49,13 @@ public class PesquisaFichasBean implements Serializable {
     private Ficha fichaSelecionada;
     private Ficha ficha;
 
-    public void prepararCadastro() {
+    private List<Usuario> usuariosGestor;
+
+    @Inject
+    private Usuarios usuarios;
+
+    public void prepararCadastro() {        
+        this.usuariosGestor = this.usuarios.todosGestores();
         this.fichasNovo = fichas.todasFichas();
         this.fichasFiltradasAdminGerarFinanceiro = fichas.todasFichasGerarFinanceiro();
 
@@ -143,6 +151,16 @@ public class PesquisaFichasBean implements Serializable {
         this.fichasFiltradasAdmin = fichasFiltradasAdmin;
     }
 
+    public List<Usuario> getUsuariosGestor() {
+        return usuariosGestor;
+    }
+
+    public void setUsuariosGestor(List<Usuario> usuariosGestor) {
+        this.usuariosGestor = usuariosGestor;
+    }
+    
+    
+
     public Ficha getFicha() {
         return ficha;
     }
@@ -150,13 +168,9 @@ public class PesquisaFichasBean implements Serializable {
     public void setFicha(Ficha ficha) {
         this.ficha = ficha;
     }
-    
-    
 
     public Boolean isStatusPago() {
         return this.ficha.getStatusFichaFinanceiro() == this.ficha.getStatusFichaFinanceiro().PAGO;
     }
-    
-    
 
 }

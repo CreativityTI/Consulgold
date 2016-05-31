@@ -8,6 +8,12 @@
                 xmlns:o="http://omnifaces.org/ui">
 
 
+    <f:metadata>
+
+
+        <f:viewAction action="#{pesquisaFichasBean.prepararCadastro()}" />
+    </f:metadata>
+
 
 
     <ui:define name="content">
@@ -57,8 +63,15 @@
                                                 value="#{pesquisaFichasBean.filtro.dataCriacaoAte}" />
                                 </h:panelGroup>
 
-                                <p:outputLabel value="Vendedor" />
-                                <p:inputText size="40" value="#{pesquisaFichasBean.filtro.nomeVendedor}" />
+                          
+                                <p:outputLabel value="Gestor" for="gestor"/>
+                                <p:selectOneMenu  id="gestor"  value="#{pesquisaFichasBean.filtro.nomeVendedor}" style="width: 40%"
+                                                  requiredMessage="Favor informar filtro gestor"> 
+                                    <f:selectItem itemLabel="Todos" itemValue=""  />
+                                    <f:selectItems value="#{pesquisaFichasBean.usuariosGestor}" var="gestor" itemLabel="#{gestor.nome} " 
+                                                   itemValue="#{gestor.nome}"  />
+
+                                </p:selectOneMenu>
 
                                 <p:outputLabel value="Cliente" />
                                 <p:inputText size="40" value="#{pesquisaFichasBean.filtro.nomeCliente}" />
@@ -75,44 +88,39 @@
                             <p:dataTable id="fichasTable" value="#{pesquisaFichasBean.fichasFiltradasAdmin}" var="ficha" 
                                          emptyMessage="Nenhuma ficha encontrada." rows="10" reflow="true"  
                                          paginator="true"
-
+                                         sortBy="#{ficha.dataCriacao}"
+                                         sortOrder="DESCENDING"
                                          currentPageReportTemplate="Pag. {currentPage}/{totalPages} - Total de Fichas: {totalRecords} )"
                                          paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                          rowsPerPageTemplate="5,10,15,30,100"
-
                                          rowExpandMode="single">
 
                                 <f:facet name="header">
                                     Lista de Fichas
                                 </f:facet>
-                                <p:column headerText="Nº" width="5%" >
+                                <p:column headerText="Nº" width="5%" sortBy="#{ficha.id}" >
                                     <h:outputText value="#{ficha.id}" />
                                 </p:column>
 
-                                <p:column headerText="Data" style="text-align: center" >
+                                <p:column headerText="Data" style="text-align: center"  sortBy="#{ficha.dataCriacao}">
                                     <h:outputText value="#{ficha.dataCriacao}" >
 
                                     </h:outputText>
                                 </p:column> 
-                                <p:column headerText="Gestor" >
+                                <p:column headerText="Gestor" sortBy="#{ficha.gestor.nome}" >
                                     <h:outputText value="#{ficha.gestor.nome}" />
                                 </p:column>
 
-                                <p:column headerText="Cliente" >
+                                <p:column headerText="Cliente" sortBy="#{ficha.nomeRazao}" >
                                     <h:outputText value="#{ficha.nomeRazao}" />
                                 </p:column>   
 
-                                <p:column headerText="Quantidade" style="text-align: center">
+                                <p:column headerText="Quantidade" style="text-align: center" sortBy="#{ficha.quantidade}">
                                     <h:outputText value="#{ficha.quantidade}" />
                                 </p:column>     
 
-                                <p:column headerText="Valor Desconto" >
-                                    <h:outputText value="#{ficha.valorDesconto}" >
-                                        <f:convertNumber currencySymbol="R$" type="currency"/>
-                                    </h:outputText>
-                                </p:column>  
 
-                                <p:column headerText="Valor Total" >
+                                <p:column headerText="Valor Total" sortBy="#{ficha.valorTotal}" >
                                     <h:outputText value="#{ficha.valorTotal}" >
                                        	<f:convertNumber currencySymbol="R$" type="currency"/>
                                     </h:outputText>
@@ -121,7 +129,7 @@
 
 
 
-                                <p:column headerText="Status" style="text-align: center;" width="8%">
+                                <p:column headerText="Status" style="text-align: center;" width="8%" sortBy="#{ficha.statusFicha.descricao}">
                                     <h:outputText value="#{ficha.statusFicha.descricao}"/>
                                 </p:column>
 

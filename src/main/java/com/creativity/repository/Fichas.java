@@ -131,6 +131,14 @@ public class Fichas implements Serializable {
             criteria.add(Restrictions.ge("dataCriacao", filtro.getDataCriacaoDe()));
         }
 
+        if (StringUtils.isNotBlank(filtro.getCpf()))  {
+            criteria.add(Restrictions.ilike("cpf", filtro.getCpf()));
+        }
+        
+           if (StringUtils.isNotBlank(filtro.getCnpj()))  {
+            criteria.add(Restrictions.ilike("cnpj", filtro.getCnpj()));
+        }
+
         if (filtro.getDataCriacaoAte() != null) {
             criteria.add(Restrictions.le("dataCriacao", filtro.getDataCriacaoAte()));
         }

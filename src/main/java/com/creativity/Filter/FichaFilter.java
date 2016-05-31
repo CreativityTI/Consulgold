@@ -25,6 +25,8 @@ public class FichaFilter implements Serializable {
     private String nomeVendedor;
     private String nomeCliente;
     private StatusFicha[] statuses;
+    private String cpf;
+    private String cnpj;
  
 
     public Long getNumeroDe() {
@@ -81,6 +83,22 @@ public class FichaFilter implements Serializable {
 
     public void setNomeCliente(String nomeCliente) {
         this.nomeCliente = nomeCliente;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public String getCnpj() {
+        return cnpj;
+    }
+
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
     }
 
 

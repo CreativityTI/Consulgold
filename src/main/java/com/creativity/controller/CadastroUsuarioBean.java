@@ -47,6 +47,7 @@ public class CadastroUsuarioBean implements Serializable {
     @Inject
     private Usuarios gestoresRepositoty;
     private List<Usuario> gestores;
+    private List<Usuario> consultores;
 
     @Inject
     private GruposUsuarios gruposUsuariosRepository;
@@ -65,6 +66,8 @@ public class CadastroUsuarioBean implements Serializable {
         this.gruposUsuarios = this.gruposUsuariosRepository.todosGruposUsuarios();
         this.empresas = this.empresasRepository.todasEmpresas();
         this.gestores = this.gestoresRepositoty.todosGestores();
+     
+        
 
         if (this.usuario == null) {
             this.usuario = new Usuario();
