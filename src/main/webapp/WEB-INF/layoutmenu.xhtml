@@ -37,6 +37,7 @@
                     <p:menuitem id="rm_dark_layout3" value="Pesquisa de Fichas" icon=" fa fa-search" outcome="/Admin/Fichas/PesquisaFicha"/>
 
                 </p:submenu>
+
                 <p:menuitem value="Sair" url="/j_spring_security_logout" />
             </pr:menu>
         </h:form>
@@ -45,6 +46,11 @@
             <pr:menu>
 
                 <p:menuitem id="rm_dashboardGestor" value="Menu Principal" icon="fa fa-joomla"  outcome="/DashboardGestor" />
+
+                <p:submenu id="rm_layoutCadastrosConsultor" label="Cadastros de Consultores" icon="fa  fa-user-plus">
+                    <p:menuitem id="rm_dark_layoutConsultor" value="Consultores" icon=" fa fa-users" outcome="/Fichas/Consultor/CadastroConsultor"/>
+
+                </p:submenu>
 
                 <p:submenu id="rm_layoutFinanceiroGestor" label="Financeiro" icon="fa fa-calculator">
 

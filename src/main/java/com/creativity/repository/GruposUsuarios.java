@@ -38,6 +38,10 @@ public class GruposUsuarios implements Serializable {
     public List<GrupoUsuario> todosGruposUsuarios() {
         return manager.createQuery("from GrupoUsuario", GrupoUsuario.class).getResultList();
     }
+
+    public List<GrupoUsuario> gruposUsuariosConsultores() {
+        return manager.createQuery("from GrupoUsuario where id = '3'", GrupoUsuario.class).getResultList();
+    }
     
-     
+
 }

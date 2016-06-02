@@ -29,7 +29,7 @@
 
                             <p:toolbar>
                                 <f:facet name="left">
-                                    <p:commandButton  value="Salvar"  update="frmCadUsuario"  icon="fa fa-save" action="#{cadastroUsuarioBean.salvar}" styleClass="GreenButton"/>
+                                    <p:commandButton  value="Salvar"  update="frmCadUsuario"  icon="fa fa-save" action="#{cadastroUsuarioBean.salvarConsultor()}" styleClass="GreenButton"/>
                                 </f:facet>
 
                                 <f:facet name="right">
@@ -140,16 +140,16 @@
                                     <p:outputLabel value="Perfil de Usuário:" for="gruposUsuarios"  />
                                     <p:selectOneMenu  id="gruposUsuarios"  value="#{cadastroUsuarioBean.usuario.grupoUsuario}"   > 
                                         <f:selectItem itemLabel="Seleione o Perfil" itemValue=""  />
-                                        <f:selectItems value="#{cadastroUsuarioBean.gruposUsuarios}" var="grupo" itemLabel="#{grupo.descricao} " 
+                                        <f:selectItems value="#{cadastroUsuarioBean.grupoUsuarioConsultor}" var="grupo" itemLabel="#{grupo.descricao} " 
                                                        itemValue="#{grupo}"  />
 
 
                                     </p:selectOneMenu > 
 
                                     <p:outputLabel value="Gestor:" for="gestores"  />
-                                    <p:selectOneMenu  id="gestores"  value="#{cadastroUsuarioBean.usuario.gestor}"   > 
+                                    <p:selectOneMenu  id="gestores"  value="#{cadastroUsuarioBean.usuario.gestor}"  required="true" requiredMessage="Informe o Gestor" > 
                                         <f:selectItem itemLabel="Seleione o gestor" itemValue=""  />
-                                        <f:selectItems value="#{cadastroUsuarioBean.gestores}" var="gestor" itemLabel="#{gestor.nome} " 
+                                        <f:selectItems value="#{cadastroUsuarioBean.gestorLogado}" var="gestor" itemLabel="#{gestor.nome} " 
                                                        itemValue="#{gestor}"  />
 
                                     </p:selectOneMenu > 

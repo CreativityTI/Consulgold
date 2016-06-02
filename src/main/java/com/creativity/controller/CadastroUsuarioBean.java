@@ -47,13 +47,16 @@ public class CadastroUsuarioBean implements Serializable {
     @Inject
     private Usuarios gestoresRepositoty;
     private List<Usuario> gestores;
-    private List<Usuario> consultores;
+    private List<Usuario> gestorLogado;
+
+    private List<Usuario> usuarioLogado;
 
     @Inject
     private GruposUsuarios gruposUsuariosRepository;
     private GrupoUsuario grupoUsuarioSelecionado;
 
     private List<GrupoUsuario> gruposUsuarios;
+    private List<GrupoUsuario> grupoUsuarioConsultor;
 
     @Inject
     private Empresas empresasRepository;
@@ -64,10 +67,10 @@ public class CadastroUsuarioBean implements Serializable {
 
     public void prepararCadastro() {
         this.gruposUsuarios = this.gruposUsuariosRepository.todosGruposUsuarios();
+        this.grupoUsuarioConsultor = this.gruposUsuariosRepository.gruposUsuariosConsultores();
         this.empresas = this.empresasRepository.todasEmpresas();
         this.gestores = this.gestoresRepositoty.todosGestores();
-     
-        
+        this.gestorLogado = this.gestoresRepositoty.gestorLogado();
 
         if (this.usuario == null) {
             this.usuario = new Usuario();
@@ -94,8 +97,26 @@ public class CadastroUsuarioBean implements Serializable {
         }
     }
 
+    public void salvarConsultor() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        try {
+          
+            this.usuarioService.salvar(this.usuario);
+            context.addMessage(null, new FacesMessage(" Consultor salvo com sucesso!"));
+            this.usuario = new Usuario();
+            this.grupoUsuarioSelecionado = new GrupoUsuario();
+
+        } catch (NegocioException e) {
+
+            FacesMessage mensagem = new FacesMessage(e.getMessage());
+            mensagem.setSeverity(FacesMessage.SEVERITY_ERROR);
+            context.addMessage(null, mensagem);
+        }
+    }
+
     public void carregarGestores() {
         this.gestores = this.gestoresRepositoty.todosGestores();
+        
     }
 
     public String retornaFoto(Usuario usu) {
@@ -258,6 +279,24 @@ public class CadastroUsuarioBean implements Serializable {
         this.cep = cep;
     }
 
+    public List<Usuario> getGestorLogado() {
+        return gestorLogado;
+    }
+
+    public void setGestorLogado(List<Usuario> gestorLogado) {
+        this.gestorLogado = gestorLogado;
+    }
+
+    public List<GrupoUsuario> getGrupoUsuarioConsultor() {
+        return grupoUsuarioConsultor;
+    }
+
+    public void setGrupoUsuarioConsultor(List<GrupoUsuario> grupoUsuarioConsultor) {
+        this.grupoUsuarioConsultor = grupoUsuarioConsultor;
+    }
+    
+    
+
     public boolean isEditando() {
         return this.usuario.getId() != null;
     }
@@ -265,5 +304,7 @@ public class CadastroUsuarioBean implements Serializable {
     public boolean isEditandoCep() {
         return this.usuario.getId() == null;
     }
+    
+    
 
 }

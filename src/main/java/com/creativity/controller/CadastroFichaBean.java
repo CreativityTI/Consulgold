@@ -319,6 +319,8 @@ public class CadastroFichaBean implements Serializable {
     public TipoPessoa[] getTiposPessoas() {
         return TipoPessoa.values();
     }
+    
+    
 
     public void carregarSubcategorias() {
         subcategorias = categorias.subcategoriasDe(categoriaPai);

@@ -1250,15 +1250,15 @@ hr.ui-widget-header{background-color: #E5EBF0; border-width:0px;}
                                                             background-repeat: no-repeat; background-size: 90%; width: 20px; height: 20px;}
 .ui-overlaypanel .ui-overlaypanel-content{background-color: #FBFCFD; padding: 20px !important; border-radius:5px; -webkit-border-radius:5px; -moz-border-radius:5px;}
 
-.ui-lightbox{color: #778D9B; background-color: #FBFCFD; padding: 10px; border: solid 1px transparent;}
+.ui-lightbox{color: #778D9B; background-color: #FBFCFD; padding: 10px; border: solid 1px transparent; width: 100% ; height: 100%}
 .ui-lightbox .ui-lightbox-content-wrapper{ }
 .ui-lightbox .ui-lightbox-content-wrapper .ui-lightbox-nav-left{left:5px;}
 .ui-lightbox .ui-lightbox-content-wrapper .ui-lightbox-nav-right{right:5px;}
 .ui-lightbox .ui-lightbox-content-wrapper .ui-lightbox-nav-left .ui-icon{background-image:url("#{resource['primefaces-ronin:images/left-arrow.svg']}"); background-position: center !important; 
-                                                                         background-repeat: no-repeat; background-size: 130%; width: 40px; height: 40px; opacity: 0.6; filter: alpha(opacity=60);}
+                                                                         background-repeat: no-repeat; background-size: 230%; width:200px; height: 200px; opacity: 0.6; filter: alpha(opacity=80);}
 .ui-lightbox .ui-lightbox-content-wrapper .ui-lightbox-nav-left .ui-icon:hover{opacity: 1; filter: alpha(opacity=100);}
 .ui-lightbox .ui-lightbox-content-wrapper .ui-lightbox-nav-right .ui-icon{background-image:url("#{resource['primefaces-ronin:images/right-arrow.svg']}"); background-position: center !important; 
-                                                                          background-repeat: no-repeat; background-size: 130%; width: 40px; height: 40px; opacity: 0.6; filter: alpha(opacity=60);}
+                                                                          background-repeat: no-repeat; background-size: 230%; width: 200px; height: 200px; opacity: 0.6; filter: alpha(opacity=80);}
 .ui-lightbox .ui-lightbox-content-wrapper .ui-lightbox-nav-right .ui-icon:hover{opacity: 1; filter: alpha(opacity=100);}
 .ui-lightbox .ui-lightbox-content-wrapper .ui-lightbox-content{}
 .ui-lightbox .ui-lightbox-caption{padding: 5px 20px 10px 20px !important; border-top: solid 1px #E8EDF2 !important; background-color: #F3F5F7; margin:10px -10px -10px -10px !important; color: #778D9B;

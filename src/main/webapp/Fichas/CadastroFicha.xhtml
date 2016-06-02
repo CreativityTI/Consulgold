@@ -148,6 +148,7 @@
                                             <f:selectItem itemLabel="Selecione o Gestor" itemValue=""  />
                                             <f:selectItems value="#{cadastroFichaBean.gestores}" var="gestor" itemLabel="#{gestor.nome} " 
                                                            itemValue="#{gestor}"  />
+                                            <p:ajax listener="#{cadastroFichaBean.carregarConsultores()}" update="consultor" />
 
                                         </p:selectOneMenu>
 
