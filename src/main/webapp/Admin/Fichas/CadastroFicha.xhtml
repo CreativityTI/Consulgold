@@ -209,7 +209,7 @@
                                         <p:inputText id="uf"  value="#{cadastroFichaBean.ficha.estado}" />
 
                                         <p:outputLabel value="Tipo: " for="tipologradouro"/>
-                                        <p:inputText id="tipologradouro" value="#{cadastroFichaBean.ficha.tipoLogradouro}" />
+                                        <p:inputText id="tipologradouro" value="#{cadastroFichaBean.ficha.tipoLogradouro}" placeholder="Ex:Rua, Avenida"/>
 
                                         <p:outputLabel value="Logradouro: " for="logradouro"/>
                                         <p:inputText id="logradouro" value="#{cadastroFichaBean.ficha.logradouro}" />
@@ -240,7 +240,8 @@
 
                                         <p:outputLabel value="Telefone Celular: " for="telCelular"/>
 
-                                        <p:inputMask id="telCelular"  value="#{cadastroFichaBean.ficha.celular}" mask="(99)#9999-9999"/>
+                                        <p:inputMask id="telCelular"  value="#{cadastroFichaBean.ficha.celular}" mask="(99)#9999-9999" 
+                                                     placeholder="Quando não utilizar o nono digito, favor colocar espaço no lugar (99) 9999-9999"/>
 
                                         <p:outputLabel value="Telefone Preferêncial:" for="telPreferencial" />
                                         <p:selectOneMenu id="telPreferencial"  value="#{cadastroFichaBean.ficha.telPreferencial}"   > 

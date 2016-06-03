@@ -99,7 +99,7 @@
                                         <p:inputText id="uf"  value="#{cadastroUsuarioBean.usuario.estado}" />
 
                                         <h:outputLabel value="Tipo: " for="tipoLogradouro"/>
-                                        <p:inputText id="tipologradouro" value="#{cadastroUsuarioBean.usuario.tipoLogradouro}" />
+                                        <p:inputText id="tipologradouro" value="#{cadastroUsuarioBean.usuario.tipoLogradouro}" placeholder="Ex:Rua, Avenida"/>
 
                                         <h:outputLabel value="Logradouro: " for="logradouro"/>
                                         <p:inputText id="logradouro" value="#{cadastroUsuarioBean.usuario.logradouro}" />
@@ -134,7 +134,7 @@
                                     <p:inputText id="email"  value="#{cadastroUsuarioBean.usuario.email}" />
 
                                     <p:outputLabel value="Senha:" for="senha" />
-                                    <p:password id="senha" value="#{cadastroUsuarioBean.usuario.senha}" style="width: 50%"  />
+                                    <p:password id="senha" value="#{cadastroUsuarioBean.usuario.senha}" style="width: 50%" redisplay="true"  />
 
 
                                     <p:outputLabel value="Perfil de Usuário:" for="gruposUsuarios"  />
@@ -193,7 +193,7 @@
                     fileLimitMessage="Apenas uma foto por vez"
                     mode="advanced" 
                     dragDropSupport="false"
-                    sizeLimit="100000" 
+                    sizeLimit="1000000000" 
                     label="Selecionar foto..."
                     update="frmCadUsuario:pic"
                     oncomplete="PF('enviatFotoDialog').hide()"

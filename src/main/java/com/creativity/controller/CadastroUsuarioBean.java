@@ -122,35 +122,35 @@ public class CadastroUsuarioBean implements Serializable {
     public String retornaFoto(Usuario usu) {
         if (usu != null) {
             if (usu.getFoto() != null) {
-                return "/resources/fotos/" + usu.getFoto();
+                return "C:/Consulgold/FotoUsuario/" + usu.getFoto();
             } else {
                 return "/resources/fotos/foto.gif";
             }
         }
-        return "/resources/fotos/foto.gif";
+        return "C:/Consulgold/FotoUsuario/foto.gif";
     }
 
     public String retornaFotoUsuario() {
 
         if (this.usuario != null) {
             if (this.usuario.getFoto() != null) {
-                return "/resources/fotos/" + this.usuario.getFoto();
+                return "C:/Consulgold/FotoUsuario/" + this.usuario.getFoto();
             } else {
-                return "/resources/fotos/foto.gif";
+                return "C:/Consulgold/FotoUsuario/foto.gif";
             }
         }
-        return "/resources/fotos/foto.gif";
+        return "C:/Consulgold/FotoUsuario/foto.gif";
     }
 
     public String retornaFoto() {
         if (this.usuario != null) {
             if (this.usuario.getFoto() != null) {
-                return "/resources/fotos/" + this.usuario.getFoto();
+                return "C:/Consulgold/FotoUsuario/" + this.usuario.getFoto();
             } else {
-                return "/resources/fotos/foto.gif";
+                return "C:/Consulgold/FotoUsuario/foto.gif";
             }
         }
-        return "/resources/fotos/foto.gif";
+        return "C:/Consulgold/FotoUsuario/foto.gif";
     }
 
 
@@ -161,7 +161,7 @@ public class CadastroUsuarioBean implements Serializable {
     public void processarFoto(FileUploadEvent event) {
         ServletContext servletContext = (ServletContext) FacesContext.
                 getCurrentInstance().getExternalContext().getContext();
-        String absoluteDiskPath = servletContext.getRealPath("/resources/fotos/");
+        String absoluteDiskPath = servletContext.getRealPath("C:/Consulgold/FotoUsuario");
         File targetFolder = new File(absoluteDiskPath);
         if (!targetFolder.exists()) {
             targetFolder.mkdirs();
