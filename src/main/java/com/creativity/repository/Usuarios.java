@@ -7,7 +7,6 @@ package com.creativity.repository;
 
 import org.apache.commons.lang3.StringUtils;
 import com.creativity.Filter.UsuarioFilter;
-import com.creativity.model.Financeiro;
 import com.creativity.model.Usuario;
 import com.creativity.security.UsuarioSistema;
 import com.creativity.service.NegocioException;
@@ -116,7 +115,7 @@ public class Usuarios implements Serializable {
         Usuario usuario = null;
 
         try {
-            usuario = this.manager.createQuery("from Usuario where status = 0 and lower(email) = :email", Usuario.class)
+            usuario = this.manager.createQuery("from Usuario where lower(email) = :email", Usuario.class)
                     .setParameter("email", email.toLowerCase()).getSingleResult();
         } catch (NoResultException e) {
             // nenhum usuário encontrado com o e-mail informado

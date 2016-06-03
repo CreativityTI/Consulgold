@@ -34,6 +34,10 @@
 
 
                                 <f:facet name="right">
+
+                                    <p:commandButton  value="Voltar Novo Cadastro"  disabled="#{not seguranca.pedenteFicha}"  icon="fa fa-save"  styleClass="RedButton"
+                                                      rendered="#{cadastroFichaBean.editando}"    action="#{cadastroFichaBean.voltarStatusNovoCadastro}" update="frmCadFicha"/>
+                                    <p:separator rendered="#{cadastroFichaBean.editando}" />
                                     <p:commandButton  value="Pendente"  disabled="#{not seguranca.pedenteFicha}"  icon="fa fa-save"  styleClass="OrangeButton"
                                                       rendered="#{cadastroFichaBean.editando}"  oncomplete="PF('diaEndAdm').show()" process="@this"   />
 

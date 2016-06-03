@@ -230,6 +230,27 @@ public class CadastroFichaBean implements Serializable {
         /* TRAZ OS CONSULTORES CORRESPONDENTES AO GESTOR*/
 
     }
+    
+    
+      public void voltarStatusNovoCadastro() {
+
+        FacesContext context = FacesContext.getCurrentInstance();
+
+        try {
+            this.ficha.setStatusFicha(StatusFicha.NOVOCADASTRO);
+            this.cadastroFichaService.salvar(this.ficha);
+            context.addMessage(null, new FacesMessage(" Ficha atualizada Status para NOVO CADASTRO!"));
+            ficha = new Ficha();
+            categoriaPai = null;
+            subcategorias = new ArrayList<>();
+
+        } catch (NegocioException e) {
+
+            FacesMessage mensagem = new FacesMessage(e.getMessage());
+            mensagem.setSeverity(FacesMessage.SEVERITY_ERROR);
+            context.addMessage(null, mensagem);
+        }
+    }
 
     public void salvar() {
 
@@ -319,8 +340,6 @@ public class CadastroFichaBean implements Serializable {
     public TipoPessoa[] getTiposPessoas() {
         return TipoPessoa.values();
     }
-    
-    
 
     public void carregarSubcategorias() {
         subcategorias = categorias.subcategoriasDe(categoriaPai);
@@ -459,7 +478,7 @@ public class CadastroFichaBean implements Serializable {
 
     }
 
-    public boolean isEditandoCep() {
+       public boolean isEditandoCep() {
         return this.ficha.getId() == null;
     }
 
