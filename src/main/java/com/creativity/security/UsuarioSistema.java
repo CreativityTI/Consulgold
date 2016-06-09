@@ -23,7 +23,7 @@ public class UsuarioSistema extends User {
     public UsuarioSistema(Usuario usuario, Collection<? extends GrantedAuthority> authorities) {
         super(usuario.getEmail(), usuario.getSenha(), authorities);
         this.usuario = usuario;
-        System.out.println("----------------------Usuário Logado!"+usuario.getNome());
+        System.out.println("----------------------Usuário Logado!" + usuario.getNome());
     }
 
     public Usuario getUsuario() {

@@ -261,7 +261,7 @@
                                     <p:panelGrid  columns="1" layout="grid" style="border:0px !important; background:none;" styleClass="ui-panelgrid-blank">
 
                                         <p:outputLabel value="Banco:" for="banco" />
-                                        <p:selectOneMenu  id="banco"  value="#{cadastroFichaBean.ficha.banco}" filter="true" filterMatchMode="startsWith" var="b" > 
+                                        <p:selectOneMenu  id="banco"  value="#{cadastroFichaBean.ficha.banco}" filter="true" filterMatchMode="contains" var="b" > 
                                             <f:selectItem itemLabel="Selecione o Banco" itemValue=""  />
                                             <f:selectItems value="#{cadastroFichaBean.todosBancos}" var="banco" itemLabel="#{banco.nome} " 
                                                            itemValue="#{banco}"  />
@@ -298,7 +298,7 @@
 
 
                                         <p:outputLabel value="Quantidade:" for="quantidade" />
-                                        <p:spinner id="quantidade" size="10" maxlength="10" 
+                                        <p:spinner id="quantidade" size="10" maxlength="10" disabled="#{cadastroFichaBean.statusFichaFinanceiro}"
                                                    value="#{cadastroFichaBean.ficha.quantidade}" >
                                             <f:convertNumber type="number" />
 
@@ -341,7 +341,7 @@
                                         </h:outputText>
 
                                         <p:outputLabel value="Valor de desconto" for="valorDesconto"/>
-                                        <p:inputText id="valorDesconto" size="10" maxlength="10" styleClass="moeda" 
+                                        <p:inputText id="valorDesconto" size="10" maxlength="10" styleClass="moeda" disabled="#{cadastroFichaBean.statusFichaFinanceiro}"
                                                      value="#{cadastroFichaBean.ficha.valorDesconto}">
 
 

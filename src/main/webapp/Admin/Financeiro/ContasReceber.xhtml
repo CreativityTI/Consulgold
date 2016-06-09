@@ -49,14 +49,14 @@
                                     <p:inputText size="10" value="#{lancamentosFinanceirosBean.filtro.numeroAte}" />
                                 </h:panelGroup>
 
-                                <p:outputLabel value="Data de criação" />
+                              <!--  <p:outputLabel value="Data de criação" />
                                 <h:panelGroup>
                                     <p:calendar size="10" pattern="dd/MM/yyyy" locale="pt" 
                                                 value="#{lancamentosFinanceirosBean.filtro.dataCriacaoDe}" />
                                     a
                                     <p:calendar size="10" pattern="dd/MM/yyyy" locale="pt"
                                                 value="#{lancamentosFinanceirosBean.filtro.dataCriacaoAte}" />
-                                </h:panelGroup>
+                                </h:panelGroup>-->
 
                                 <p:outputLabel value="Cliente" />
                                 <p:inputText size="40" value="#{lancamentosFinanceirosBean.filtro.nomeCliente}" />
@@ -103,7 +103,6 @@
                                         <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
                                     </h:outputText>
                                 </p:column>
-
                                 <p:column headerText="Gestor" width="30%" style="text-align: center;">
                                     <h:outputText value="#{financeiro.ficha.gestor.nome}" />
                                 </p:column>
@@ -160,7 +159,7 @@
                                         </h:outputText>
                                     </p:column>
 
-                                   
+
                                     <p:column style="text-align: center; background: aquamarine" >
                                         <h:outputText value="#{lancamentosFinanceirosBean.valorTotalRecebido}" >
                                             <f:convertNumber type="currency" currencySymbol="R$" />

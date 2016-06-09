@@ -29,16 +29,11 @@
 
                             <p:toolbar>
                                 <f:facet name="left">
-                                    <p:commandButton  value="Salvar"  update="frmCadFicha"  icon="fa fa-save" action="#{cadastroFichaBean.salvar}" styleClass="GreenButton"/>
+                                    <p:commandButton  value="Salvar"  update="frmCadFicha" 
+                                                    
+                                                      icon="fa fa-save" action="#{cadastroFichaBean.salvar}" styleClass="GreenButton"/>
                                 </f:facet>
                                 <f:facet name="right">
-                                    <p:commandButton  value="Pendente"   disabled="#{not seguranca.pedenteFicha}"  icon="fa fa-save" action="#{cadastroFichaBean.fichaPendente}" styleClass="OrangeButton"
-                                                      rendered="#{cadastroFichaBean.editando}"   update="frmCadFicha"       />
-
-                                    <p:separator rendered="#{cadastroFichaBean.editando}" />
-                                    <p:commandButton  value="Aprovar"  update="frmCadFicha" disabled="#{not seguranca.aprovarFicha}"  icon="fa fa-save" action="#{cadastroFichaBean.fichaAprovar}" styleClass="GreenButton"
-                                                      rendered="#{cadastroFichaBean.editando}" />
-                                    <p:separator rendered="#{cadastroFichaBean.editando}" />
                                     <p:button  value="Nova Ficha" icon="fa fa-user-plus" outcome="/Fichas/CadastroFicha" />
                                     <span class="ui-separator">
                                         <span class="fa fa-ellipsis-v leaden" />

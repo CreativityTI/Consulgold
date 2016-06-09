@@ -9,6 +9,7 @@
 
 
         <f:viewAction action="#{reportFichasBean.prepararReports()}" />
+        <f:viewAction action="#{cadastroFichaBean.prepararCadastro()}"/>
     </f:metadata>
 
     <ui:define name="head">
@@ -60,7 +61,7 @@
         <div class="Container100">
             <div class="ContainerIndent">
                 <div class="ShadowBox redback white">
-                    <div class="Wid60 DispBlock Fleft">
+                    <div class="Wid60 DispBlock Fleft" >
                         <i class="Fs40 Fleft MarRight10 ShowOnDesktop"></i>
                         <a href="#" class="Fs18 Wid70 DispInBlock MarTop5 Fleft white" style="line-height:18px;">
                             <i class="Fs20 Fleft MarRight10 ShowOnMobile"></i> Consulgold Acessoria e Representação
@@ -72,6 +73,7 @@
                 </div>
             </div>
         </div>
+
 
         <div class="Container100 Responsive50 ">
             <div class="Row">
@@ -138,7 +140,7 @@
 
                             <div class="Container33 Responsive50">
                                 <div class="ContainerIndent">
-                                   
+
                                     <div class="EmptyBox10"></div>
                                     <span class="DispBlock Fs30 leaden" style="line-height:30px;"><p:outputLabel value="#{reportFichasBean.fichasPendentesGestorAno}"/></span>
 
@@ -160,7 +162,7 @@
 
                             <div class="Container33 Responsive50">
                                 <div class="ContainerIndent">
-                                   
+
                                     <div class="EmptyBox10"></div>
                                     <span class="DispBlock Fs30 leaden" style="line-height:30px;"><p:outputLabel value="#{reportFichasBean.fichasNovoCadastroGestorAno}"/></span>
 

@@ -139,8 +139,13 @@ public class Ficha implements Serializable {
 
     private BigDecimal valorUnitario = BigDecimal.valueOf(400);
 
+    @NotNull
     private BigDecimal valorDesconto = BigDecimal.ZERO;
+
+    @NotNull
     private BigDecimal valorTotal = BigDecimal.ZERO;
+    
+    @NotNull
     private BigDecimal quantidade = BigDecimal.ZERO;
 
     @Length(max = 100)
@@ -162,7 +167,6 @@ public class Ficha implements Serializable {
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date dataCriacao;
 
-  
     @Enumerated(EnumType.STRING)
     @Column(length = 20)
     private StatusResposta statusResposta;
@@ -665,8 +669,6 @@ public class Ficha implements Serializable {
     public void setStatusResposta(StatusResposta statusResposta) {
         this.statusResposta = statusResposta;
     }
-    
-    
 
     public BigDecimal getValorTotalFinanceiro() {
         BigDecimal vlTotal = new BigDecimal(BigInteger.ZERO);

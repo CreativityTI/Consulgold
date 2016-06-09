@@ -109,7 +109,7 @@
                                                               rendered="#{cadastroFichaBean.ficha.tipoPessoa eq 'JURIDICA'}" />
                                                 <p:outputLabel value="Data Nascimento" for="dataNascimento" rendered="#{cadastroFichaBean.ficha.tipoPessoa eq 'FISICA'}" />
                                                 <p:calendar id="dataNascimento" locale="pt" showOn="button" maxlength="10" pattern="dd/MM/yyyy" mask="99/99/9999"
-                                                            value="#{cadastroFichaBean.ficha.dataNascimento}" rendered="#{cadastroFichaBean.ficha.tipoPessoa eq 'FISICA'}">
+                                                            value="#{cadastroFichaBean.ficha.dataNascimento}" rendered="#{cadastroFichaBean.ficha.tipoPessoa eq 'FISICA'}" required="true">
 
                                                 </p:calendar>
 

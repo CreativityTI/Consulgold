@@ -34,6 +34,7 @@ public class ReportFichasBean implements Serializable {
     private Mensagens repositorioMensagens;
 
     private Ficha ficha;
+
     private Ficha fichaSelecionada;
 
     @Inject
@@ -76,6 +77,9 @@ public class ReportFichasBean implements Serializable {
     private BigDecimal financeiroSaldoTotal;
 
     public void prepararReports() {
+        
+        
+        this.ficha = new Ficha();
 
         this.mensagemsGestor = repositorioMensagens.mensagemGestor();
         this.mensagensTodos = repositorioMensagens.todasMensagens();
@@ -355,8 +359,8 @@ public class ReportFichasBean implements Serializable {
     public void setMensagensTodos(List<Mensagem> mensagensTodos) {
         this.mensagensTodos = mensagensTodos;
     }
-    
-    
+
+
 
     public BigDecimal getValorTotalPorGestor() {
         BigDecimal vlTotal = new BigDecimal(BigInteger.ZERO);

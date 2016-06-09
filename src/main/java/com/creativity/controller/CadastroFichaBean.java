@@ -230,9 +230,8 @@ public class CadastroFichaBean implements Serializable {
         /* TRAZ OS CONSULTORES CORRESPONDENTES AO GESTOR*/
 
     }
-    
-    
-      public void voltarStatusNovoCadastro() {
+
+    public void voltarStatusNovoCadastro() {
 
         FacesContext context = FacesContext.getCurrentInstance();
 
@@ -478,8 +477,13 @@ public class CadastroFichaBean implements Serializable {
 
     }
 
-       public boolean isEditandoCep() {
+    public boolean isEditandoCep() {
         return this.ficha.getId() == null;
+    }
+
+    public boolean isStatusFichaFinanceiro() {
+        return this.ficha.getStatusFichaFinanceiro() == ficha.getStatusFichaFinanceiro().ABERTO || this.ficha.getStatusFichaFinanceiro() == ficha.getStatusFichaFinanceiro().PAGO ;
+
     }
 
     public boolean isRespostaAtendente() {
@@ -489,5 +493,7 @@ public class CadastroFichaBean implements Serializable {
     public boolean isRespostaConsultor() {
         return this.ficha.getStatusResposta() == ficha.getStatusResposta().RESCONSULTOR;
     }
+    
+    
 
 }
