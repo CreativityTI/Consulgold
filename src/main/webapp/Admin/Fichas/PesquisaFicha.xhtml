@@ -63,7 +63,7 @@
                                                 value="#{pesquisaFichasBean.filtro.dataCriacaoAte}" />
                                 </h:panelGroup>
 
-                          
+
                                 <p:outputLabel value="Gestor" for="gestor"/>
                                 <p:selectOneMenu  id="gestor"  value="#{pesquisaFichasBean.filtro.nomeVendedor}" style="width: 40%"
                                                   requiredMessage="Favor informar filtro gestor"> 
@@ -104,6 +104,12 @@
 
                                 <p:column headerText="Data" style="text-align: center"  sortBy="#{ficha.dataCriacao}">
                                     <h:outputText value="#{ficha.dataCriacao}" >
+
+                                    </h:outputText>
+                                </p:column> 
+
+                                <p:column headerText="Data Aprovação" style="text-align: center" sortBy="#{ficha.dataAprovacao}">
+                                    <h:outputText value="#{ficha.dataAprovacao}" >
 
                                     </h:outputText>
                                 </p:column> 

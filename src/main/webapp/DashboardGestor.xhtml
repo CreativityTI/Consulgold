@@ -174,6 +174,25 @@
                 </div>
             </div>
 
+            <p:panel rendered="#{seguranca.statusUsuario !=false}">
+                <div class="Container100">
+                    <div class="ContainerIndent">
+                        <div class="ShadowBox white" style="background: red">
+                            <div class="Wid60 DispBlock Fleft"  >
+                                <i class="fa fa-thumbs-down Fs40 Fleft MarRight10 ShowOnDesktop"></i>
+                                <a href="#" class="Fs18 Wid70 DispInBlock MarTop5 Fleft white" style="line-height:18px;">
+                                    <i class="Fs29 Fleft MarRight10 ShowOnMobile"></i> Usuário Bloqueado
+                                </a>
+                                <span class="Fs18 Wid70 DispBlock Fleft ShowOnDesktop">Seu usuário está bloqueado para lançamento de novas fichas. Favor entrar em contato com gerência da CONSOLGOLD
+                                </span>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </p:panel>
+
             <p:dialog id="modalDialog" header="Você tem uma mensagem!!!"  responsive="true"
                       visible="#{!empty reportFichasBean.mensagemsGestor}"
                       widgetVar="dlg2" modal="true" height="300" width="600">

@@ -11,7 +11,6 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
-
 /**
  *
  * @author rafael.lima
@@ -30,6 +29,18 @@ public class Seguranca {
         }
 
         return nome;
+    }
+
+    public Boolean getStatusUsuario() {
+        Boolean status = null;
+
+        UsuarioSistema usuarioLogado = getUsuarioLogado();
+
+        if (usuarioLogado != null) {
+            status = usuarioLogado.getUsuario().getStatus();
+        }
+
+        return status;
     }
 
     private UsuarioSistema getUsuarioLogado() {
@@ -65,6 +76,5 @@ public class Seguranca {
         return FacesUtil.getExternalContext().isUserInRole("ADMINISTRADOR")
                 || FacesUtil.getExternalContext().isUserInRole("ATENDENTE");
     }
-    
 
 }

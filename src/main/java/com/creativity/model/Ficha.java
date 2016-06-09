@@ -144,7 +144,7 @@ public class Ficha implements Serializable {
 
     @NotNull
     private BigDecimal valorTotal = BigDecimal.ZERO;
-    
+
     @NotNull
     private BigDecimal quantidade = BigDecimal.ZERO;
 
@@ -166,6 +166,10 @@ public class Ficha implements Serializable {
     @Column(columnDefinition = "DATE")
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date dataCriacao;
+
+    @Column(columnDefinition = "DATE1")
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    private Date dataAprovacao;
 
     @Enumerated(EnumType.STRING)
     @Column(length = 20)
@@ -615,6 +619,14 @@ public class Ficha implements Serializable {
 
     public void setStatusFichaFinanceiro(StatusFinanceiro statusFichaFinanceiro) {
         this.statusFichaFinanceiro = statusFichaFinanceiro;
+    }
+
+    public Date getDataAprovacao() {
+        return dataAprovacao;
+    }
+
+    public void setDataAprovacao(Date dataAprovacao) {
+        this.dataAprovacao = dataAprovacao;
     }
 
     @Override

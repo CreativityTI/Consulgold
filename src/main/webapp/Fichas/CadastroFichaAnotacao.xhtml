@@ -30,7 +30,7 @@
                             <p:toolbar>
                                 <f:facet name="left">
                                     <p:commandButton  value="Salvar"  update="frmCadFicha" 
-                                                    
+                                                   rendered="#{seguranca.statusUsuario !=false}"
                                                       icon="fa fa-save" action="#{cadastroFichaBean.salvar}" styleClass="GreenButton"/>
                                 </f:facet>
                                 <f:facet name="right">
