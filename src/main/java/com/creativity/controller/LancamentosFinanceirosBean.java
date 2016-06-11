@@ -27,6 +27,12 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFFont;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.IndexedColors;
 
 /**
  *
@@ -97,6 +103,8 @@ public class LancamentosFinanceirosBean implements Serializable {
             context.addMessage(null, mensagem);
         }
     }
+
+   
 
     public FinanceiroFilter getFiltro() {
         return filtro;
@@ -193,8 +201,6 @@ public class LancamentosFinanceirosBean implements Serializable {
 
         return vlTotal;
     }
-    
-    
 
     public BigDecimal getValorTotalPago() {
         BigDecimal vlTotal = new BigDecimal(BigInteger.ZERO);

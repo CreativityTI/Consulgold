@@ -92,7 +92,7 @@ public class LancamentosFinanceiros implements Serializable {
             criteria.add(Restrictions.ilike("f.nomeRazao", filtro.getNomeCliente(), MatchMode.ANYWHERE));
         }
 
-        if (filtro.getStatusDocFinanceiro() != null && filtro.getStatusDocFinanceiro().length > 3) {
+        if (filtro.getStatusDocFinanceiro() != null && filtro.getStatusDocFinanceiro().length > 0) {
             // adicionamos uma restrição "in", passando um array de constantes da enum StatusPedido
             criteria.add(Restrictions.in("statusFinanceiro", filtro.getStatusDocFinanceiro()));
         }

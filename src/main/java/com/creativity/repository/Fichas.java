@@ -223,19 +223,19 @@ public class Fichas implements Serializable {
 
     public Long todasFichasAprovada() {
         Session session = this.manager.unwrap(Session.class);
-        org.hibernate.Query q = session.createQuery("select count(*) from Ficha where statusFicha = 'APROVADO' and dataCriacao = current_date()");
+        org.hibernate.Query q = session.createQuery("select count(*) from Ficha where statusFicha = 'APROVADO' and day(dataAprovacao)=day(current_date())");
         return (Long) q.uniqueResult();
     }
 
     public Long todasFichasAprovadaMes() {
         Session session = this.manager.unwrap(Session.class);
-        org.hibernate.Query q = session.createQuery("select count(*) from Ficha where statusFicha = 'APROVADO' and month(dataCriacao)=month(current_date())");
+        org.hibernate.Query q = session.createQuery("select count(*) from Ficha where statusFicha = 'APROVADO' and month(dataAprovacao)=month(current_date())");
         return (Long) q.uniqueResult();
     }
 
     public Long todasFichasAprovadaAno() {
         Session session = this.manager.unwrap(Session.class);
-        org.hibernate.Query q = session.createQuery("select count(*) from Ficha where statusFicha = 'APROVADO' and year(dataCriacao)=year(current_date())");
+        org.hibernate.Query q = session.createQuery("select count(*) from Ficha where statusFicha = 'APROVADO' and year(dataAprovacao)=year(current_date())");
         return (Long) q.uniqueResult();
     }
 
@@ -343,7 +343,7 @@ public class Fichas implements Serializable {
         }
 
         Session session = this.manager.unwrap(Session.class);
-        org.hibernate.Query q = session.createQuery("select count(*) from Ficha f where f.statusFicha = 'APROVADO' and f.dataCriacao = current_date() and (f.gestor.nome)= :nome").setParameter("nome", nome);
+        org.hibernate.Query q = session.createQuery("select count(*) from Ficha f where f.statusFicha = 'APROVADO' and day(f.dataAprovacao)=day(current_date()) and (f.gestor.nome)= :nome").setParameter("nome", nome);
         return (Long) q.uniqueResult();
 
     }
@@ -359,7 +359,7 @@ public class Fichas implements Serializable {
         }
 
         Session session = this.manager.unwrap(Session.class);
-        org.hibernate.Query q = session.createQuery("select count(*) from Ficha f where f.statusFicha = 'APROVADO' and month(f.dataCriacao)=month(current_date()) and (f.gestor.nome)= :nome").setParameter("nome", nome);
+        org.hibernate.Query q = session.createQuery("select count(*) from Ficha f where f.statusFicha = 'APROVADO' and month(f.dataAprovacao)=month(current_date()) and (f.gestor.nome)= :nome").setParameter("nome", nome);
         return (Long) q.uniqueResult();
 
     }
@@ -375,7 +375,7 @@ public class Fichas implements Serializable {
         }
 
         Session session = this.manager.unwrap(Session.class);
-        org.hibernate.Query q = session.createQuery("select count(*) from Ficha f where f.statusFicha = 'APROVADO' and year(f.dataCriacao)=year(current_date()) and (f.gestor.nome)= :nome").setParameter("nome", nome);
+        org.hibernate.Query q = session.createQuery("select count(*) from Ficha f where f.statusFicha = 'APROVADO' and year(f.dataAprovacao)=year(current_date()) and (f.gestor.nome)= :nome").setParameter("nome", nome);
         return (Long) q.uniqueResult();
 
     }
