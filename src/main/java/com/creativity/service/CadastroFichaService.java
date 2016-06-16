@@ -8,7 +8,6 @@ package com.creativity.service;
 import com.creativity.model.Ficha;
 import com.creativity.model.StatusFicha;
 import com.creativity.repository.Fichas;
-import com.creativity.repository.LancamentosFinanceiros;
 import com.creativity.util.Transactional;
 import java.io.Serializable;
 import java.util.Date;
