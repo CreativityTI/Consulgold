@@ -93,6 +93,7 @@
                                              message="Tem certeza que deseja excluir o usuário #{pesquisaUsuarioBean.usuarioSelecionado.nome}?"
                                              widgetVar="confirmacaoExclusao"	id="confirmacaoExclusaoDialog">
                                 <p:button value="Não" onclick="PF('confirmacaoExclusao').hide(); return false;" />
+                                
                                 <p:commandButton value="Sim" oncomplete="confirmacaoExclusao.hide();"
                                                  action="#{pesquisaUsuarioBean.excluir()}" process="@this"
                                                  />

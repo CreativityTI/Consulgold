@@ -9,12 +9,15 @@ import com.creativity.Filter.FinanceiroFilter;
 import com.creativity.model.Financeiro;
 import com.creativity.model.StatusFinanceiro;
 import com.creativity.security.UsuarioSistema;
+import com.creativity.service.NegocioException;
+import com.creativity.util.Transactional;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceException;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -213,6 +216,17 @@ public class LancamentosFinanceiros implements Serializable {
 
         return usuario;
 
+    }
+
+    @Transactional
+    public void remover(Financeiro financeiro) {
+        try {
+            financeiro = porId(financeiro.getId());
+            manager.remove(financeiro);
+            manager.flush();
+        } catch (PersistenceException e) {
+            throw new NegocioException("Doc Financeiro não pode ser excluído.");
+        }
     }
 
 }

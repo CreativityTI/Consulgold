@@ -6,33 +6,25 @@
 package com.creativity.controller;
 
 import com.creativity.Filter.FinanceiroFilter;
-import com.creativity.model.BaixaFinanceiro;
 import com.creativity.model.Ficha;
 import com.creativity.model.Financeiro;
 import com.creativity.model.StatusFinanceiro;
-import com.creativity.model.TipoBaixa;
 import com.creativity.model.Usuario;
 import com.creativity.repository.Fichas;
 import com.creativity.repository.LancamentosFinanceiros;
 import com.creativity.repository.Usuarios;
+import com.creativity.service.CadastroFichaService;
 import com.creativity.service.LancamentoFinanceiroService;
 import com.creativity.service.NegocioException;
 import com.creativity.util.FacesUtil;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.Date;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-import org.apache.poi.hssf.usermodel.HSSFCellStyle;
-import org.apache.poi.hssf.usermodel.HSSFFont;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.IndexedColors;
 
 /**
  *
@@ -65,6 +57,9 @@ public class LancamentosFinanceirosBean implements Serializable {
 
     @Inject
     private Usuarios usuarios;
+
+    @Inject
+    private CadastroFichaService cadastroFichaService;
 
     public LancamentosFinanceirosBean() {
         filtro = new FinanceiroFilter();
@@ -104,7 +99,12 @@ public class LancamentosFinanceirosBean implements Serializable {
         }
     }
 
-   
+    public void excluirDocFinanceiro() {
+        lancamentosFinanceiros.remover(financeiroSelecionado);
+        FacesUtil.addInfoMessage("Doc financeiro excluido com sucesso!");
+        lancamentos = lancamentosFinanceiros.filtradosAguardandoPagamento(filtro);
+
+    }
 
     public FinanceiroFilter getFiltro() {
         return filtro;

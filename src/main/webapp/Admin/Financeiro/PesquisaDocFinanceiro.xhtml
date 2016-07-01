@@ -1,0 +1,129 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:b="http://bootsfaces.net/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:o="http://omnifaces.org/ui">
+
+
+    <ui:define name="content">
+        <h:form id="frmPesquisa">
+            <div class="ui-lesscurve">
+
+                <div class="Container100">
+
+                    <div class="ContainerIndent">
+                        <div class="ShadowBox whiteback OrangeBorderedBox">
+
+
+                            <h1 class="BigTopic">Documentos Financeiros</h1>
+
+                            <p:messages  showSummary="false"  showDetail="true" autoUpdate="true" closable="true" />
+
+                            <p:toolbar style="margin-top: 20px">
+                                <p:toolbarGroup>
+                                    <p:commandButton value="Pesquisar" action="#{lancamentosFinanceirosBean.pesquisar()}" 
+                                                     update="@form" styleClass="OrangeButton"/>
+                                </p:toolbarGroup>
+                                <p:toolbarGroup align="right">
+                                    <p:commandButton value="Exportar para XLS" disabled="#{empty lancamentosFinanceirosBean.lancamentos}"
+                                                     ajax="false"  class="GreenButton">
+                                        <p:dataExporter type="xls" target="financeiroTable" fileName="contasReceber"/>
+                                    </p:commandButton>
+                                    <p:separator/>
+                                    <p:button value="Nova Ficha" outcome="/Admin/Fichas/CadastroFicha"  />
+                                </p:toolbarGroup>
+                            </p:toolbar>
+
+                            <p:panelGrid columns="1" layout="grid" style="border:0px !important; background:none;" styleClass="ui-panelgrid-blank">
+
+                                <p:outputLabel value="Número" />
+                                <h:panelGroup>
+                                    <p:inputText size="10" value="#{lancamentosFinanceirosBean.filtro.numeroDe}" required="true" requiredMessage="Informe número de"/>
+                                    a
+                                    <p:inputText size="10" value="#{lancamentosFinanceirosBean.filtro.numeroAte}" required="true" requiredMessage="Informe número até" />
+                                </h:panelGroup>
+
+                            </p:panelGrid>
+
+                            <p:dataTable id="financeiroTable" value="#{lancamentosFinanceirosBean.lancamentos}" var="financeiro" 
+                                         emptyMessage="Nenhum documento encontrado."  reflow="true"  sortBy="#{financeiro.ficha.gestor.nome}">
+
+                                <f:facet name="header">
+                                    Lista de Documentos Financeiros
+                                </f:facet>
+                                <p:column headerText="Ficha" width="15%" style="text-align: center;">
+                                    <h:outputText value="#{financeiro.ficha}" />
+                                </p:column>
+                                <p:column headerText="Nº Doc Receber" width="10%" style="text-align: center;">
+                                    <h:outputText value="#{financeiro.id}" />
+                                </p:column>
+                                <p:column headerText="Data" width="15%" style="text-align: center;">
+                                    <h:outputText value="#{financeiro.dataLancamento}" >
+                                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+                                    </h:outputText>
+                                </p:column>
+                                <p:column headerText="Gestor" width="30%" style="text-align: center;">
+                                    <h:outputText value="#{financeiro.ficha.gestor.nome}" />
+                                </p:column>
+                                <p:column  headerText="Cliente" width="30%" style="text-align: center;">
+                                    <h:outputText value="#{financeiro.ficha.nomeRazao}" />
+                                </p:column>
+
+                                <p:column headerText="Valor de Venda" width="15%" style="text-align: center;">
+                                    <h:outputText value="#{financeiro.ficha.valorTotalFicha}" >
+                                        <f:convertNumber currencySymbol="R$" type="currency" />
+                                    </h:outputText>
+                                </p:column>
+                                <p:column headerText="Valor a Receber" width="15%" style="text-align: center; background: #f7e3a4">
+                                    <h:outputText value="#{financeiro.valor}" >
+                                        <f:convertNumber currencySymbol="R$" type="currency" />
+                                    </h:outputText>
+                                </p:column>
+
+                                <p:column headerText="Valor Recebido" width="15%" style="text-align: center; background: aquamarine">
+                                    <h:outputText value="#{financeiro.valorTotalRecebido}" >
+                                        <f:convertNumber currencySymbol="R$" type="currency" />
+                                    </h:outputText>
+                                </p:column>
+
+                                <p:column headerText="Status Financeiro" style="text-align: center;" width="15%">
+                                    <h:outputText value="#{financeiro.statusFinanceiro.descricao}" />
+
+                                </p:column>
+
+                                <p:column style="width: 100px; text-align: center">
+                                    <p:commandButton icon="ui-icon-trash" title="Excluir"
+                                                     oncomplete="PF('excluirDoFinanceiroDialog').show(); return false;">
+                                        <f:setPropertyActionListener value="#{financeiro}"
+                                                                     target="#{lancamentosFinanceirosBean.financeiroSelecionado}" />
+                                    </p:commandButton>
+                                </p:column>
+
+                            </p:dataTable>
+
+                            <p:confirmDialog header="Escluir Doc Financeiro"
+                                             message="Tem certeza que deseja excluir o Doc Financeiro?"
+                                             widgetVar="excluirDoFinanceiroDialog">
+                                <p:button value="Não"
+                                          onclick="PF('excluirDoFinanceiroDialog').hide(); return false;" >
+                                </p:button>
+                                <p:commandButton value="Sim"
+                                                 oncomplete="PF('excluirDoFinanceiroDialog').hide();" update="financeiroTable"
+                                                 action="#{lancamentosFinanceirosBean.excluirDocFinanceiro()}"
+                                                 process="@this"/>
+                            </p:confirmDialog>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </h:form>
+
+    </ui:define>
+</ui:composition>
