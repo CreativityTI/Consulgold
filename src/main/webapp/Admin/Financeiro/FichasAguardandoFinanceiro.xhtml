@@ -40,6 +40,7 @@
                             <p:dataTable id="fichasTable" value="#{pesquisaFichasBean.fichasFiltradasAdminGerarFinanceiro}" var="ficha" 
                                          emptyMessage="Nenhuma ficha encontrada." rows="10" reflow="true"  
                                          paginator="true"
+                                           currentPageReportTemplate="Pag. {currentPage}/{totalPages} - Total de Fichas: {totalRecords} )"
                                          paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                          rowsPerPageTemplate="5,10,15,30,100">
                                 

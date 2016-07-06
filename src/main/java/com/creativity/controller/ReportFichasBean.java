@@ -75,6 +75,10 @@ public class ReportFichasBean implements Serializable {
     private BigDecimal financeiroAbertoTotal;
     private BigDecimal financeiroPagoTotal;
     private BigDecimal financeiroSaldoTotal;
+    
+    private BigDecimal financeiroPagoDia;
+    private BigDecimal financeiroPagoMes;
+    private BigDecimal financeiroPagoAno;
 
     public void prepararReports() {
         
@@ -88,6 +92,9 @@ public class ReportFichasBean implements Serializable {
         this.financeiroAbertoTotal = lancamentosFinanceiros.valorAbertoTotal();
         this.financeiroPagoTotal = lancamentosFinanceiros.valorPagoTotal();
         //this.financeiroSaldoTotal = lancamentosFinanceiros.valorSaldoTotal();
+        this.financeiroPagoDia = lancamentosFinanceiros.valorPagoDiaTotal();
+        this.financeiroPagoMes = lancamentosFinanceiros.valorPagoMesTotal();
+        this.financeiroPagoAno = lancamentosFinanceiros.valorPagoAnoTotal();
 
         this.fichasPendentesMenu = fichas.todasFichasPendentesAdmMenu();
 
@@ -358,6 +365,30 @@ public class ReportFichasBean implements Serializable {
 
     public void setMensagensTodos(List<Mensagem> mensagensTodos) {
         this.mensagensTodos = mensagensTodos;
+    }
+
+    public BigDecimal getFinanceiroPagoDia() {
+        return financeiroPagoDia;
+    }
+
+    public void setFinanceiroPagoDia(BigDecimal financeiroPagoDia) {
+        this.financeiroPagoDia = financeiroPagoDia;
+    }
+
+    public BigDecimal getFinanceiroPagoMes() {
+        return financeiroPagoMes;
+    }
+
+    public void setFinanceiroPagoMes(BigDecimal financeiroPagoMes) {
+        this.financeiroPagoMes = financeiroPagoMes;
+    }
+
+    public BigDecimal getFinanceiroPagoAno() {
+        return financeiroPagoAno;
+    }
+
+    public void setFinanceiroPagoAno(BigDecimal financeiroPagoAno) {
+        this.financeiroPagoAno = financeiroPagoAno;
     }
 
 

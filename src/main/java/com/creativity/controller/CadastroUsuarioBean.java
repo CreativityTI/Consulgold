@@ -45,32 +45,32 @@ public class CadastroUsuarioBean implements Serializable {
     private Usuario usuarioSelecionado;
 
     @Inject
-    private Usuarios gestoresRepositoty;
+    private Usuarios repositorioGestores;
     private List<Usuario> gestores;
     private List<Usuario> gestorLogado;
 
     private List<Usuario> usuarioLogado;
 
     @Inject
-    private GruposUsuarios gruposUsuariosRepository;
+    private GruposUsuarios repositorioGruposUsuario;
     private GrupoUsuario grupoUsuarioSelecionado;
 
     private List<GrupoUsuario> gruposUsuarios;
     private List<GrupoUsuario> grupoUsuarioConsultor;
 
     @Inject
-    private Empresas empresasRepository;
+    private Empresas repositorioEmpresa;
     private Empresa empresaSelecionada;
     private List<Empresa> empresas;
 
     private String cep = null;
 
     public void prepararCadastro() {
-        this.gruposUsuarios = this.gruposUsuariosRepository.todosGruposUsuarios();
-        this.grupoUsuarioConsultor = this.gruposUsuariosRepository.gruposUsuariosConsultores();
-        this.empresas = this.empresasRepository.todasEmpresas();
-        this.gestores = this.gestoresRepositoty.todosGestores();
-        this.gestorLogado = this.gestoresRepositoty.gestorLogado();
+        this.gruposUsuarios = this.repositorioGruposUsuario.todosGruposUsuarios();
+        this.grupoUsuarioConsultor = this.repositorioGruposUsuario.gruposUsuariosConsultores();
+        this.empresas = this.repositorioEmpresa.todasEmpresas();
+        this.gestores = this.repositorioGestores.todosGestores();
+        this.gestorLogado = this.repositorioGestores.gestorLogado();
 
         if (this.usuario == null) {
             this.usuario = new Usuario();
@@ -115,7 +115,7 @@ public class CadastroUsuarioBean implements Serializable {
     }
 
     public void carregarGestores() {
-        this.gestores = this.gestoresRepositoty.todosGestores();
+        this.gestores = this.repositorioGestores.todosGestores();
         
     }
 

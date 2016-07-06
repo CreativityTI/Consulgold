@@ -197,27 +197,56 @@
                         </div>
                     </div>
 
-                    <div class="Container50 Responsive50">
-                        <div class="ContainerIndent">
-                            <div class="ShadowBox whiteback RedBorderedBox" style="min-height:200px">
+
+                    <div class="Container50 Responsive50 ">
+                        <div class="ContainerIndent ">
+                            <div class="ShadowBox whiteback NavyBlueBorderedBox" style="min-height:200px">
                                 <div class="Container100">
                                     <div class="ContainerIndent">
-                                        <i class="fa fa-money navyblue Fs60 Fleft MarRight10"></i>
-                                        <span class="DispBlock green Fs26" style="line-height:26px;">Contas Recebidas</span>
-
-                                        <p:outputLabel value="#{reportFichasBean.financeiroPagoTotal}" class="DispBlock green Fs26" style="line-height:26px;">
-                                            <f:convertNumber currencySymbol="R$" type="currency"/>
-                                        </p:outputLabel>
-
-                                        <span class="navyblue Fs14"></span>
+                                        <h2 class="Fs26 navyblue DispInlBlock FontDosisRegular Fleft" style="line-height:26px;">Contas a Recebidas</h2>
+                                        <i class="icon-local-mall Fright navyblue Fs30"></i>
                                     </div>
                                 </div>
-                                <div class="EmptyBox20">
+                                <div class="Container33 Responsive50">
+                                    <div class="ContainerIndent">
+                                        <span class="DispBlock Fs18 FontDosisRegular leaden">Hoje</span>
+                                        <div class="EmptyBox10"></div>
+                                        <span class="DispBlock Fs30 leaden" style="line-height:30px;">
+                                            <p:outputLabel value="#{reportFichasBean.financeiroPagoDia}">
+                                                <f:convertNumber currencySymbol="R$" type="currency"/>
+                                            </p:outputLabel>
+                                        </span>
 
+                                    </div>
+                                </div>
+                                <div class="Container33 Responsive50">
+                                    <div class="ContainerIndent">
+                                        <span class="DispBlock Fs18 FontDosisRegular leaden">Mês</span>
+                                        <div class="EmptyBox10"></div>
+                                        <span class="DispBlock Fs30 leaden" style="line-height:30px;">
+                                            <p:outputLabel value="#{reportFichasBean.financeiroPagoMes}">
+                                                <f:convertNumber currencySymbol="R$" type="currency"/>
+                                            </p:outputLabel>
+                                        </span>
+
+                                    </div>
+                                </div>
+                                <div class="Container33 Responsive50">
+                                    <div class="ContainerIndent">
+                                        <span class="DispBlock Fs18 FontDosisRegular leaden">Ano</span>
+                                        <div class="EmptyBox10"></div>
+                                        <span class="DispBlock Fs30 leaden" style="line-height:30px;">
+                                            <p:outputLabel value="#{reportFichasBean.financeiroPagoAno}">
+                                                <f:convertNumber currencySymbol="R$" type="currency"/>
+                                            </p:outputLabel>
+                                        </span>
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
 
                     <div class="Container100 Responsive100">
                         <div class="ContainerIndent">

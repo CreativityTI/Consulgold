@@ -23,7 +23,6 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
@@ -193,6 +192,24 @@ public class LancamentosFinanceiros implements Serializable {
     public BigDecimal valorPagoTotal() {
         Session session = this.manager.unwrap(Session.class);
         org.hibernate.Query q = session.createSQLQuery("select sum(valorTotalRecebido) from financeiro");
+        return (BigDecimal) q.uniqueResult();
+    }
+
+    public BigDecimal valorPagoDiaTotal() {
+        Session session = this.manager.unwrap(Session.class);
+        org.hibernate.Query q = session.createSQLQuery("SELECT sum(valorPagamento) from baixafinanceiro where dataPagamento = current_date();");
+        return (BigDecimal) q.uniqueResult();
+    }
+
+    public BigDecimal valorPagoMesTotal() {
+        Session session = this.manager.unwrap(Session.class);
+        org.hibernate.Query q = session.createSQLQuery("SELECT sum(valorPagamento) from baixafinanceiro where month(dataPagamento) = month( current_date());");
+        return (BigDecimal) q.uniqueResult();
+    }
+    
+        public BigDecimal valorPagoAnoTotal() {
+        Session session = this.manager.unwrap(Session.class);
+        org.hibernate.Query q = session.createSQLQuery("SELECT sum(valorPagamento) from baixafinanceiro where year(dataPagamento) = year( current_date());");
         return (BigDecimal) q.uniqueResult();
     }
 
