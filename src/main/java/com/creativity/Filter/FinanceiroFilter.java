@@ -21,6 +21,7 @@ public class FinanceiroFilter implements Serializable {
     private Long numeroAte;
     private Date dataCriacaoDe;
     private Date dataCriacaoAte;
+    
     private String nomeVendedor;
     private String nomeCliente;
     private Long gestor;

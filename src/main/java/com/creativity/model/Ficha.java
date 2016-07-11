@@ -29,6 +29,8 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.br.CNPJ;
+import org.hibernate.validator.constraints.br.CPF;
 
 /**
  *
@@ -38,22 +40,25 @@ import org.hibernate.validator.constraints.NotBlank;
 @Table(name = "FICHA")
 public class Ficha implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue
     private Long id;
 
-    private static final long serialVersionUID = 1L;
+    @NotBlank
     @Length(max = 100)
     @Column(nullable = false, length = 100)
     private String nomeRazao;
+
     @Length(max = 100)
     @Column(length = 100)
     private String nomeFantasia;
 
-    // @CNPJ(message = "CNPJ Inválido verifique!")
+    @CNPJ(message = "CNPJ Inválido verifique!")
     private String cnpj;
 
-    //@CPF(message = "CPF Inválido verifique!")
+    @CPF(message = "CPF Inválido verifique!")
     private String cpf;
     @Length(max = 15)
     @Column(length = 15)
@@ -63,6 +68,7 @@ public class Ficha implements Serializable {
     @Column(length = 15)
     private String ie;
 
+    @NotBlank
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataNascimento;
 
@@ -640,8 +646,6 @@ public class Ficha implements Serializable {
     public void setDataEntregaMaquina(Date dataEntregaMaquina) {
         this.dataEntregaMaquina = dataEntregaMaquina;
     }
-    
-    
 
     @Override
     public int hashCode() {

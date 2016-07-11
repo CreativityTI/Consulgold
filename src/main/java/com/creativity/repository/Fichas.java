@@ -82,6 +82,14 @@ public class Fichas implements Serializable {
             criteria.add(Restrictions.le("dataCriacao", filtro.getDataCriacaoAte()));
         }
 
+        if (filtro.getDataAprovacaoDe() != null) {
+            criteria.add(Restrictions.ge("dataAprovacao", filtro.getDataAprovacaoDe()));
+        }
+
+        if (filtro.getDataAprovacaoAte() != null) {
+            criteria.add(Restrictions.le("dataAprovacao", filtro.getDataAprovacaoAte()));
+        }
+
         if (StringUtils.isNotBlank(filtro.getNomeVendedor())) {
             // acessamos o nome do vendedor associado ao pedido pelo alias "v", criado anteriormente
             criteria.add(Restrictions.ilike("v.nome", filtro.getNomeVendedor(), MatchMode.ANYWHERE));
@@ -131,16 +139,24 @@ public class Fichas implements Serializable {
             criteria.add(Restrictions.ge("dataCriacao", filtro.getDataCriacaoDe()));
         }
 
-        if (StringUtils.isNotBlank(filtro.getCpf()))  {
-            criteria.add(Restrictions.ilike("cpf", filtro.getCpf()));
-        }
-        
-           if (StringUtils.isNotBlank(filtro.getCnpj()))  {
-            criteria.add(Restrictions.ilike("cnpj", filtro.getCnpj()));
-        }
-
         if (filtro.getDataCriacaoAte() != null) {
             criteria.add(Restrictions.le("dataCriacao", filtro.getDataCriacaoAte()));
+        }
+
+        if (filtro.getDataAprovacaoDe() != null) {
+            criteria.add(Restrictions.ge("dataAprovacao", filtro.getDataAprovacaoDe()));
+        }
+
+        if (filtro.getDataAprovacaoAte() != null) {
+            criteria.add(Restrictions.le("dataAprovacao", filtro.getDataAprovacaoAte()));
+        }
+
+        if (StringUtils.isNotBlank(filtro.getCpf())) {
+            criteria.add(Restrictions.ilike("cpf", filtro.getCpf()));
+        }
+
+        if (StringUtils.isNotBlank(filtro.getCnpj())) {
+            criteria.add(Restrictions.ilike("cnpj", filtro.getCnpj()));
         }
 
         if (StringUtils.isNotBlank(nome)) {
@@ -223,7 +239,7 @@ public class Fichas implements Serializable {
 
     public Long todasFichasAprovada() {
         Session session = this.manager.unwrap(Session.class);
-        org.hibernate.Query q = session.createQuery("select count(*) from Ficha where statusFicha = 'APROVADO' and day(dataAprovacao)=day(current_date())");
+        org.hibernate.Query q = session.createQuery("select count(*) from Ficha where statusFicha = 'APROVADO' and date(dataAprovacao)=date(current_date())");
         return (Long) q.uniqueResult();
     }
 
@@ -343,7 +359,7 @@ public class Fichas implements Serializable {
         }
 
         Session session = this.manager.unwrap(Session.class);
-        org.hibernate.Query q = session.createQuery("select count(*) from Ficha f where f.statusFicha = 'APROVADO' and day(f.dataAprovacao)=day(current_date()) and (f.gestor.nome)= :nome").setParameter("nome", nome);
+        org.hibernate.Query q = session.createQuery("select count(*) from Ficha f where f.statusFicha = 'APROVADO' and date(f.dataAprovacao)=date(current_date()) and (f.gestor.nome)= :nome").setParameter("nome", nome);
         return (Long) q.uniqueResult();
 
     }

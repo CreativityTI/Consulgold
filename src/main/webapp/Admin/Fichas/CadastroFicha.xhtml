@@ -108,6 +108,7 @@
 
                                             <p:outputLabel value="Data Nascimento" for="dataNascimento" rendered="#{cadastroFichaBean.ficha.tipoPessoa eq 'FISICA'}" />
                                             <p:calendar id="dataNascimento" locale="pt" showOn="button" maxlength="10" pattern="dd/MM/yyyy" mask="99/99/9999"
+
                                                         value="#{cadastroFichaBean.ficha.dataNascimento}" rendered="#{cadastroFichaBean.ficha.tipoPessoa eq 'FISICA'}">
 
                                             </p:calendar>
@@ -398,7 +399,7 @@
                                         <p:panelGrid id="gridEnd" columns="1">
 
                                             <p:outputLabel value="Nota" for="nota" />
-                                            <p:inputTextarea id="nota" value="#{cadastroFichaBean.anotacao.nota}" cols="100" rows="20" maxlength="200"/>
+                                            <p:inputTextarea id="nota" value="#{cadastroFichaBean.anotacao.nota}" cols="100" rows="20" maxlength="400"/>
                                         </p:panelGrid>
                                         <p:commandButton value="Incluir" oncomplete="if (!args.validationFailed){ PF('diaEnd').hide() }"
                                                          style="margin-top: 10px" action="#{cadastroFichaBean.adicionarAnotacaoResAtendente()}"
@@ -462,21 +463,16 @@
 
 
 
-                            <p:dialog  closable="false" draggable="false" id="endDialAdm" widgetVar="diaEndAdm"
+                            <p:dialog  closable="true" draggable="false" id="endDialAdm" widgetVar="diaEndAdm"
                                        header="Anotação" maximizable="true" minimizable="true" 
                                        position="center" resizable="false" showEffect="slide" >
                                 <b:messages id="mesDialAdm" />
-                                <p:panelGrid id="gridEndAdm" columns="2">
+                                <p:panelGrid id="gridEndAdm" columns="1">
 
-                                    <!-- <p:outputLabel value="Usuário" for="usuarioAnotacaoPendente"/>
-                                     <p:selectOneMenu  id="usuarioAnotacaoPendente"  value="#{cadastroFichaBean.anotacao.usuario}"   > 
-                                         <f:selectItem itemLabel="Selecione " itemValue=""  />
-                                         <f:selectItems value="#{cadastroFichaBean.gestores}" var="usuarioLogado" itemLabel="#{usuarioLogado.nome} " 
-                                                        itemValue="#{usuarioLogado}"  />
-                                     </p:selectOneMenu>-->
+                                    <p:outputLabel value="Nota" for="nota" />
+                                    <p:inputTextarea id="nota" value="#{cadastroFichaBean.anotacao.nota}" cols="100" rows="20" maxlength="800"/>
 
-                                    <p:outputLabel value="Nota" for="anotacaoNota" />
-                                    <p:inputTextarea id="anotacaoNota" value="#{cadastroFichaBean.anotacao.nota}" cols="100" rows="20" maxlength="400"/>
+
                                 </p:panelGrid>
 
                                 <p:commandButton value="Incluir" oncomplete="if (!args.validationFailed){ PF('diaEndAdm').hide() }"

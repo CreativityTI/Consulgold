@@ -54,13 +54,23 @@
                                     <p:inputText size="10" value="#{pesquisaFichasBean.filtro.numeroAte}" />
                                 </h:panelGroup>
 
-                                <p:outputLabel value="Data de criação" />
+                                <p:outputLabel value="Data de Lançamento" />
                                 <h:panelGroup>
                                     <p:calendar size="10" pattern="dd/MM/yyyy" locale="pt" 
                                                 value="#{pesquisaFichasBean.filtro.dataCriacaoDe}" />
                                     a
                                     <p:calendar size="10" pattern="dd/MM/yyyy" locale="pt"
                                                 value="#{pesquisaFichasBean.filtro.dataCriacaoAte}" />
+                                </h:panelGroup>
+                                
+                                
+                                       <p:outputLabel value="Data de Aprovação" />
+                                <h:panelGroup>
+                                    <p:calendar size="10" pattern="dd/MM/yyyy" locale="pt" 
+                                                value="#{pesquisaFichasBean.filtro.dataAprovacaoDe}" />
+                                    a
+                                    <p:calendar size="10" pattern="dd/MM/yyyy" locale="pt"
+                                                value="#{pesquisaFichasBean.filtro.dataAprovacaoAte}" />
                                 </h:panelGroup>
 
 

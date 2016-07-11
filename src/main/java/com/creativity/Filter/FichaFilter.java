@@ -22,6 +22,8 @@ public class FichaFilter implements Serializable {
     private Long numeroAte;
     private Date dataCriacaoDe;
     private Date dataCriacaoAte;
+    private Date dataAprovacaoDe;
+    private Date dataAprovacaoAte;
     private String nomeVendedor;
     private String nomeCliente;
     private StatusFicha[] statuses;
@@ -99,6 +101,22 @@ public class FichaFilter implements Serializable {
 
     public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
+    }
+
+    public Date getDataAprovacaoDe() {
+        return dataAprovacaoDe;
+    }
+
+    public void setDataAprovacaoDe(Date dataAprovacaoDe) {
+        this.dataAprovacaoDe = dataAprovacaoDe;
+    }
+
+    public Date getDataAprovacaoAte() {
+        return dataAprovacaoAte;
+    }
+
+    public void setDataAprovacaoAte(Date dataAprovacaoAte) {
+        this.dataAprovacaoAte = dataAprovacaoAte;
     }
 
 

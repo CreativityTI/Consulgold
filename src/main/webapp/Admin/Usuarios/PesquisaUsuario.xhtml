@@ -69,6 +69,7 @@
                                 </p:column>
 
 
+
                                 <p:column headerText="Ação" width="10%"  style="text-align: center" >
 
 
@@ -84,21 +85,17 @@
                                         <f:setPropertyActionListener target="#{pesquisaUsuarioBean.usuarioSelecionado}" 
                                                                      value="#{usuario}" />
                                     </p:commandButton>
-
-
                                 </p:column>
                             </p:dataTable>
-
                             <p:confirmDialog header="Exclusão de usuário" 
                                              message="Tem certeza que deseja excluir o usuário #{pesquisaUsuarioBean.usuarioSelecionado.nome}?"
                                              widgetVar="confirmacaoExclusao"	id="confirmacaoExclusaoDialog">
                                 <p:button value="Não" onclick="PF('confirmacaoExclusao').hide(); return false;" />
-                                
+
                                 <p:commandButton value="Sim" oncomplete="confirmacaoExclusao.hide();"
                                                  action="#{pesquisaUsuarioBean.excluir()}" process="@this"
                                                  />
                             </p:confirmDialog>
-
                         </div>
                     </div>
                 </div>
