@@ -68,7 +68,6 @@ public class Ficha implements Serializable {
     @Column(length = 15)
     private String ie;
 
-    @NotBlank
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataNascimento;
 
