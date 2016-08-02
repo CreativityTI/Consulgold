@@ -191,11 +191,7 @@
             <artifactId>simple-email</artifactId>
             <version>0.2.3</version>
         </dependency>
-        <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ojdbc14</artifactId>
-            <version>10.2.0.5</version>
-        </dependency>
+     
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
@@ -205,8 +201,6 @@
     </dependencies>
   
 
-
-
     <repositories>
         <!-- For 3.5 and older -->  
         <repository>  
@@ -215,27 +209,7 @@
             <url>http://repository.primefaces.org</url>  
             <layout>default</layout>  
         </repository> 
-        
-        <repository>
-            <id>maven.oracle.com</id>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <url>https://maven.oracle.com</url>
-            <layout>default</layout>
-        </repository>
-
     </repositories>
-    
-    <pluginRepositories>
-        <pluginRepository>
-            <id>maven.oracle.com</id>
-            <url>https://maven.oracle.com</url>
-        </pluginRepository>
-    </pluginRepositories>
 
     <build>
         

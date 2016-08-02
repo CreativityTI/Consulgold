@@ -37,7 +37,7 @@ import org.hibernate.validator.constraints.br.CPF;
  * @author rafael.lima
  */
 @Entity
-@Table(name = "FICHA")
+@Table(name = "ficha")
 public class Ficha implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -121,6 +121,7 @@ public class Ficha implements Serializable {
     @NotBlank
     private String telPreferencial;
 
+    @NotBlank
     @Email(message = "o e-mail informado não é valido")
     private String email;
 

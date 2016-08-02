@@ -31,7 +31,7 @@ import javax.persistence.Temporal;
  * @author rafael.lima
  */
 @Entity
-@Table(name = "FINANCEIRO")
+@Table(name = "financeiro")
 public class Financeiro implements Serializable {
 
     private static final long serialVersionUID = 1L;

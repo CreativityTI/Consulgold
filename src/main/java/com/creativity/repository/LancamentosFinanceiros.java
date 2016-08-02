@@ -36,7 +36,7 @@ public class LancamentosFinanceiros implements Serializable {
 
     private EntityManager manager;
 
-    private Financeiro financeiro;
+ 
 
     @Inject
     public LancamentosFinanceiros(EntityManager manager) {
@@ -125,7 +125,7 @@ public class LancamentosFinanceiros implements Serializable {
 
                 // fazemos uma associação (join) com vendedor e nomeamos como "v"
                 .createAlias("ficha", "f")
-                .add(Restrictions.eq("f.gestor.id", Long.valueOf(usuarioGestorLogado)));
+                .add(Restrictions.eq("f.gestor.id", usuarioGestorLogado));
 
         if (filtro.getNumeroDe() != null) {
             // id deve ser maior ou igual (ge = greater or equals) a filtro.numeroDe
@@ -176,7 +176,7 @@ public class LancamentosFinanceiros implements Serializable {
 
                 // fazemos uma associação (join) com vendedor e nomeamos como "v"
                 .createAlias("ficha", "f")
-                .add(Restrictions.eq("f.gestor.id", Long.valueOf(usuarioGestorLogado)))
+                .add(Restrictions.eq("f.gestor.id", usuarioGestorLogado))
                 .add(Restrictions.like("statusFinanceiro", StatusFinanceiro.ABERTO));
 
         return criteria.addOrder(Order.asc("id")).list();

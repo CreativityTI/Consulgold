@@ -69,11 +69,11 @@
     font-family: 'dosismedium';
 }
 .ui-widget .ui-widget {
-    /* font-size: 1em; */
-    /*-moz-transition: all 0.2s ease;
+    font-size: 1.1em;
+    moz-transition: all 0.2s ease;
     -ms-transition: all 0.2s ease;
     -o-transition: all 0.2s ease;
-    transition: all 0.2s ease;*/
+    transition: all 0.2s ease;
     font-family: 'dosismedium';
 }
 .ui-widget input,
@@ -573,7 +573,7 @@ label{font-weight:normal !important;}
 .ui-datatable  table thead tr th .ui-column-customfilter .ui-spinner-button.ui-state-active .ui-icon-triangle-1-n,
 .ui-datatable  table thead tr th .ui-column-customfilter .ui-spinner-button.ui-state-active .ui-icon-triangle-1-s{background-position: center !important; 
                                                                                                                   background-size: 80% !important; margin-left: 12px !important; margin-top: -8px !important;}
-.ui-datatable table tbody tr td{color:#003D50; border: solid 1px #D9E3E8; font-size: 14px; font-family: 'dosismedium';
+.ui-datatable table tbody tr td{color:#003D50; border: solid 1px #D9E3E8; font-size: 16px; font-family: 'dosismedium';
                                 -webkit-transition: all 0.2s ease; -moz-transition: all 0.2s ease; -ms-transition: all 0.2s ease; -o-transition: all 0.2s ease; transition: all 0.2s ease;}
 .ui-datatable  table tbody tr td .ui-row-toggler.ui-icon-circle-triangle-s{background-image:url("#{resource['primefaces-ronin:images/downarrow-gray.svg']}"); 
                                                                            background-position:center !important; background-size:110%;}

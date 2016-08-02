@@ -20,15 +20,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
-import javax.validation.constraints.NotNull;
-import org.hibernate.validator.constraints.NotBlank;
 
 /**
  *
  * @author rafael.lima
  */
 @Entity
-@Table(name = "BAIXAFINANCEIRO")
+@Table(name = "baixafinanceiro")
 public class BaixaFinanceiro implements Serializable {
 
     private static final long serialVersionUID = 1L;

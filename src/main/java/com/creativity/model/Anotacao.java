@@ -23,7 +23,7 @@ import javax.persistence.Transient;
  * @author rafael.lima
  */
 @Entity
-@Table(name = "ANOTACAO")
+@Table(name = "anotacao")
 public class Anotacao implements Serializable {
 
     @Id

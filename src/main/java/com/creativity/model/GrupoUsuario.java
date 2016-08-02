@@ -18,7 +18,7 @@ import javax.persistence.Table;
  * @author rafael.lima
  */
 @Entity
-@Table(name = "GRUPOUSUARIO")
+@Table(name = "grupousuario")
 public class GrupoUsuario implements Serializable {
     
       private static final long serialVersionUID = 1L;

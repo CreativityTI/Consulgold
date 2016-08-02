@@ -26,7 +26,7 @@ import org.hibernate.validator.constraints.NotBlank;
  * @author rafael.lima
  */
 @Entity
-@Table(name = "MENSAGEM")
+@Table(name = "mensagem")
 public class Mensagem implements Serializable {
 
     private static final long serialVersionUID = 1L;
