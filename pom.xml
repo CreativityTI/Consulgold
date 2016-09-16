@@ -186,11 +186,7 @@
             <version>1.4.7</version>
             <scope>compile</scope>
         </dependency>
-        <dependency>
-            <groupId>com.outjected</groupId>
-            <artifactId>simple-email</artifactId>
-            <version>0.2.3</version>
-        </dependency>
+       
      
         <dependency>
             <groupId>javax</groupId>
