@@ -180,6 +180,10 @@ public class Ficha implements Serializable {
     @Column(columnDefinition = "DATE")
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date dataEntregaMaquina;
+    
+     @Column(columnDefinition = "DATE")
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    private Date dataPrevistaPgto;
 
     @Enumerated(EnumType.STRING)
     @Column(length = 20)
@@ -646,6 +650,16 @@ public class Ficha implements Serializable {
     public void setDataEntregaMaquina(Date dataEntregaMaquina) {
         this.dataEntregaMaquina = dataEntregaMaquina;
     }
+
+    public Date getDataPrevistaPgto() {
+        return dataPrevistaPgto;
+    }
+
+    public void setDataPrevistaPgto(Date dataPrevistaPgto) {
+        this.dataPrevistaPgto = dataPrevistaPgto;
+    }
+
+ 
 
     @Override
     public int hashCode() {

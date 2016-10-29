@@ -24,7 +24,7 @@ import javax.validation.constraints.NotNull;
 public @interface DecimalPositivo {
 
 	@OverridesAttribute(constraint = DecimalMin.class, name = "message")
-	String message() default "{com.pontorural.NumeroDecimal.message}";
+	String message() default "{com.creativity.NumeroDecimal.message}";
 
 	Class<?>[] groups() default {};
 

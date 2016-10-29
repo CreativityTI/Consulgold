@@ -334,7 +334,12 @@
                                         <p:panelGrid  columns="1" layout="grid" style="border:0px !important; background:none;" styleClass="ui-panelgrid-blank">
                                             <p:outputLabel value="Forma de Pagamento: " for="formaPagamento"/>
                                             <p:inputText id="formaPagamento"  value="#{cadastroFichaBean.ficha.formaPagemento}" />
+                                          
+                                            <p:outputLabel value="Data Prevista para Pagamento" for="dataPagamento"  />
+                                            <p:calendar id="dataPagamento" locale="pt" showOn="button" maxlength="10" pattern="dd/MM/yyyy" mask="99/99/9999"
+                                                        value="#{cadastroFichaBean.ficha.dataPrevistaPgto}">
 
+                                            </p:calendar>
 
                                             <p:outputLabel value="Subtotal" style="font-weight: bold"/>
                                             <h:outputText value="#{cadastroFichaBean.ficha.valorSubtotal}" 

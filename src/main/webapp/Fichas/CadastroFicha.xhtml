@@ -44,7 +44,7 @@
                                 </f:facet>
 
                             </p:toolbar>
-                      
+
                         </div>
                     </div>
                 </div>
@@ -324,6 +324,11 @@
                                             <p:outputLabel value="Forma de Pagamento: " for="formaPagamento"/>
                                             <p:inputText id="formaPagamento"  value="#{cadastroFichaBean.ficha.formaPagemento}" />
 
+                                            <p:outputLabel value="Data Prevista para Pagamento" for="dataPagamento"  />
+                                            <p:calendar id="dataPagamento" locale="pt" showOn="button" maxlength="10" pattern="dd/MM/yyyy" mask="99/99/9999"
+                                                        value="#{cadastroFichaBean.ficha.dataPrevistaPgto}">
+
+                                            </p:calendar>
 
                                             <p:outputLabel value="Subtotal" style="font-weight: bold"/>
                                             <h:outputText value="#{cadastroFichaBean.ficha.valorSubtotal}" 
@@ -414,6 +419,8 @@
 
                                             <p:outputLabel value="Observação:" for="obsCred" />
                                             <p:inputTextarea id="obsCred" value="#{cadastroFichaBean.ficha.observacaoCredenciamento}" />
+
+
                                         </p:panelGrid>
                                     </p:tab>
 

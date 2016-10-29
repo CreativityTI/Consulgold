@@ -30,7 +30,7 @@
                             <p:toolbar>
                                 <f:facet name="left">
                                     <p:commandButton  value="Salvar"  update="frmCadFicha" 
-                                                   rendered="#{seguranca.statusUsuario !=false}"
+                                                      rendered="#{seguranca.statusUsuario !=false}"
                                                       icon="fa fa-save" action="#{cadastroFichaBean.salvar}" styleClass="GreenButton"/>
                                 </f:facet>
                                 <f:facet name="right">
@@ -318,6 +318,11 @@
                                             <p:outputLabel value="Forma de Pagamento: " for="formaPagamento"/>
                                             <p:inputText id="formaPagamento"  value="#{cadastroFichaBean.ficha.formaPagemento}" />
 
+                                            <p:outputLabel value="Data Prevista para Pagamento" for="dataPagamento"  />
+                                            <p:calendar id="dataPagamento" locale="pt" showOn="button" maxlength="10" pattern="dd/MM/yyyy" mask="99/99/9999"
+                                                        value="#{cadastroFichaBean.ficha.dataPrevistaPgto}">
+
+                                            </p:calendar>
 
                                             <p:outputLabel value="Subtotal" style="font-weight: bold"/>
                                             <h:outputText value="#{cadastroFichaBean.ficha.valorSubtotal}" 

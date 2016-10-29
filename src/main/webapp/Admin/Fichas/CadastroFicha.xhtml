@@ -334,6 +334,12 @@
                                         <p:outputLabel value="Forma de Pagamento: " for="formaPagamento"/>
                                         <p:inputText id="formaPagamento"  value="#{cadastroFichaBean.ficha.formaPagemento}" />
 
+                                        <p:outputLabel value="Data Prevista para Pagamento" for="dataPagamento"  />
+                                        <p:calendar id="dataPagamento" locale="pt" showOn="button" maxlength="10" pattern="dd/MM/yyyy" mask="99/99/9999"
+                                                    value="#{cadastroFichaBean.ficha.dataPrevistaPgto}">
+
+                                        </p:calendar>
+
 
                                         <p:outputLabel value="Subtotal" style="font-weight: bold"/>
                                         <h:outputText value="#{cadastroFichaBean.ficha.valorSubtotal}" 
@@ -420,7 +426,7 @@
                                         <p:calendar id="dataEntrega" locale="pt" showOn="button" maxlength="10" pattern="dd/MM/yyyy" mask="99/99/9999"
                                                     value="#{cadastroFichaBean.ficha.dataEntregaMaquina}">
 
-                                        </p:calendar>
+                                        </p:calendar>                                      
 
                                     </p:panelGrid>
                                 </p:tab>
