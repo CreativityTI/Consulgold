@@ -236,6 +236,10 @@ public class Ficha implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(length = 20)
     private StatusFinanceiro statusFichaFinanceiro = StatusFinanceiro.SEMLANCAMENTO;
+    
+    
+    private String obsCobranca;
+    private String obsCobGestor;
 
     @Transient
     public boolean isNovo() {
@@ -658,6 +662,24 @@ public class Ficha implements Serializable {
     public void setDataPrevistaPgto(Date dataPrevistaPgto) {
         this.dataPrevistaPgto = dataPrevistaPgto;
     }
+
+    public String getObsCobranca() {
+        return obsCobranca;
+    }
+
+    public void setObsCobranca(String obsCobranca) {
+        this.obsCobranca = obsCobranca;
+    }
+
+    public String getObsCobGestor() {
+        return obsCobGestor;
+    }
+
+    public void setObsCobGestor(String obsCobGestor) {
+        this.obsCobGestor = obsCobGestor;
+    }
+    
+    
 
  
 

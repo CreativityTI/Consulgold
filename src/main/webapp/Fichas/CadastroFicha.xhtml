@@ -420,6 +420,11 @@
                                             <p:outputLabel value="Observação:" for="obsCred" />
                                             <p:inputTextarea id="obsCred" value="#{cadastroFichaBean.ficha.observacaoCredenciamento}" />
 
+                                            <p:outputLabel value="Data Entrega" for="dataEntrega"  />
+                                            <p:calendar id="dataEntrega" locale="pt" showOn="button" maxlength="10" pattern="dd/MM/yyyy" mask="99/99/9999" disabled="true"
+                                                        value="#{cadastroFichaBean.ficha.dataEntregaMaquina}">
+
+                                            </p:calendar>    
 
                                         </p:panelGrid>
                                     </p:tab>

@@ -65,7 +65,7 @@
                         <a href="#" class="Fs18 Wid70 DispInBlock MarTop5 Fleft white" style="line-height:18px;">
                             <i class="Fs20 Fleft MarRight10 ShowOnMobile"></i> Consulgold Consultoria e Representação
                         </a>
-                        <span class="Fs12 Wid70 DispBlock Fleft ShowOnDesktop">Sistema de Controle de Cadastro</span>
+                        <span class="Fs12 Wid70 DispBlock Fleft ShowOnDesktop">Sistema Gerencial</span>
                     </div>
 
 
@@ -175,125 +175,126 @@
 
 
 
-            <div class="Container100 Responsive50 ">
-                <div class="Row">
-                    <div class="Container50 Responsive50">
-                        <div class="ContainerIndent">
-                            <div class="ShadowBox whiteback RedBorderedBox" style="min-height:200px">
-                                <div class="Container100">
-                                    <div class="ContainerIndent">
-                                        <i class="fa fa-money navyblue Fs60 Fleft MarRight10"></i>
-                                        <span class="DispBlock red Fs26" style="line-height:26px;">Contas a Receber</span>
-
-                                        <p:outputLabel value="#{reportFichasBean.financeiroAbertoTotal}" class="DispBlock red Fs26" style="line-height:26px;">
-                                            <f:convertNumber currencySymbol="R$" type="currency"/>
-                                        </p:outputLabel>
-
-                                        <span class="navyblue Fs14"></span>
-                                    </div>
-                                </div>
-                                <div class="EmptyBox20"></div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="Container50 Responsive50 ">
-                        <div class="ContainerIndent ">
-                            <div class="ShadowBox whiteback NavyBlueBorderedBox" style="min-height:200px">
-                                <div class="Container100">
-                                    <div class="ContainerIndent">
-                                        <h2 class="Fs26 navyblue DispInlBlock FontDosisRegular Fleft" style="line-height:26px;">Contas a Recebidas</h2>
-                                        <i class="icon-local-mall Fright navyblue Fs30"></i>
-                                    </div>
-                                </div>
-                                <div class="Container33 Responsive50">
-                                    <div class="ContainerIndent">
-                                        <span class="DispBlock Fs18 FontDosisRegular leaden">Hoje</span>
-                                        <div class="EmptyBox10"></div>
-                                        <span class="DispBlock Fs30 leaden" style="line-height:30px;">
-                                            <p:outputLabel value="#{reportFichasBean.financeiroPagoDia}">
-                                                <f:convertNumber currencySymbol="R$" type="currency"/>
-                                            </p:outputLabel>
-                                        </span>
+            <!-- <div class="Container100 Responsive50 ">
+                 <div class="Row">
+                     <div class="Container50 Responsive50">
+                         <div class="ContainerIndent">
+                             <div class="ShadowBox whiteback RedBorderedBox" style="min-height:200px">
+                                 <div class="Container100">
+                                     <div class="ContainerIndent">
+                                         <i class="fa fa-money navyblue Fs60 Fleft MarRight10"></i>
+                                         <span class="DispBlock red Fs26" style="line-height:26px;">Contas a Receber</span>
+ 
+                                         <p:outputLabel value="#{reportFichasBean.financeiroAbertoTotal}" class="DispBlock red Fs26" style="line-height:26px;">
+                                             <f:convertNumber currencySymbol="R$" type="currency"/>
+                                         </p:outputLabel>
+ 
+                                         <span class="navyblue Fs14"></span>
+                                     </div>
+                                 </div>
+                                 <div class="EmptyBox20"></div>
+                             </div>
+                         </div>
+                     </div>
+          <div class="Container50 Responsive50 ">
+                   <div class="ContainerIndent ">
+                       <div class="ShadowBox whiteback NavyBlueBorderedBox" style="min-height:200px">
+                           <div class="Container100">
+                               <div class="ContainerIndent">
+                                   <h2 class="Fs26 navyblue DispInlBlock FontDosisRegular Fleft" style="line-height:26px;">Contas a Recebidas</h2>
+                                   <i class="icon-local-mall Fright navyblue Fs30"></i>
+                               </div>
+                           </div>
+                           <div class="Container33 Responsive50">
+                               <div class="ContainerIndent">
+                                   <span class="DispBlock Fs18 FontDosisRegular leaden">Hoje</span>
+                                   <div class="EmptyBox10"></div>
+                                   <span class="DispBlock Fs30 leaden" style="line-height:30px;">
+                                       <p:outputLabel value="#{reportFichasBean.financeiroPagoDia}">
+                                           <f:convertNumber currencySymbol="R$" type="currency"/>
+                                       </p:outputLabel>
+                                   </span>
 
-                                    </div>
-                                </div>
-                                <div class="Container33 Responsive50">
-                                    <div class="ContainerIndent">
-                                        <span class="DispBlock Fs18 FontDosisRegular leaden">Mês</span>
-                                        <div class="EmptyBox10"></div>
-                                        <span class="DispBlock Fs30 leaden" style="line-height:30px;">
-                                            <p:outputLabel value="#{reportFichasBean.financeiroPagoMes}">
-                                                <f:convertNumber currencySymbol="R$" type="currency"/>
-                                            </p:outputLabel>
-                                        </span>
+                               </div>
+                           </div>
+                           <div class="Container33 Responsive50">
+                               <div class="ContainerIndent">
+                                   <span class="DispBlock Fs18 FontDosisRegular leaden">Mês</span>
+                                   <div class="EmptyBox10"></div>
+                                   <span class="DispBlock Fs30 leaden" style="line-height:30px;">
+                                       <p:outputLabel value="#{reportFichasBean.financeiroPagoMes}">
+                                           <f:convertNumber currencySymbol="R$" type="currency"/>
+                                       </p:outputLabel>
+                                   </span>
 
-                                    </div>
-                                </div>
-                                <div class="Container33 Responsive50">
-                                    <div class="ContainerIndent">
-                                        <span class="DispBlock Fs18 FontDosisRegular leaden">Ano</span>
-                                        <div class="EmptyBox10"></div>
-                                        <span class="DispBlock Fs30 leaden" style="line-height:30px;">
-                                            <p:outputLabel value="#{reportFichasBean.financeiroPagoAno}">
-                                                <f:convertNumber currencySymbol="R$" type="currency"/>
-                                            </p:outputLabel>
-                                        </span>
+                               </div>
+                           </div>
+                           <div class="Container33 Responsive50">
+                               <div class="ContainerIndent">
+                                   <span class="DispBlock Fs18 FontDosisRegular leaden">Ano</span>
+                                   <div class="EmptyBox10"></div>
+                                   <span class="DispBlock Fs30 leaden" style="line-height:30px;">
+                                       <p:outputLabel value="#{reportFichasBean.financeiroPagoAno}">
+                                           <f:convertNumber currencySymbol="R$" type="currency"/>
+                                       </p:outputLabel>
+                                   </span>
 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+          
 
 
+        </div>
+           
+        </div>
 
-                </div>
-            </div>
+   -->
 
 
 
 
+        <p:dialog id="modalDialog" header="Você tem uma mensagem!!!"  responsive="true"
+                  visible="#{!empty reportFichasBean.mensagemsGestor}"
+                  widgetVar="dlg2" modal="true" height="300" width="600">
+            <p:dataTable id="mensagensTable" value="#{reportFichasBean.mensagemsGestor}" var="mens" 
+                         style="border:0px !important; background:none;" > 
 
+                <p:column headerText="-" width="20%">
+                    <h:outputText value="#{mens.tituloMensagem}" style="font-size: 25px" />
+                </p:column>
 
-            <p:dialog id="modalDialog" header="Você tem uma mensagem!!!"  responsive="true"
-                      visible="#{!empty reportFichasBean.mensagemsGestor}"
-                      widgetVar="dlg2" modal="true" height="300" width="600">
-                <p:dataTable id="mensagensTable" value="#{reportFichasBean.mensagemsGestor}" var="mens" 
-                             style="border:0px !important; background:none;" > 
+                <p:column headerText="-" width="50%" >
+                    <h:outputText value="#{mens.textoMensagem}" style="font-size: 20px" />
+                </p:column>        
 
-                    <p:column headerText="-" width="20%">
-                        <h:outputText value="#{mens.tituloMensagem}" style="font-size: 25px" />
-                    </p:column>
+            </p:dataTable>
 
-                    <p:column headerText="-" width="50%" >
-                        <h:outputText value="#{mens.textoMensagem}" style="font-size: 20px" />
-                    </p:column>        
+        </p:dialog>
 
-                </p:dataTable>
 
-            </p:dialog>
 
+        <p:dialog id="modalDialogTodos" header="Você tem uma mensagem!!!"  responsive="true"
+                  visible="#{!empty reportFichasBean.mensagensTodos}"
+                  widgetVar="dlg3" modal="true" height="300" width="600">
+            <p:dataTable id="mensagensTableTodos" value="#{reportFichasBean.mensagensTodos}" var="mens" 
+                         style="border:0px !important; background:none;" > 
 
+                <p:column headerText="-" width="20%">
+                    <h:outputText value="#{mens.tituloMensagem}" style="font-size: 25px" />
+                </p:column>
 
-            <p:dialog id="modalDialogTodos" header="Você tem uma mensagem!!!"  responsive="true"
-                      visible="#{!empty reportFichasBean.mensagensTodos}"
-                      widgetVar="dlg3" modal="true" height="300" width="600">
-                <p:dataTable id="mensagensTableTodos" value="#{reportFichasBean.mensagensTodos}" var="mens" 
-                             style="border:0px !important; background:none;" > 
+                <p:column headerText="-" width="50%" >
+                    <h:outputText value="#{mens.textoMensagem}" style="font-size: 20px" />
+                </p:column>        
 
-                    <p:column headerText="-" width="20%">
-                        <h:outputText value="#{mens.tituloMensagem}" style="font-size: 25px" />
-                    </p:column>
+            </p:dataTable>
 
-                    <p:column headerText="-" width="50%" >
-                        <h:outputText value="#{mens.textoMensagem}" style="font-size: 20px" />
-                    </p:column>        
+        </p:dialog>
 
-                </p:dataTable>
 
-            </p:dialog>
 
 
 
@@ -308,76 +309,74 @@
 
 
 
+        <h1 class="BigTopic" style="text-align: center">Fichas Pendentes</h1>
 
+        <h:form>
 
-            <h1 class="BigTopic" style="text-align: center">Fichas Pendentes</h1>
 
-            <h:form>
+            <p:dataTable id="fichasTable" value="#{reportFichasBean.fichasPendentesAdmMenu}" var="ficha" 
+                         emptyMessage="Nenhuma ficha pendente encontrada." rows="20" reflow="true" 
+                         paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom"
+                         sortBy="#{ficha.dataCriacao}"
+                         sortOrder="DESCENDING">
 
+                <p:column headerText="Nº" width="5%" sortBy="#{ficha.id}" >
+                    <h:outputText value="#{ficha.id}" />
+                </p:column>
 
-                <p:dataTable id="fichasTable" value="#{reportFichasBean.fichasPendentesAdmMenu}" var="ficha" 
-                             emptyMessage="Nenhuma ficha pendente encontrada." rows="20" reflow="true" 
-                             paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom"
-                             sortBy="#{ficha.dataCriacao}"
-                             sortOrder="DESCENDING">
+                <p:column headerText="Data" style="text-align: center"  sortBy="#{ficha.dataCriacao}">
+                    <h:outputText value="#{ficha.dataCriacao}" >
 
-                    <p:column headerText="Nº" width="5%" sortBy="#{ficha.id}" >
-                        <h:outputText value="#{ficha.id}" />
-                    </p:column>
+                    </h:outputText>
+                </p:column> 
+                <p:column headerText="Gestor" sortBy="#{ficha.gestor.nome}" >
+                    <h:outputText value="#{ficha.gestor.nome}" />
+                </p:column>
 
-                    <p:column headerText="Data" style="text-align: center"  sortBy="#{ficha.dataCriacao}">
-                        <h:outputText value="#{ficha.dataCriacao}" >
+                <p:column headerText="Cliente" sortBy="#{ficha.nomeRazao}" >
+                    <h:outputText value="#{ficha.nomeRazao}" />
+                </p:column>   
 
-                        </h:outputText>
-                    </p:column> 
-                    <p:column headerText="Gestor" sortBy="#{ficha.gestor.nome}" >
-                        <h:outputText value="#{ficha.gestor.nome}" />
-                    </p:column>
+                <p:column headerText="Quantidade" style="text-align: center" sortBy="#{ficha.quantidade}">
+                    <h:outputText value="#{ficha.quantidade}" />
+                </p:column>     
 
-                    <p:column headerText="Cliente" sortBy="#{ficha.nomeRazao}" >
-                        <h:outputText value="#{ficha.nomeRazao}" />
-                    </p:column>   
 
-                    <p:column headerText="Quantidade" style="text-align: center" sortBy="#{ficha.quantidade}">
-                        <h:outputText value="#{ficha.quantidade}" />
-                    </p:column>     
+                <p:column headerText="Valor Total" sortBy="#{ficha.valorTotal}" >
+                    <h:outputText value="#{ficha.valorTotal}" >
+                        <f:convertNumber currencySymbol="R$" type="currency"/>
+                    </h:outputText>
+                </p:column>  
 
 
-                    <p:column headerText="Valor Total" sortBy="#{ficha.valorTotal}" >
-                        <h:outputText value="#{ficha.valorTotal}" >
-                            <f:convertNumber currencySymbol="R$" type="currency"/>
-                        </h:outputText>
-                    </p:column>  
 
 
+                <p:column headerText="Status" style="text-align: center;" width="8%" sortBy="#{ficha.statusFicha.descricao}">
+                    <h:outputText value="#{ficha.statusFicha.descricao}"/>
+                </p:column>
 
 
-                    <p:column headerText="Status" style="text-align: center;" width="8%" sortBy="#{ficha.statusFicha.descricao}">
-                        <h:outputText value="#{ficha.statusFicha.descricao}"/>
-                    </p:column>
 
 
+                <p:column headerText="Anotação" style="text-align: center;" width="8%" >
+                    <p:graphicImage name="creativity/images/#{ficha.statusResposta}.png" title="#{ficha.statusResposta.descricao}"/>
 
+                </p:column>
 
-                    <p:column headerText="Anotação" style="text-align: center;" width="8%" >
-                        <p:graphicImage name="creativity/images/#{ficha.statusResposta}.png" title="#{ficha.statusResposta.descricao}"/>
+                <p:column headerText="Ação" width="12%"  style="text-align: center" >
 
-                    </p:column>
+                    <p:button class="Wid40" outcome="/Admin/Fichas/CadastroFichaAnotacao" icon="fa  fa-edit" title="Editar" styleClass="OrangeButton"  >  
+                        <f:param name="id" value="#{ficha.id}" />
+                    </p:button>  
 
-                    <p:column headerText="Ação" width="12%"  style="text-align: center" >
+                </p:column>
+            </p:dataTable>
 
-                        <p:button class="Wid40" outcome="/Admin/Fichas/CadastroFichaAnotacao" icon="fa  fa-edit" title="Editar" styleClass="OrangeButton"  >  
-                            <f:param name="id" value="#{ficha.id}" />
-                        </p:button>  
 
-                    </p:column>
-                </p:dataTable>
 
 
 
-
-
-            </h:form>
+        </h:form>
 
         </div>
 

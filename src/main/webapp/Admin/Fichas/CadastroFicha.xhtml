@@ -464,6 +464,14 @@
 
                                         </p:column>
                                     </p:dataTable>
+                                </p:tab >
+                                <p:tab id="cobranca" title="Cobrança">
+                                    <p:outputLabel value="Observação Cobrança" for="obsCobranca" />
+                                    <p:inputTextarea id="obsCobranca" value="#{cadastroFichaBean.ficha.obsCobranca}" />
+                                    
+                                    <p:outputLabel value="Observação Gestor" for="obsGestor" />
+                                    <p:inputTextarea id="obsGestor" value="#{cadastroFichaBean.ficha.obsCobGestor}" />
+
                                 </p:tab>
                             </p:tabView>
 
