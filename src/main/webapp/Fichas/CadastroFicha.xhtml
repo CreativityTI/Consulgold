@@ -172,9 +172,13 @@
 
 
 
-                                        <p:outputLabel value="Retorno da Oferta" for="retornoOferta" />
-                                        <p:selectOneMenu id="retornoOferta"  value="#{cadastroFichaBean.ficha.oferta}"   > 
+                                        <p:outputLabel value="Faturamento Mensal" for="faturamentoMensal" />
+                                        <p:selectOneMenu id="faturamentoMensal"  value="#{cadastroFichaBean.ficha.oferta}"   > 
                                             <f:selectItem itemLabel="Selecione" itemValue=""  />
+
+                                            <f:selectItem itemLabel="Faturamento R$ 300,00 ao mês/ R$ 550,00" itemValue="Faturamento R$ 300,00 ao mês/ R$ 550,00"  />
+                                            <f:selectItem itemLabel="Faturamento R$ 500,00 ao mês / R$ 500,00" itemValue="Faturamento R$ 500,00 ao mês / R$ 500,00"  />
+                                            <f:selectItem itemLabel="Faturamento R$ 1000,00 ao mês / R$ 400,00" itemValue="Faturamento R$ 1000,00 ao mês / R$ 400,00" />
                                             <f:selectItem itemLabel="Faturamento R$ 500,00 ao mês" itemValue="Faturamento R$ 500,00 ao mês"  />
                                             <f:selectItem itemLabel="Faturamento com antecipação" itemValue="Faturamento com antecipação"  />
 
@@ -330,6 +334,13 @@
 
                                             </p:calendar>
 
+                                            <p:outputLabel value="Valor Unitário" style="font-weight: bold"/>
+                                            <p:inputText value="#{cadastroFichaBean.ficha.valorUnitario}" 
+                                                         style="font-weight: bold" id="valorUnitario">
+                                                <p:ajax event="change" process="@this" update="totalFicha,subtotal"
+                                                        listener="#{cadastroFichaBean.recalcularFicha()}" />
+                                            </p:inputText>
+
                                             <p:outputLabel value="Subtotal" style="font-weight: bold"/>
                                             <h:outputText value="#{cadastroFichaBean.ficha.valorSubtotal}" 
                                                           style="font-weight: bold" id="subtotal">
@@ -428,7 +439,14 @@
 
                                         </p:panelGrid>
                                     </p:tab>
+                                    <p:tab id="cobranca" title="Cobrança">
+                                        <p:outputLabel value="Observação Cobrança" for="obsCobranca" />
+                                        <p:inputTextarea id="obsCobranca" value="#{cadastroFichaBean.ficha.obsCobranca}" disabled="true" />
 
+                                        <p:outputLabel value="Observação Gestor" for="obsGestor" />
+                                        <p:inputTextarea id="obsGestor" value="#{cadastroFichaBean.ficha.obsCobGestor}" />
+
+                                    </p:tab>
 
                                 </p:tabView>
 

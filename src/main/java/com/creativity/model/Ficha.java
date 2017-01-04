@@ -143,7 +143,7 @@ public class Ficha implements Serializable {
     @NotBlank
     private String formaPagemento;
 
-    private BigDecimal valorUnitario = BigDecimal.valueOf(400);
+    private BigDecimal valorUnitario = BigDecimal.ZERO ;
 
     @NotNull
     private BigDecimal valorDesconto = BigDecimal.ZERO;

@@ -214,7 +214,7 @@ public class Fichas implements Serializable {
 
     public Long todasFichasPendentesAno() {
         Session session = this.manager.unwrap(Session.class);
-        org.hibernate.Query q = session.createQuery("select count(*) from Ficha where statusFicha = 'PENDENTE' and year(dataCriacao)=year(current_date())");
+        org.hibernate.Query q = session.createQuery("select count(*) from Ficha where statusFicha = 'PENDENTE'");
         return (Long) q.uniqueResult();
     }
 
@@ -343,7 +343,7 @@ public class Fichas implements Serializable {
         }
 
         Session session = this.manager.unwrap(Session.class);
-        org.hibernate.Query q = session.createQuery("select count(*) from Ficha f where f.statusFicha = 'PENDENTE' and year(f.dataCriacao)=year(current_date()) and (f.gestor.nome)= :nome").setParameter("nome", nome);
+        org.hibernate.Query q = session.createQuery("select count(*) from Ficha f where f.statusFicha = 'PENDENTE' and (f.gestor.nome)= :nome").setParameter("nome", nome);
         return (Long) q.uniqueResult();
 
     }
