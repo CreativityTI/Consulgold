@@ -14,6 +14,7 @@ public enum StatusFicha {
     NOVOCADASTRO("Novo Cadastro"),
     PENDENTE("Pendente"),
     APROVADO("Aprovado"),
+     CANCELADO("Cancelada"),
     BACKUP("Backup");
 
     private String descricao;
